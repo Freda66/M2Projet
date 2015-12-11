@@ -31,3 +31,14 @@ Optimisation des expressions : (Critique)
 Optimisation des commandes : 
    Interface entre les deux autres modules
    
+
+BDD :
+   Table :
+      Measurement
+         id : Integer AutoIncrement Pk
+         numLigne : Integer
+         nomVar : Varchar
+         debutInt : Numeric
+         finInt : Numeric
+         val : Numeric
+         valOpt : Numeric
