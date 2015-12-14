@@ -1,4 +1,6 @@
-package structure;
+package structure.affectation;
+
+import structure.Node;
 
 public class Affectation extends Node {
 

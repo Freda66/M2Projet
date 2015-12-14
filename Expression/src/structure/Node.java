@@ -2,6 +2,6 @@ package structure;
 
 public abstract class Node extends SimpleNode{
 	
-	private Node fg;
-	private Node fd;
+	public Node fg;
+	public Node fd;
 }
