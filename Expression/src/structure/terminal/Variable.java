@@ -35,4 +35,8 @@ public class Variable<T> extends Terminal{
 	public String type() {
 		return "Variable";
 	}
+	@Override
+	public String toString() {
+		return this.name;
+	}
 }
