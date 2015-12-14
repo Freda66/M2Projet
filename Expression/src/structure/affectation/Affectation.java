@@ -8,5 +8,9 @@ public class Affectation extends Node {
 	public String type() {
 		return "Affectation";
 	}
+	@Override
+	public String toString() {
+		return " = ";
+	}
 
 }

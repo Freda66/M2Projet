@@ -10,4 +10,8 @@ public class Multiplication extends Operator {
 	public String toString() {
 		return " * ";
 	}
+	@Override
+	public float Eval(float val1,float val2) {
+		return val1*val2;
+	}
 }
