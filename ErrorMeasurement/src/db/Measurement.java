@@ -86,6 +86,41 @@ public class Measurement extends Database{
         return lesMeasurements;
 	}
 	
+	/** 
+	 * Fonction qui recupere un Measurement par son id
+	 */
+	public void getMeasurementById(int mId){
+		// Met à jour l'objet
+        ResultSet resultSet = super.query("SELECT * FROM Measurement WHERE id="+mId);
+        try {
+        	this.setId(resultSet.getInt("id"));
+        	this.setNomVar(resultSet.getString("nomVar"));
+        	this.setMin(resultSet.getDouble("min"));
+        	this.setMax(resultSet.getDouble("max"));
+        } catch (SQLException e) { e.printStackTrace(); }
+	}
+	
+	/** 
+	 * Fonction qui recupere un Measurement par son nom de variable
+	 */
+	public void getMeasurementByNomVar(String mNomVar){
+		// Met à jour l'objet
+        ResultSet resultSet = super.query("SELECT * FROM Measurement WHERE nomVar='"+mNomVar+"'");
+        try {
+        	this.setId(resultSet.getInt("id"));
+        	this.setNomVar(resultSet.getString("nomVar"));
+        	this.setMin(resultSet.getDouble("min"));
+        	this.setMax(resultSet.getDouble("max"));
+        } catch (SQLException e) { e.printStackTrace(); }
+	}
+	
+	/**
+	 * Fonction qui affiche l'objet courant
+	 */
+	public void printObject(){
+		System.out.println("ID: "+ this.getId() +", Var:"+ this.getNomVar() + ", min:max["+ this.getMin() + ":"+ this.getMax() +"]");
+	}
+	
 	/**
 	 * Accesseurs (Getters/Setters)
 	 */
