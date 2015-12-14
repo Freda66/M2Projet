@@ -4,7 +4,8 @@ import structure.Node;
 
 public abstract class Operator extends Node {
 
-	public abstract float Eval(float val1,float val2);
+
+	public abstract float[] Eval(float[] range1,float[] range2);
 	@Override
 	public String type() {
 		return "Operator";
