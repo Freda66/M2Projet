@@ -16,4 +16,11 @@ error measurement</name>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>lib</name>
+			<type>2</type>
+			<location>/Users/fredericcano/M2Projet/lib</location>
+		</link>
+	</linkedResources>
 </projectDescription>
