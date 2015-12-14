@@ -10,6 +10,11 @@ public class TestFred {
         db.connect(); 
         System.out.println();
         
+        /**
+         * MEASUREMENT
+         */
+        System.out.println();
+        System.out.println("MEASUREMENT");
         // Objet Measurement
         Measurement measurement = new Measurement(db);
 
@@ -41,6 +46,34 @@ public class TestFred {
         	System.out.println("Var:"+ m.getNomVar() + ", min:max["+ m.getMin() + ":"+ m.getMax() +"]");
         }
         System.out.println();
+        
+        /**
+         * RESULTAT
+         */
+        System.out.println();
+        System.out.println("RESULTAT");
+        // Objet Resultat
+        Resultat resultat = new Resultat(db);
+
+        // Insert
+        resultat.setResultInit(3.23);
+        resultat.setResultOpt(1.23);
+        resultat.setResultMpfr(6.232);
+        resultat.addResultat();
+        
+        // Update
+        resultat.setResultInit(14.04);
+        resultat.setResultOpt(1.23);
+        resultat.setResultMpfr(6.232);
+        resultat.setIdRun(1);
+        resultat.updateResultat();
+        
+        // Get resultat id 1
+        resultat.getResultatById(1);
+        resultat.printObject();
+        System.out.println();
+
+        
         
         // Déconnexion de la bdd
         db.close();
