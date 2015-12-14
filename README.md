@@ -22,7 +22,10 @@ Utilisation du parser JavaCC.
 
 
 Mesure :
-   Programme source -> Programme instrumenté : (chaque variable type float, print qui affiche la valeur/intervalle de la variable et sa ligne -> insert bdd)
+   Programme source -> Programme instrumenté : (chaque variable type float, print qui affiche la valeur/intervalle de la variable et sa ligne -> insert bdd
+   1 : Lire fichier c -> Parser en arbre -> Recreer programme c
+   2 : Parcour arbre -> insert bdd
+
    
 Optimisation des expressions : (Critique)
    On prend une expressions, on renvoi des ranges
@@ -31,3 +34,14 @@ Optimisation des expressions : (Critique)
 Optimisation des commandes : 
    Interface entre les deux autres modules
    
+
+BDD :
+   Table :
+      Measurement
+         id : Integer AutoIncrement Pk
+         numLigne : Integer
+         nomVar : Varchar
+         debutInt : Numeric
+         finInt : Numeric
+         val : Numeric
+         valOpt : Numeric
