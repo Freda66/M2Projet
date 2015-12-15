@@ -1,30 +1,28 @@
 package structure.terminal;
 
-public class Constante<T> extends Terminal {
+import structure.SimpleNode;
+
+public class Constante extends Terminal {
 	
-	private T value;
-
-	public Constante(T value) {
-		super();
-		this.value = value;
+	public Constante(float[] testRange) {
+		super(testRange);
 	}
 	
-	public T getValue() {
-		return value;
-	}
-
-	public void setValue(T value) {
-		this.value = value;
-	}
-
 	@Override
 	public String type() {
 		return "Constante";
 	}
 	@Override
 	public String toString() {
-		return this.value.toString();
+		return "";
 	}
+
+	@Override
+	public SimpleNode clone() {
+		return new Constante(this.getRange());
+	}
+
+	
 
 	
 }

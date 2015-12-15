@@ -1,28 +1,13 @@
 package structure.terminal;
 
-public class Variable<T> extends Terminal{
+import structure.SimpleNode;
+
+public class Variable extends Terminal{
 	private String name;
-	private T min;
-	private T max;
 	
-	public Variable(String name,T min,T max) {
-		super();
+	public Variable(String name,float[] range) {
+		super(range);
 		this.name = name;
-		this.min=min;
-		this.max=max;
-	}
-	
-	public T getMin() {
-		return min;
-	}
-	public void setMin(T min) {
-		this.min = min;
-	}
-	public T getMax() {
-		return max;
-	}
-	public void setMax(T max) {
-		this.max = max;
 	}
 	
 	public String getName() {
@@ -38,5 +23,10 @@ public class Variable<T> extends Terminal{
 	@Override
 	public String toString() {
 		return this.name;
+	}
+
+	@Override
+	public SimpleNode clone() {
+		return new Variable(this.getName(),this.getRange());
 	}
 }

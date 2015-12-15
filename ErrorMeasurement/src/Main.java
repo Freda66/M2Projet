@@ -3,9 +3,12 @@ import db.Database;
 public class Main {
  
     public static void main(String[] args) {
-        Database connexion = new Database("Database.db");
-        connexion.connect();
-        connexion.close();
+    	// Connexion à la bdd
+        Database db = new Database("../db/PrecisionNumerique.db");
+        db.connect(); 
+        
+        // Déconnexion de la bdd
+        db.close();
     }
  
 }
