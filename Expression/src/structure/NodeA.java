@@ -1,12 +1,9 @@
 package structure;
 
 
-import java.rmi.server.Operation;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-
-import structure.operator.Operator;
 
 
 public abstract class NodeA extends SimpleNodeA{
@@ -17,11 +14,11 @@ public abstract class NodeA extends SimpleNodeA{
 	
 	//build set of equivalent graph
 	
-	public void SetFilsGauche(SimpleNodeA sn){
+	public void setFG(SimpleNodeA sn){
 		this.fg = sn;
 		this.fg.SetLevel(this.level+1);
 	}
-	public void SetFilsDroit(SimpleNodeA sn){
+	public void setFD(SimpleNodeA sn){
 		this.fd = sn;
 		this.fd.SetLevel(this.level+1);
 	}
@@ -40,6 +37,7 @@ public abstract class NodeA extends SimpleNodeA{
 		return A;
 			
 	}
+}
 	
 	
 	

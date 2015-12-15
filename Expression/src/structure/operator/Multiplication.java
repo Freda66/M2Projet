@@ -56,8 +56,8 @@ public class Multiplication extends Operator {
 		Operator copy = (Operator)Clone(this);
 		
 		SimpleNodeA tmp = copy.Fd();
-		SetFilsDroit(copy.Fg());
-		SetFilsGauche(tmp);
+		setFD(copy.Fg());
+		setFG(tmp);
 		l.add(copy);
 		
 		copy = (Operator)Clone(this);
@@ -67,15 +67,15 @@ public class Multiplication extends Operator {
 			
 			Multiplication MGauche = new Multiplication();
 			Multiplication MDroit = new Multiplication();
-			MGauche.SetFilsGauche(NodeA.Clone(copy.Fd()));
-			MDroit.SetFilsGauche(NodeA.Clone(copy.Fd()));
+			MGauche.setFG(NodeA.Clone(copy.Fd()));
+			MDroit.setFG(NodeA.Clone(copy.Fd()));
 			
 			//Dolipran
-			MGauche.SetFilsDroit(NodeA.Clone(((NodeA)copy.Fg()).Fg()));
-			MDroit.SetFilsDroit(NodeA.Clone(((NodeA)copy.Fg()).Fd()));
+			MGauche.setFD(NodeA.Clone(((NodeA)copy.Fg()).Fg()));
+			MDroit.setFD(NodeA.Clone(((NodeA)copy.Fg()).Fd()));
 			
-			root.SetFilsDroit(MDroit);
-			root.SetFilsGauche(MGauche);
+			root.setFD(MDroit);
+			root.setFG(MGauche);
 		}
 		return l;
 	}

@@ -1,5 +1,8 @@
 package structure.operator;
 
+import java.util.LinkedList;
+
+import structure.NodeA;
 import structure.SimpleNodeA;
 
 public class Plus extends Operator {
@@ -22,6 +25,11 @@ public class Plus extends Operator {
 	@Override
 	public SimpleNodeA clone() {
 		return new Plus();
+	}
+	@Override
+	public LinkedList<NodeA> BESOE() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
