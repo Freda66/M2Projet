@@ -1,8 +1,10 @@
 package structure.operator;
 
+
 import java.util.LinkedList;
 
 import structure.NodeA;
+
 
 public abstract class Operator extends NodeA {
 

@@ -1,5 +1,6 @@
 package structure.operator;
 
+
 import java.awt.List;
 import java.util.LinkedList;
 

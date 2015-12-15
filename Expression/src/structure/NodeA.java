@@ -1,5 +1,6 @@
 package structure;
 
+
 import java.rmi.server.Operation;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,4 +45,4 @@ public abstract class NodeA extends SimpleNodeA{
 	
 	
 	
-}
+

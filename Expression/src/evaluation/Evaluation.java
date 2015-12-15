@@ -53,15 +53,26 @@ public class Evaluation {
 	public static void main(String args[]){
 		Evaluation test=new Evaluation();
 		float[] testRange=new float[2];
-		testRange[0]=2;
-		testRange[1]=10;
+
+		// Niveau 1
 		Operator tmp=new Multiplication();
+		testRange[0]=2;
+		testRange[1]=2;
 		tmp.fd=new Constante(testRange);
 		testRange=new float[2];
 		testRange[0]=3;
 		testRange[1]=3;
 		tmp.fg=new Constante(testRange);
-		testRange=test.Eval(tmp);
+		
+		//Niveau 0
+		Operator tmp2=new Plus();
+		testRange=new float[2];
+		testRange[0]=5;
+		testRange[1]=5;
+		tmp2.fd=new Constante(testRange);
+		tmp2.fg=tmp;
+		
+		testRange=test.Eval(tmp2);
 		System.out.println(testRange[0]+ " "+testRange[1]);
 
 	}

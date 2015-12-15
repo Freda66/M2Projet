@@ -8,24 +8,31 @@ import java.io.InputStreamReader;
 public class CCompiler {
 
 	/**
-	 * @param args
+	 * Attributs de la classe
 	 */
-	
 	public String fileName;
 	public File dir;
+	public String exeName;
 	
+	/**
+	 * Constructeur surchargé
+	 * @param f : Nom du fichier c
+	 * @param dir : Repertoire du fichier
+	 */
 	public CCompiler(String f, File dir)
 	{
 		this.fileName=f;
 		this.dir=dir;
+		this.exeName = fileName.substring(0, fileName.length() - 2);
 	}
 	
-	
-	void Compile()
+	/**
+	 * Fonction qui compile le fichier c
+	 */
+	public void Compile()
 	{
-		try {  
-            String exeName = fileName.substring(0, fileName.length() - 2);
-            Process p = Runtime.getRuntime().exec("cmd /C gcc " + fileName + " -o " + exeName, null, dir);   
+		try {
+            Process p = Runtime.getRuntime().exec("gcc " + fileName + " -o " + exeName, null, dir);
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));  
             String line = null;  
             while ((line = in.readLine()) != null) {  
@@ -34,17 +41,29 @@ public class CCompiler {
         } catch (IOException e) {  
             e.printStackTrace();  
         } 
+		
+		System.out.println("Compile succès.\n");
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.print("sa marche!");
-		String fileName="helloWorld.c";
-		File dir = new File("/ProgramC");
-		CCompiler test = new CCompiler(fileName,dir);
-		test.Compile();
+	/**
+	 * Fonction qui execute le fichier c
+	 */
+	public void Execute()
+	{
+		System.out.println("Affichage programme "+ exeName +" : ");
 		
-
+		try {
+            Process p = Runtime.getRuntime().exec("./"+exeName, null, dir);
+            BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));  
+            String line = null;  
+            while ((line = in.readLine()) != null) {  
+                System.out.println(line);  
+            } 
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        } 
+		
+		System.out.println("\nExecute succès.\n");
 	}
-
+	
 }

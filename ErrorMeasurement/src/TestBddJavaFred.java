@@ -2,7 +2,7 @@ import db.Database;
 import db.Measurement;
 import db.Resultat;
 
-public class TestFred {
+public class TestBddJavaFred {
  
     public static void main(String[] args) {
     	// Connexion à la bdd
