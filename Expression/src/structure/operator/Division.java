@@ -1,6 +1,5 @@
 package structure.operator;
 
-import structure.NodeA;
 import structure.SimpleNodeA;
 
 public class Division extends Operator {
@@ -15,7 +14,7 @@ public class Division extends Operator {
 	}
 	@Override
 	public float[] Eval(float[] range1, float[] range2) {
-		float val1=range1[0]*range2[0];
+		float val1=range1[0]/range2[0];
 		float val2=val1;
 		float tmp=0;
 		float[] retour= new float[2];
