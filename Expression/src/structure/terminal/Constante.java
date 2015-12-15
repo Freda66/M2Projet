@@ -1,6 +1,6 @@
 package structure.terminal;
 
-import structure.SimpleNode;
+import structure.SimpleNodeA;
 
 public class Constante extends Terminal {
 	
@@ -18,7 +18,7 @@ public class Constante extends Terminal {
 	}
 
 	@Override
-	public SimpleNode clone() {
+	public SimpleNodeA clone() {
 		return new Constante(this.getRange());
 	}
 

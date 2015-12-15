@@ -1,7 +1,7 @@
 package structure.operator;
 
-import structure.Node;
-import structure.SimpleNode;
+import structure.NodeA;
+import structure.SimpleNodeA;
 
 public class Division extends Operator {
 
@@ -54,7 +54,7 @@ public class Division extends Operator {
 		return retour;
 	}
 	@Override
-	public SimpleNode clone() {
+	public SimpleNodeA clone() {
 		return new Division();
 	}
 }
