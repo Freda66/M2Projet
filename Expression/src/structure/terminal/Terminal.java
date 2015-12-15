@@ -1,8 +1,8 @@
 package structure.terminal;
 
-import structure.SimpleNode;
+import structure.SimpleNodeA;
 
-public abstract class Terminal extends SimpleNode {
+public abstract class Terminal extends SimpleNodeA {
 	private float[] range;
 
 	public Terminal(float[] testRange) {

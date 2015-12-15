@@ -1,41 +1,41 @@
 package evaluation;
 
-import structure.Node;
-import structure.SimpleNode;
+import structure.NodeA;
+import structure.SimpleNodeA;
 import structure.operator.*;
 import structure.terminal.*;
 
 public class Evaluation {
 
 	// Fonction d'evaluation de l'arbre
-	public float[] Eval(SimpleNode toTest){
+	public float[] Eval(SimpleNodeA toTest){
 		float[] retour= new float[2];
-		SimpleNode tmp=toTest;
+		SimpleNodeA tmp=toTest;
 		Terminal value;
 		float[] range1= new float[2];
 		float[] range2= new float[2];
 
 		// Parcours de l'arbre de facon recursive
-		if (tmp instanceof Node){
-			if(((Node) tmp).eval == null){
-				((Node) tmp).eval=new float[2];
+		if (tmp instanceof NodeA){
+			if(((NodeA) tmp).eval == null){
+				((NodeA) tmp).eval=new float[2];
 				
 				// Fil Gauche
-				if(((Node) tmp).fg instanceof Node){
-					range1=Eval(((Node) tmp).fg);
+				if(((NodeA) tmp).fg instanceof NodeA){
+					range1=Eval(((NodeA) tmp).fg);
 					System.out.println(range1[0]+" "+range1[1]);
-				}else if (((Node) tmp).fg instanceof Terminal){
-					value=(Terminal) ((Node) tmp).fg;
+				}else if (((NodeA) tmp).fg instanceof Terminal){
+					value=(Terminal) ((NodeA) tmp).fg;
 					range1=value.getRange();
 					System.out.println(range1[0]+" "+range1[1]);
 				}
 				
 				//Fil Droit
-				if(((Node) tmp).fd instanceof Node){
-					range2=Eval(((Node) tmp).fd);
+				if(((NodeA) tmp).fd instanceof NodeA){
+					range2=Eval(((NodeA) tmp).fd);
 					System.out.println(range2[0]+" "+range2[1]);
-				}else if (((Node) tmp).fd instanceof Terminal){
-					value=(Terminal) ((Node) tmp).fd;
+				}else if (((NodeA) tmp).fd instanceof Terminal){
+					value=(Terminal) ((NodeA) tmp).fd;
 					range2=value.getRange();
 					System.out.println(range2[0]+" "+range2[1]);
 				}
@@ -43,7 +43,7 @@ public class Evaluation {
 					System.out.println("Operation");
 					retour=((Operator) tmp).Eval(range1, range2);
 				}
-				((Node) tmp).eval=retour;
+				((NodeA) tmp).eval=retour;
 			}
 		}
 		return retour;

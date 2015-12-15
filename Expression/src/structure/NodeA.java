@@ -1,10 +1,20 @@
 package structure;
 
+import java.rmi.server.Operation;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 
-public abstract class Node extends SimpleNode{
-	public SimpleNode fg;
-	public SimpleNode fd;
+import structure.operator.Operator;
+
+
+public abstract class NodeA extends SimpleNodeA{
+
+	public SimpleNodeA fg;
+	public SimpleNodeA fd;
 	public float[] eval=null;
+	
+	//build set of equivalent graph
 	
 	public void SetFilsGauche(SimpleNodeA sn){
 		this.fg = sn;
@@ -29,5 +39,9 @@ public abstract class Node extends SimpleNode{
 		return A;
 			
 	}
+	
+	
+	
+	
 	
 }

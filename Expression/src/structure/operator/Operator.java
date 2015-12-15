@@ -1,8 +1,10 @@
 package structure.operator;
 
-import structure.Node;
+import java.util.LinkedList;
 
-public abstract class Operator extends Node {
+import structure.NodeA;
+
+public abstract class Operator extends NodeA {
 
 
 	public abstract float[] Eval(float[] range1,float[] range2);
@@ -10,5 +12,11 @@ public abstract class Operator extends Node {
 	public String type() {
 		return "Operator";
 	}
+	
+	//Build equivalent set of expression
+	public abstract LinkedList<NodeA> BESOE ();	
+	
+	
+	
 
 }
