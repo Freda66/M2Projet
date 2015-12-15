@@ -23,9 +23,10 @@ public class CCompiler {
 	
 	void Compile()
 	{
+		
 		try {  
             String exeName = fileName.substring(0, fileName.length() - 2);
-            Process p = Runtime.getRuntime().exec("cmd /C gcc " + fileName + " -o " + exeName, null, dir);   
+            Process p = Runtime.getRuntime().exec("gcc " + fileName + " -o " + exeName, null, dir);
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));  
             String line = null;  
             while ((line = in.readLine()) != null) {  
@@ -34,15 +35,24 @@ public class CCompiler {
         } catch (IOException e) {  
             e.printStackTrace();  
         } 
+		
+		System.out.println("Compile!");
+
+		
 	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.print("sa marche!");
+		
 		String fileName="helloWorld.c";
-		File dir = new File("/ProgramC");
+		File dir = new File("programmeC");
+		///home/gaellic/workspace/M2Projet/ErrorMeasurement/
 		CCompiler test = new CCompiler(fileName,dir);
 		test.Compile();
+		
+
+		
+		System.out.print("sa marche!");
 		
 
 	}

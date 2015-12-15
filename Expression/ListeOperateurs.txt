@@ -1,0 +1,51 @@
+Liste des opérateurs a redéfinir
+
+http://www.commentcamarche.net/contents/115-langage-c-les-operateurs
+
+
+
+Operateurs de calcul
+
+	commutatif distributif associatif
+
++	o	n	n
+-	n	n	n
+*	o	o	o
+/	n	o	n
+%	n	n	n
+
+La distributivité se fait uniquement par rapport a l'addition
+
+opérteur d'assignation
+
+=
++=
+-=
+*=
+/=
+%=
+ 
+opérateur d'incrémentation
+
+++
+--
+
+opérateur de comparaison
+
+==
+< 
+<=
+>
+>=
+!=
+
+opérateur logique
+
+|| ou
+&& et
+! non
+
+
+
+
+
