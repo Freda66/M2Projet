@@ -1,5 +1,10 @@
 package structure.operator;
 
+
+import java.awt.List;
+import java.util.LinkedList;
+
+import structure.NodeA;
 import structure.SimpleNodeA;
 
 public class Multiplication extends Operator {
@@ -39,4 +44,41 @@ public class Multiplication extends Operator {
 	public SimpleNodeA clone() {
 		return new Multiplication();
 	}
+	
+	@Override
+	public LinkedList<NodeA> BESOE (){
+		LinkedList<NodeA> l = new LinkedList<NodeA>();
+		
+		//TODO sauvegarder le node et le reset a la fin
+		
+		//comutativité
+		
+		Operator copy = (Operator)Clone(this);
+		
+		SimpleNodeA tmp = copy.Fd();
+		SetFilsDroit(copy.Fg());
+		SetFilsGauche(tmp);
+		l.add(copy);
+		
+		copy = (Operator)Clone(this);
+		//distribue la multiplication par rapport a l'addition
+		if (copy.Fg() instanceof Plus){
+			Plus root = new Plus();
+			
+			Multiplication MGauche = new Multiplication();
+			Multiplication MDroit = new Multiplication();
+			MGauche.SetFilsGauche(NodeA.Clone(copy.Fd()));
+			MDroit.SetFilsGauche(NodeA.Clone(copy.Fd()));
+			
+			//Dolipran
+			MGauche.SetFilsDroit(NodeA.Clone(((NodeA)copy.Fg()).Fg()));
+			MDroit.SetFilsDroit(NodeA.Clone(((NodeA)copy.Fg()).Fd()));
+			
+			root.SetFilsDroit(MDroit);
+			root.SetFilsGauche(MGauche);
+		}
+		return l;
+	}
+	
+	
 }
