@@ -105,8 +105,10 @@ import java.util.*;
         return ;
       }
       try {
-        parser.TranslationUnit();
+	SimpleNode parseTree = parser.Start();
         System.out.println("C Parser Version 0.1Alpha:  Java program parsed successfully.");
+	parseTree.dump("");
+	System.out.println("End");
       }
       catch(ParseException e){
         System.out.println("C Parser Version 0.1Alpha:  Encountered errors during parse.");
@@ -185,6 +187,7 @@ TOKEN : {
 	<FOR: "for"> |
 	<INT: "int"> |
 	<IF: "if"> |
+	<END: "<EOF>"> |
 	<DO: "do">
 }
 
@@ -194,12 +197,11 @@ TOKEN : {
 |  <#DIGIT: ["0"-"9"]>
 }
 
-void TranslationUnit() : {}
+SimpleNode Start() : {}
 {
-	(ExternalDeclaration())+
-	{printTypes();}
+	(LOOKAHEAD(ExternalDeclaration()) ExternalDeclaration()) +
+	{return jjtThis;}
 }
-
 void ExternalDeclaration() : {}
 {
 	( LOOKAHEAD( FunctionDefinition() ) FunctionDefinition() | Declaration())
@@ -590,9 +592,15 @@ void ArgumentExpressionList() : {}
 	AssignmentExpression() ( "," AssignmentExpression() )*
 }
 
-void Constant() : {}
+void Constant() : 
 {
- <INTEGER_LITERAL> | <FLOATING_POINT_LITERAL> | <CHARACTER_LITERAL> | <STRING_LITERAL>
+	Token t;
+}
+{
+	t = <INTEGER_LITERAL> | <FLOATING_POINT_LITERAL> | <CHARACTER_LITERAL> | <STRING_LITERAL>
+	{
+		jjtThis.setName(t.image);
+	}
 }
 
 
