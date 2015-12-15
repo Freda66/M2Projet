@@ -1,11 +1,5 @@
 package structure;
 
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
-
 public abstract class NodeA extends SimpleNodeA{
 
 	public SimpleNodeA fg;
