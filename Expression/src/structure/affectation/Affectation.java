@@ -1,9 +1,9 @@
 package structure.affectation;
 
-import structure.Node;
-import structure.SimpleNode;
+import structure.NodeA;
+import structure.SimpleNodeA;
 
-public class Affectation extends Node {
+public class Affectation extends NodeA {
 
 	@Override
 	public String type() {
@@ -14,7 +14,7 @@ public class Affectation extends Node {
 		return " = ";
 	}
 	@Override
-	public SimpleNode clone() {
+	public SimpleNodeA clone() {
 		return new Affectation();
 	}
 

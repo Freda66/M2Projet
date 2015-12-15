@@ -1,8 +1,8 @@
 package structure.operator;
 
-import structure.Node;
+import structure.NodeA;
 
-public abstract class Operator extends Node {
+public abstract class Operator extends NodeA {
 
 
 	public abstract float[] Eval(float[] range1,float[] range2);

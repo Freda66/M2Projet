@@ -1,6 +1,6 @@
 package structure.terminal;
 
-import structure.SimpleNode;
+import structure.SimpleNodeA;
 
 public class Variable extends Terminal{
 	private String name;
@@ -26,7 +26,7 @@ public class Variable extends Terminal{
 	}
 
 	@Override
-	public SimpleNode clone() {
+	public SimpleNodeA clone() {
 		return new Variable(this.getName(),this.getRange());
 	}
 }

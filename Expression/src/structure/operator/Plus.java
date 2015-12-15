@@ -1,6 +1,6 @@
 package structure.operator;
 
-import structure.SimpleNode;
+import structure.SimpleNodeA;
 
 public class Plus extends Operator {
 
@@ -20,7 +20,7 @@ public class Plus extends Operator {
 		return retour;
 	}
 	@Override
-	public SimpleNode clone() {
+	public SimpleNodeA clone() {
 		return new Plus();
 	}
 	
