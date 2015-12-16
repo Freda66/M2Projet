@@ -22,5 +22,15 @@ public abstract class Terminal extends SimpleNodeA {
 		this.range = range;
 	}
 	
+	public boolean equals(Terminal term){
+		boolean retour = true;
+		if(this.range[0] != term.range[0]){
+			retour=false;
+		}else if(this.range[0] != term.range[0]){
+			retour=false;
+		}
+		return retour;
+	}
+	
 
 }

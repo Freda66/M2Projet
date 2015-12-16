@@ -29,4 +29,12 @@ public class Variable extends Terminal{
 	public SimpleNodeA clone() {
 		return new Variable(this.getName(),this.getRange());
 	}
+	
+	public boolean equals(Variable term){
+		boolean retour = super.equals(term);
+		if(this.name != term.name){
+			retour=false;
+		}
+		return retour;
+	}
 }

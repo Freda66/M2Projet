@@ -22,7 +22,12 @@ public class Constante extends Terminal {
 	public SimpleNodeA clone() {
 		return new Constante(this.getRange());
 	}
-
+	
+	public boolean equals(Constante term){
+		boolean retour = super.equals(term);
+	
+		return retour;
+	}
 	
 
 	

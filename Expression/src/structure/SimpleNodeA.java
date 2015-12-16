@@ -12,7 +12,9 @@ public abstract class SimpleNodeA {
 
 	public abstract SimpleNodeA clone();
 	
-	
 	public abstract String toString();
 
+	public boolean equals(SimpleNodeA term){
+		return true;
+	}
 } 

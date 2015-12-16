@@ -1,5 +1,7 @@
 package structure;
 
+import structure.terminal.Terminal;
+
 public abstract class NodeA extends SimpleNodeA{
 
 	public SimpleNodeA fg;
@@ -53,6 +55,15 @@ public abstract class NodeA extends SimpleNodeA{
 	public void Displayln(){
 		this.Display();
 		System.out.println("");
+	}
+	public boolean equals(NodeA term){
+		boolean retour = super.equals(term);
+		if(!this.Fd().equals(term.Fd())){
+			retour=false;
+		}else if(!this.Fg().equals(term.Fg())){
+			retour=false;
+		}
+		return retour;
 	}
 	
 }
