@@ -47,8 +47,7 @@ public class Multiplication extends Operator {
 	public LinkedList<NodeA> NESOE (){
 		LinkedList<NodeA> l = new LinkedList<NodeA>();
 		
-		//comutativité
-		
+		// Commutativité
 		Operator copy = (Operator)Clone(this);
 		
 		SimpleNodeA tmp = copy.Fd();
@@ -57,7 +56,8 @@ public class Multiplication extends Operator {
 		l.add(copy);
 		
 		copy = (Operator)Clone(this);
-		//distribue la multiplication par rapport a l'addition
+		// Distribue la multiplication par rapport a l'addition
+		// Cas ou element multipliant a droit
 		if (copy.Fg() instanceof Plus){
 			Plus root = new Plus();
 			
@@ -65,8 +65,7 @@ public class Multiplication extends Operator {
 			Multiplication MDroit = new Multiplication();
 			MGauche.setFG(NodeA.Clone(copy.Fd()));
 			MDroit.setFG(NodeA.Clone(copy.Fd()));
-			
-			//Dolipran
+
 			MGauche.setFD(NodeA.Clone(((NodeA)copy.Fg()).Fg()));
 			MDroit.setFD(NodeA.Clone(((NodeA)copy.Fg()).Fd()));
 			
@@ -77,6 +76,7 @@ public class Multiplication extends Operator {
 		}
 		
 		copy = (Operator)Clone(this);
+		// Cas ou element multipliant a gauche
 		if (copy.Fd() instanceof Plus){
 			Plus root = new Plus();
 			
@@ -85,7 +85,6 @@ public class Multiplication extends Operator {
 			MGauche.setFG(NodeA.Clone(copy.Fg()));
 			MDroit.setFG(NodeA.Clone(copy.Fg()));
 			
-			//Dolipran
 			MGauche.setFD(NodeA.Clone(((NodeA)copy.Fd()).Fg()));
 			MDroit.setFD(NodeA.Clone(((NodeA)copy.Fd()).Fd()));
 			
@@ -93,8 +92,6 @@ public class Multiplication extends Operator {
 			root.setFG(MGauche);
 			l.add(root);
 		}
-		
-		
 		return l;
 	}
 	

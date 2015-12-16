@@ -59,9 +59,32 @@ public class Division extends Operator {
 	public SimpleNodeA clone() {
 		return new Division();
 	}
+	
+	
 	@Override
-	public LinkedList<NodeA> NESOE() {
-		// TODO Auto-generated method stub
-		return null;
+	public LinkedList<NodeA> NESOE (){
+		LinkedList<NodeA> l = new LinkedList<NodeA>();
+
+		Operator copy = (Operator)Clone(this);
+		copy = (Operator)Clone(this);
+		
+		// Distribue la Division par rapport a la multiplication
+		if (copy.Fg() instanceof Multiplication){
+			Multiplication root = new Multiplication();
+			
+			Division MGauche = new Division();
+			Division MDroit = new Division();
+			MGauche.setFD(NodeA.Clone(copy.Fd()));
+			MDroit.setFD(NodeA.Clone(copy.Fd()));
+
+			MGauche.setFG(NodeA.Clone(((NodeA)copy.Fg()).Fg()));
+			MDroit.setFG(NodeA.Clone(((NodeA)copy.Fg()).Fd()));
+			
+			root.setFD(MDroit);
+			root.setFG(MGauche);
+			l.add(root);
+
+		}
+		return l;
 	}
 }

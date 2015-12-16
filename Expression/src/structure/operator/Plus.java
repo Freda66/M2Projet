@@ -26,10 +26,43 @@ public class Plus extends Operator {
 	public SimpleNodeA clone() {
 		return new Plus();
 	}
+	
 	@Override
-	public LinkedList<NodeA> NESOE() {
-		// TODO Auto-generated method stub
-		return null;
+	public LinkedList<NodeA> NESOE (){
+		LinkedList<NodeA> l = new LinkedList<NodeA>();
+
+		Operator copy = (Operator)Clone(this);
+		copy = (Operator)Clone(this);
+		
+		// Factorise la multiplication
+		if (copy.Fg() instanceof Multiplication && copy.Fd() instanceof Multiplication){
+			Multiplication root = new Multiplication();
+			Plus MGauche = new Plus();
+			
+			if(((NodeA) copy.Fg()).Fg()==((NodeA) copy.Fd()).Fg()){
+				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
+				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
+				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
+				
+			}else if(((NodeA) copy.Fg()).Fg()==((NodeA) copy.Fd()).Fd()){
+				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
+				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
+				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
+				
+			}else if(((NodeA) copy.Fg()).Fd()==((NodeA) copy.Fd()).Fg()){
+				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
+				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
+				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
+				
+			}else if(((NodeA) copy.Fg()).Fd()==((NodeA) copy.Fd()).Fd()){
+				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
+				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
+				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
+			}
+			root.setFG(MGauche);
+			l.add(root);
+		}
+		return l;
 	}
 	
 }
