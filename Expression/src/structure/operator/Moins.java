@@ -27,7 +27,9 @@ public class Moins extends Operator {
 		return new Moins();
 	}
 	@Override
+
 	public LinkedList<NodeA> NESOE() {
+
 		// TODO Auto-generated method stub
 		return null;
 	}

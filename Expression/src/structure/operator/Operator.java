@@ -37,7 +37,7 @@ public abstract class Operator extends NodeA {
 			work = this.NESOE();
 			ListIterator<NodeA> li = work.listIterator();
 			while(li.hasNext()){
-				this.SetFilsGauche(li.next());
+				this.fg = li.next();
 				ESOE.add((NodeA) NodeA.Clone(Root));
 			}
 		}

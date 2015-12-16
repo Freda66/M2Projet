@@ -1,7 +1,5 @@
 package structure.operator;
 
-
-import java.awt.List;
 import java.util.LinkedList;
 
 import structure.NodeA;
@@ -54,8 +52,8 @@ public class Multiplication extends Operator {
 		Operator copy = (Operator)Clone(this);
 		
 		SimpleNodeA tmp = copy.Fd();
-		SetFilsDroit(copy.Fg());
-		SetFilsGauche(tmp);
+		setFD(copy.Fg());
+		setFG(tmp);
 		l.add(copy);
 		
 		copy = (Operator)Clone(this);
@@ -65,16 +63,17 @@ public class Multiplication extends Operator {
 			
 			Multiplication MGauche = new Multiplication();
 			Multiplication MDroit = new Multiplication();
-			MGauche.SetFilsGauche(NodeA.Clone(copy.Fd()));
-			MDroit.SetFilsGauche(NodeA.Clone(copy.Fd()));
+			MGauche.setFG(NodeA.Clone(copy.Fd()));
+			MDroit.setFG(NodeA.Clone(copy.Fd()));
 			
 			//Dolipran
-			MGauche.SetFilsDroit(NodeA.Clone(((NodeA)copy.Fg()).Fg()));
-			MDroit.SetFilsDroit(NodeA.Clone(((NodeA)copy.Fg()).Fd()));
+			MGauche.setFD(NodeA.Clone(((NodeA)copy.Fg()).Fg()));
+			MDroit.setFD(NodeA.Clone(((NodeA)copy.Fg()).Fd()));
 			
-			root.SetFilsDroit(MDroit);
-			root.SetFilsGauche(MGauche);
+			root.setFD(MDroit);
+			root.setFG(MGauche);
 			l.add(root);
+
 		}
 		
 		copy = (Operator)Clone(this);
@@ -83,15 +82,15 @@ public class Multiplication extends Operator {
 			
 			Multiplication MGauche = new Multiplication();
 			Multiplication MDroit = new Multiplication();
-			MGauche.SetFilsGauche(NodeA.Clone(copy.Fg()));
-			MDroit.SetFilsGauche(NodeA.Clone(copy.Fg()));
+			MGauche.setFG(NodeA.Clone(copy.Fg()));
+			MDroit.setFG(NodeA.Clone(copy.Fg()));
 			
 			//Dolipran
-			MGauche.SetFilsDroit(NodeA.Clone(((NodeA)copy.Fd()).Fg()));
-			MDroit.SetFilsDroit(NodeA.Clone(((NodeA)copy.Fd()).Fd()));
+			MGauche.setFD(NodeA.Clone(((NodeA)copy.Fd()).Fg()));
+			MDroit.setFD(NodeA.Clone(((NodeA)copy.Fd()).Fd()));
 			
-			root.SetFilsDroit(MDroit);
-			root.SetFilsGauche(MGauche);
+			root.setFD(MDroit);
+			root.setFG(MGauche);
 			l.add(root);
 		}
 		
