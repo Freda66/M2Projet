@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 import structure.NodeA;
-import structure.SimpleNodeA;
 
 
 public abstract class Operator extends NodeA {

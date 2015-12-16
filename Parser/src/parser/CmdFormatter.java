@@ -162,44 +162,6 @@ public class CmdFormatter {
 		
 		if( n instanceof Variable ){
 
-			// si dans en mode lecture
-			if(m == Mode.READ_VAR){
-				
-
-				String newname = varnames.get(((Variable) n).getName());
-				((Variable) n).setName(newname);
-				System.out.println("name set to " + newname );
-				
-			}
-			
-			// si en mode ecriture
-			else if(m == Mode.SET_VAR){
-				
-				String currentName = varnames.get( ((Variable) n).getName() );
-				
-				int num ;
-				
-				if(currentName != null){
-					
-					String[] strings = currentName.split("___");
-					
-					num = Integer.parseInt(strings[1]);
-					
-				}
-				else{
-					
-					num = 0;
-					
-				}
-				
-				num++;
-				
-				String newName = ((Variable) n).getName() + "___" + num	;
-				varnames.put( ((Variable) n).getName() , newName);
-				
-				((Variable) n).setName(	newName );
-				System.out.println("name set to " + newName);
-			}
 			
 		}
 		else if( n instanceof Affectation){
@@ -207,9 +169,9 @@ public class CmdFormatter {
 			// fg reçoit fd, donc fg est en mode SET
 			if( ((NodeA) n).fg instanceof Variable){
 				
-				toSSA( ((NodeA) n).fg, Mode.SET_VAR );
+				//toSSA( ((NodeA) n).fg, Mode.SET_VAR );
 				
-				Variable fg = (Variable)( (NodeA) n).fg ;
+				Variable fg = (Variable)( ( (NodeA) n ).fg) ;
 				
 				Variable currentVar = varnames.get( fg.getName() );
 				
@@ -232,12 +194,11 @@ public class CmdFormatter {
 				
 				num++;
 				
-				String newName = ((Variable) n).getName() + "___" + num	;
-				varnames.put( ((Variable) n).getName() , newName);
+				String newName = (fg).getName() + "___" + num	;
+				varnames.put( (fg).getName() , (fg) );
 				
-				((Variable) n).setName(	newName );
+				(fg).setName(	newName );
 				System.out.println("name set to " + newName);
-				(NodeA) n).fg  =  ;
 				
 				
 			}
@@ -252,7 +213,12 @@ public class CmdFormatter {
 				
 				toSSA( ((NodeA) n).fd, Mode.READ_VAR );
 				
+				Variable fd = (Variable)(((NodeA) n).fd);
 				
+				Variable newvar = varnames.get( fd.getName() );
+				//((Variable) n).setName(newname);
+				((NodeA) n).fd = newvar;
+				System.out.println("name set to " + newvar.getName() );
 				
 			}
 			else{
@@ -270,6 +236,13 @@ public class CmdFormatter {
 				
 				toSSA( ((NodeA) n).fg, Mode.READ_VAR );
 				
+				Variable fg = (Variable)(((NodeA) n).fg);
+				
+				Variable newvar = varnames.get( fg.getName() );
+				//((Variable) n).setName(newname);
+				((NodeA) n).fg = newvar;
+				System.out.println("name set to " + newvar.getName() );
+				
 			}
 			else{
 				
@@ -281,6 +254,13 @@ public class CmdFormatter {
 			if( ((NodeA) n).fd instanceof Variable){
 				
 				toSSA( ((NodeA) n).fd, Mode.READ_VAR );
+				
+				Variable fd = (Variable)(((NodeA) n).fd);
+				
+				Variable newvar = varnames.get( fd.getName() );
+				//((Variable) n).setName(newname);
+				((NodeA) n).fd = newvar;
+				System.out.println("name set to " + newvar.getName() );
 				
 			}
 			else{
