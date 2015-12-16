@@ -52,8 +52,8 @@ public class Multiplication extends Operator {
 		Operator copy = (Operator)Clone(this);
 		
 		SimpleNodeA tmp = copy.Fd();
-		setFD(copy.Fg());
-		setFG(tmp);
+		copy.setFD(copy.Fg());
+		copy.setFG(tmp);
 		l.add(copy);
 		
 		copy = (Operator)Clone(this);

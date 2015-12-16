@@ -14,7 +14,8 @@ public class Constante extends Terminal {
 	}
 	@Override
 	public String toString() {
-		return "";
+		float[] range = this.getRange();
+		return "["+range[0]+","+range[1]+"]";
 	}
 
 	@Override

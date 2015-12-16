@@ -11,6 +11,8 @@ public abstract class SimpleNodeA {
 	}
 
 	public abstract SimpleNodeA clone();
-
+	
+	
+	public abstract String toString();
 
 } 

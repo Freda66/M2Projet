@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 import structure.NodeA;
+import structure.SimpleNodeA;
 
 
 public abstract class Operator extends NodeA {
@@ -20,29 +21,36 @@ public abstract class Operator extends NodeA {
 	public abstract LinkedList<NodeA> NESOE ();	
 	
 	//parcourt en profondeur
-	public void BESOE(NodeA Root,int k,LinkedList<NodeA> ESOE){
+	//ESOE Equivalent set of expression
+	//BESOE build equivalent set of expression 
+	public void BESOE(NodeA Root,LinkedList<NodeA> ESOE,int k){
 		if(this == Root) ESOE.add(this);
 		
 		LinkedList<NodeA> work;
 		
-		if(Fd() instanceof Operator){
+		if(this.Fd() instanceof Operator){
+			Operator initialFD = (Operator)this.Fd();
 			work = this.NESOE();
 			ListIterator<NodeA> li = work.listIterator();
 			while(li.hasNext()){
-				this.fd = li.next();
+				this.setFD(li.next());
 				ESOE.add((NodeA) NodeA.Clone(Root));
 			}
+			this.setFD(initialFD);
+			initialFD.BESOE(Root,ESOE,k);
+			
 		}
 		if(this.Fg() instanceof Operator){
+			Operator initialFG = (Operator) this.Fg();
 			work = this.NESOE();
 			ListIterator<NodeA> li = work.listIterator();
 			while(li.hasNext()){
-				this.fg = li.next();
+				this.setFG( li.next());
 				ESOE.add((NodeA) NodeA.Clone(Root));
 			}
+			this.setFG(initialFG);
+			initialFG.BESOE(Root,ESOE,k);
 		}
-		
-	
 		
 	}
 	

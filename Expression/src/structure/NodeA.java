@@ -31,6 +31,30 @@ public abstract class NodeA extends SimpleNodeA{
 		return A;
 			
 	}
+	
+	public void Display(){
+		
+		System.out.print("( ");
+		if(fg instanceof NodeA )
+			((NodeA) fg).Display();
+		else
+			System.out.print(fg.toString());
+		
+		System.out.print(" " + this.toString() + " ");
+		
+		if(fd instanceof NodeA )
+			((NodeA) fd).Display();
+		else
+			System.out.print(fd.toString());
+		
+		System.out.print(" )");
+		
+	}
+	public void Displayln(){
+		Display();
+		System.out.println("");
+	}
+	
 }
 	
 	
