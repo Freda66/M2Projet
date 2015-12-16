@@ -4,12 +4,21 @@ import structure.SimpleNodeA;
 
 public class Variable extends Terminal{
 	private String name;
+	private String typeDef;
 	
 	public Variable(String name,float[] range) {
 		super(range);
 		this.name = name;
 	}
 	
+	public String getTypeDef() {
+		return typeDef;
+	}
+
+	public void setTypeDef(String typeDef) {
+		this.typeDef = typeDef;
+	}
+
 	public String getName() {
 		return name;
 	}
