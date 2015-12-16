@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import db.Database;
+import db.Measurement;
+
 public class CCompiler {
 
 	/**
@@ -32,17 +35,12 @@ public class CCompiler {
 	public void Compile()
 	{
 		try {
-            Process p = Runtime.getRuntime().exec("gcc " + fileName + " -o " + exeName, null, dir);
-            BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));  
-            String line = null;  
-            while ((line = in.readLine()) != null) {  
-                System.out.println(line);  
-            }  
+			// Compile le fichier c
+            Runtime.getRuntime().exec("gcc " + fileName + " -o " + exeName, null, dir);
         } catch (IOException e) {  
             e.printStackTrace();  
-        } 
-		
-		System.out.println("Compile succès.\n");
+        }
+		System.out.println("Compile succès.");
 	}
 	
 	/**
@@ -50,20 +48,58 @@ public class CCompiler {
 	 */
 	public void Execute()
 	{
-		System.out.println("Affichage programme "+ exeName +" : ");
+		System.out.println("Execution programme "+ exeName + " en cours.");
 		
 		try {
+			// Connexion à la bdd
+			Database db = new Database("../db/PrecisionNumerique.db");
+	        db.connect();
+			Measurement measurement = new Measurement(db);
+			System.out.println("");
+	        
+			// Execute le programme c
             Process p = Runtime.getRuntime().exec("./"+exeName, null, dir);
+            
+            // Lit les print du programme
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));  
-            String line = null;  
-            while ((line = in.readLine()) != null) {  
-                System.out.println(line);  
-            } 
+            // Chaine de lecture des valeurs du programme
+            String line = null;
+            // Parcours l'affichage du programme
+            while ((line = in.readLine()) != null) {
+            	// Appel la fonction qui gère les lignes du programme
+            	HandlePrintProgramme(measurement, line);
+            }
+            
         } catch (IOException e) {  
             e.printStackTrace();  
         } 
 		
-		System.out.println("\nExecute succès.\n");
+		System.out.println("\nExecution programme "+ exeName + " terminé.\n");
+	}
+	
+	/**
+	 * Fonction qui gère les lignes du programmme c
+	 * Affiche dans la console la ligne OU
+	 * Parse la chaine, puis insert les données dans la table Measurement de la bdd
+	 * @param line
+	 */
+	public void HandlePrintProgramme(Measurement measurement, String line){
+		// Initialise les variables
+		String[] lineSplit;
+
+		// Si la ligne est destiné à la bdd
+    	if(line.contains("BDDMeasurement")){
+    		// Recupere la partie droite de la chaine (nomVar, min, max)
+    		lineSplit = line.split(":")[1].split(";");
+    		// Rempli l'objet Measurement
+    		measurement.setNomVar(lineSplit[0]);
+    		measurement.setMin(Double.parseDouble(lineSplit[1]));
+    		measurement.setMax(Double.parseDouble(lineSplit[2]));
+    		// Insert les données dans la table Measurement de la bdd
+    		measurement.addMeasurement();
+    	} else {
+            System.out.println(line);
+    	}  
 	}
 	
 }

@@ -10,9 +10,9 @@ public class Resultat extends Database{
 	 * Attributs de la table/classe
 	 */
 	private int idRun;
-	private double resultInit;
-	private double resultOpt;
-	private double resultMpfr;
+	private double resultInit = 0.0;
+	private double resultOpt = 0.0;
+	private double resultMpfr = 0.0;
 	
 	/** 
 	 * Constructeur par defaut
