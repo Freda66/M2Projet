@@ -8,7 +8,7 @@ public class TestCompileExecFileCGaellic {
 		CCompiler compiler = new CCompiler("myProg.c",new File("programmeC"));
 		
 		// Compile le fichier c
-		compiler.Compile();
+		compiler.Compile(false);
 		
 		// Execute le fichier c
 		compiler.Execute();

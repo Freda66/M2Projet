@@ -15,6 +15,10 @@ public abstract class SimpleNodeA {
 	public abstract String toString();
 
 	public boolean equals(SimpleNodeA term){
-		return true;
+		boolean retour=true;
+		if(this.type()!=term.type()){
+			retour=false;
+		}
+		return retour;
 	}
 } 

@@ -1,6 +1,5 @@
 package structure;
 
-import structure.terminal.Terminal;
 
 public abstract class NodeA extends SimpleNodeA{
 

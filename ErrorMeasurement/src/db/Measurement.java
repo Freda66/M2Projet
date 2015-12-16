@@ -89,15 +89,23 @@ public class Measurement extends Database{
 	/** 
 	 * Fonction qui recupere un Measurement par son id
 	 */
-	public void getMeasurementById(int mId){
+	public boolean getMeasurementById(int mId){
 		// Met à jour l'objet
         ResultSet resultSet = super.query("SELECT * FROM Measurement WHERE id="+mId);
         try {
-        	this.setId(resultSet.getInt("id"));
-        	this.setNomVar(resultSet.getString("nomVar"));
-        	this.setMin(resultSet.getDouble("min"));
-        	this.setMax(resultSet.getDouble("max"));
+        	// Si il y a un resultat
+        	if(!resultSet.isClosed()){
+	        	this.setId(resultSet.getInt("id"));
+	        	this.setNomVar(resultSet.getString("nomVar"));
+	        	this.setMin(resultSet.getDouble("min"));
+	        	this.setMax(resultSet.getDouble("max"));
+	        	return true; // Ligne trouvée
+        	} 
+        	// Aucun resultat
+        	else return false;
         } catch (SQLException e) { e.printStackTrace(); }
+        
+        return false; // Ligne non trouvée
 	}
 	
 	/** 
@@ -106,17 +114,21 @@ public class Measurement extends Database{
 	public boolean getMeasurementByNomVar(String mNomVar){
 		// Met à jour l'objet
         ResultSet resultSet = super.query("SELECT * FROM Measurement WHERE nomVar='"+mNomVar+"'");
-        if(resultSet == null) return false;
-        else return true;/*
+        
         try {
-        	this.setId(resultSet.getInt("id"));
-        	this.setNomVar(resultSet.getString("nomVar"));
-        	this.setMin(resultSet.getDouble("min"));
-        	this.setMax(resultSet.getDouble("max"));
-        	return true; // Ligne trouvée
+        	// Si il y a un resultat
+        	if(!resultSet.isClosed()){
+	        	this.setId(resultSet.getInt("id"));
+	        	this.setNomVar(resultSet.getString("nomVar"));
+	        	this.setMin(resultSet.getDouble("min"));
+	        	this.setMax(resultSet.getDouble("max"));
+	        	return true; // Ligne trouvée
+        	} 
+        	// Aucun resultat
+        	else return false;
         } catch (SQLException e) { e.printStackTrace(); }
         
-        return false; // Ligne non trouvée*/
+        return false; // Ligne non trouvée
 	}
 	
 	/**

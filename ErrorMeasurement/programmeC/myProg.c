@@ -3,7 +3,7 @@
 
 int main()
 {
-    printf("BDDMeasurement:varProgC;13.242434233\n");
+    printf("BDDMeasurement:var2ProgC;11.0\n");
  
     printf("Message a afficher\n");
     
