@@ -46,22 +46,22 @@ public class Plus extends Operator {
 			Plus MGauche = new Plus();
 			root.setFD(null);
 			
-			if(((NodeA) copy.Fg()).Fg()==((NodeA) copy.Fd()).Fg()){
+			if(((NodeA) copy.Fg()).Fg().equals(((NodeA) copy.Fd()).Fg())){
 				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
 				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
 				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
 
-			}else if(((NodeA) copy.Fg()).Fg()==((NodeA) copy.Fd()).Fd()){
+			}else if(((NodeA) copy.Fg()).Fg().equals(((NodeA) copy.Fd()).Fd())){
 				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
 				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
 				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
 
-			}else if(((NodeA) copy.Fg()).Fd()==((NodeA) copy.Fd()).Fg()){
+			}else if(((NodeA) copy.Fg()).Fd().equals(((NodeA) copy.Fd()).Fg())){
 				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
 				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
 				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
 
-			}else if(((NodeA) copy.Fg()).Fd()==((NodeA) copy.Fd()).Fd()){
+			}else if(((NodeA) copy.Fg()).Fd().equals(((NodeA) copy.Fd()).Fd())){
 				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
 				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
 				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
