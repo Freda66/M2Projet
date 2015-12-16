@@ -51,7 +51,7 @@ public abstract class NodeA extends SimpleNodeA{
 		
 	}
 	public void Displayln(){
-		Display();
+		this.Display();
 		System.out.println("");
 	}
 	

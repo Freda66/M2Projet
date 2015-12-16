@@ -66,7 +66,6 @@ public class Division extends Operator {
 		LinkedList<NodeA> l = new LinkedList<NodeA>();
 
 		Operator copy = (Operator)Clone(this);
-		copy = (Operator)Clone(this);
 		
 		// Distribue la Division par rapport a la multiplication
 		if (copy.Fg() instanceof Multiplication){

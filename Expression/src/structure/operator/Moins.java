@@ -32,28 +32,30 @@ public class Moins extends Operator {
 		LinkedList<NodeA> l = new LinkedList<NodeA>();
 
 		Operator copy = (Operator)Clone(this);
-		copy = (Operator)Clone(this);
 		
 		// Factorise la multiplication
 		if (copy.Fg() instanceof Multiplication && copy.Fd() instanceof Multiplication){
 			Multiplication root = new Multiplication();
 			Moins MGauche = new Moins();
-			
+			// Comparaison fils gauche fils gauche
 			if(((NodeA) copy.Fg()).Fg()==((NodeA) copy.Fd()).Fg()){
 				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
 				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
 				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
 				
+			// Comparaison fils gauche fils droit
 			}else if(((NodeA) copy.Fg()).Fg()==((NodeA) copy.Fd()).Fd()){
 				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
 				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
 				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
 				
+			// Comparaison fils droit fils gauche
 			}else if(((NodeA) copy.Fg()).Fd()==((NodeA) copy.Fd()).Fg()){
 				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
 				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
 				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
 				
+			// Comparaison fils droit fils droit
 			}else if(((NodeA) copy.Fg()).Fd()==((NodeA) copy.Fd()).Fd()){
 				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
 				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));

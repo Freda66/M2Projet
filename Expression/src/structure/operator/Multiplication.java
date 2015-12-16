@@ -47,7 +47,7 @@ public class Multiplication extends Operator {
 	public LinkedList<NodeA> NESOE (){
 		LinkedList<NodeA> l = new LinkedList<NodeA>();
 		
-		// Commutativité
+		// Commutativite
 		Operator copy = (Operator)Clone(this);
 		
 		SimpleNodeA tmp = NodeA.Clone(copy.Fd());
