@@ -50,12 +50,13 @@ public class Multiplication extends Operator {
 		// Commutativité
 		Operator copy = (Operator)Clone(this);
 		
-		SimpleNodeA tmp = copy.Fd();
+		SimpleNodeA tmp = NodeA.Clone(copy.Fd());
 		copy.setFD(copy.Fg());
 		copy.setFG(tmp);
-		l.add(copy);
+		l.add((NodeA)NodeA.Clone(copy));
 		
 		copy = (Operator)Clone(this);
+		
 		// Distribue la multiplication par rapport a l'addition
 		// Cas ou element multipliant a droit
 		if (copy.Fg() instanceof Plus){
@@ -71,7 +72,7 @@ public class Multiplication extends Operator {
 			
 			root.setFD(MDroit);
 			root.setFG(MGauche);
-			l.add(root);
+			l.add((NodeA)NodeA.Clone(root));
 
 		}
 		
@@ -90,7 +91,7 @@ public class Multiplication extends Operator {
 			
 			root.setFD(MDroit);
 			root.setFG(MGauche);
-			l.add(root);
+			l.add((NodeA)NodeA.Clone(root));
 		}
 		return l;
 	}

@@ -24,13 +24,19 @@ public abstract class Operator extends NodeA {
 	//ESOE Equivalent set of expression
 	//BESOE build equivalent set of expression 
 	public void BESOE(NodeA Root,LinkedList<NodeA> ESOE,int k){
-		if(this == Root) ESOE.add(this);
 		
 		LinkedList<NodeA> work;
-		
+		if(this == Root){			
+			work = this.NESOE();
+			ListIterator<NodeA> li = work.listIterator();
+			while(li.hasNext()){
+				ESOE.add(li.next());
+			}
+			
+		}
 		if(this.Fd() instanceof Operator){
 			Operator initialFD = (Operator)this.Fd();
-			work = this.NESOE();
+			work = ((Operator)this.Fd()).NESOE();
 			ListIterator<NodeA> li = work.listIterator();
 			while(li.hasNext()){
 				this.setFD(li.next());
@@ -42,7 +48,7 @@ public abstract class Operator extends NodeA {
 		}
 		if(this.Fg() instanceof Operator){
 			Operator initialFG = (Operator) this.Fg();
-			work = this.NESOE();
+			work = ((Operator)this.Fg()).NESOE();
 			ListIterator<NodeA> li = work.listIterator();
 			while(li.hasNext()){
 				this.setFG( li.next());

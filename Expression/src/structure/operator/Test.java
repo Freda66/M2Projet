@@ -30,8 +30,8 @@ public class Test {
 		addition.setFG(new Constante(Range));
 		
 		root.Displayln();
-		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
 		
+		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
 		root.BESOE(root, ESOE, 0);
 		
 		ListIterator<NodeA> li = ESOE.listIterator();
