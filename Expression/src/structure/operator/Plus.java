@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import structure.NodeA;
 import structure.SimpleNodeA;
+import structure.SimpleNodeA.Signature;
 
 public class Plus extends Operator {
 
@@ -70,9 +71,15 @@ public class Plus extends Operator {
 				root.setFG(MGauche);
 				l.add((NodeA) NodeA.Clone(root));
 				root.Displayln();
+				System.out.println("TAGADA");
 			}
 		}
 		return l;
+	}
+	
+	@Override
+	protected String getSignature() {
+		return Signature.Plus.toString()  + super.getSignature();
 	}
 
 }

@@ -78,6 +78,22 @@ public abstract class NodeA extends SimpleNodeA{
 		}
 		return retour;
 	}
+	/*
+	 * Cette fonction permet de signer les graph en créant une image ne leur structure
+	 * voir https://fr.wikipedia.org/wiki/Arbre_binaire
+	 * Cette image est utilisé pour déterminer rapidement si un graph existe deja sur une
+	 * base de donée de graph classé selon leur structure
+	 * le format definit une clef spéciale pour déterminer si on arrive sur une feuille
+	 */
+	public String sign(){
+		
+		return getSignature();
+	}
+	
+	@Override
+	protected String getSignature() {
+		return Fg().getSignature()+Fd().getSignature();
+	}
 	
 }
 	

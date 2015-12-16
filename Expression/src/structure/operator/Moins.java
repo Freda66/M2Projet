@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import structure.NodeA;
 import structure.SimpleNodeA;
+import structure.SimpleNodeA.Signature;
 
 public class Moins extends Operator {
 	
@@ -66,5 +67,9 @@ public class Moins extends Operator {
 			}
 		}
 		return l;
+	}
+	@Override
+	protected String getSignature() {
+		return Signature.moins.toString() + super.getSignature();
 	}
 }

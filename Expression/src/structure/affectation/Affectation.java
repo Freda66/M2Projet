@@ -17,5 +17,9 @@ public class Affectation extends NodeA {
 	public SimpleNodeA clone() {
 		return new Affectation();
 	}
+	@Override
+	protected String getSignature() {
+		return Signature.egal.toString() + super.getSignature();
+	}
 
 }
