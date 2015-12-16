@@ -44,7 +44,8 @@ public class Plus extends Operator {
 		if (copy.Fg() instanceof Multiplication && copy.Fd() instanceof Multiplication){
 			Multiplication root = new Multiplication();
 			Plus MGauche = new Plus();
-
+			root.setFD(null);
+			
 			if(((NodeA) copy.Fg()).Fg()==((NodeA) copy.Fd()).Fg()){
 				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
 				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
@@ -65,8 +66,10 @@ public class Plus extends Operator {
 				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
 				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
 			}
-			root.setFG(MGauche);
-			l.add((NodeA) NodeA.Clone(root));
+			if(root.Fd()!=null){
+				root.setFG(MGauche);
+				l.add((NodeA) NodeA.Clone(root));
+			}
 		}
 		return l;
 	}
