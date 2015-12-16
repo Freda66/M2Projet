@@ -10,25 +10,36 @@ public class Test {
 
 	public static void main(String args[]){
 		System.out.println();
-		
-		Operator root = new Multiplication();
+		float[] Range;
+		/*Operator root = new Multiplication();
 		float[] Range=new float[2];
 		Range[0] = 2;
+		Range[1] = 2;*/
+		
+		Operator root = new Plus();
+		Operator mult1 = new Multiplication();
+		Range=new float[2];
+		Range[0] = 2;
 		Range[1] = 2;
+		mult1.setFD(new Constante(Range));
+		Range=new float[2];
+		Range[0] = 3;
+		Range[1] = 3;
+		mult1.setFG(new Constante(Range));
 		
-		Constante c = new Constante(Range);
-		root.setFD(c);
-		
-		Operator addition = new Plus();
-		root.setFG(addition);
-		
+		Operator mult2 = new Multiplication();
+		Range=new float[2];
+		Range[0] = 2;
+		Range[1] = 2;
+		mult2.setFD(new Constante(Range));
+		Range=new float[2];
 		Range[0] = 4;
 		Range[1] = 4;
-		addition.setFD(new Constante(Range));
-		Range[0] = 1;
-		Range[1] = 1;
-		addition.setFG(new Constante(Range));
+		mult2.setFG(new Constante(Range));
 		
+		
+		root.setFD(mult2);
+		root.setFG(mult1);
 		root.Displayln();
 		
 		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
@@ -38,10 +49,6 @@ public class Test {
 		while(li.hasNext()){
 			(li.next()).Displayln();
 		}
-		
-		
-		
-		
 		
 	}
 	

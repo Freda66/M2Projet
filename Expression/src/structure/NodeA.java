@@ -15,7 +15,7 @@ public abstract class NodeA extends SimpleNodeA{
 	}
 	public void setFD(SimpleNodeA sn){
 		this.fd = sn;
-		this.fd.SetLevel(this.level+1);
+		//this.fd.SetLevel(this.level+1);
 	}
 	
 	public SimpleNodeA Fd(){return this.fd;}
