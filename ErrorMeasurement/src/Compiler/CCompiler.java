@@ -32,11 +32,12 @@ public class CCompiler {
 	/**
 	 * Fonction qui compile le fichier c
 	 */
-	public void Compile()
+	public void Compile(boolean isMpfr)
 	{
 		try {
 			// Compile le fichier c
-            Runtime.getRuntime().exec("gcc " + fileName + " -o " + exeName + " -lmpfr -lgmp ", null, dir);
+			if(isMpfr)Runtime.getRuntime().exec("gcc " + fileName + " -o " + exeName + " -lmpfr -lgmp ", null, dir);
+			else Runtime.getRuntime().exec("gcc " + fileName + " -o " + exeName, null, dir);
         } catch (IOException e) {  
             e.printStackTrace();  
         }
@@ -66,8 +67,8 @@ public class CCompiler {
             String line = null;
             // Parcours l'affichage du programme
             while ((line = in.readLine()) != null) {
-            	// Appel la fonction qui gère les lignes du programme
-            	HandlePrintProgramme(measurement, line);
+            	// Appel la fonction qui gère les lignes du programme avec la bdd
+            	HandlePrintBddProgramme(measurement, line);
             }
             
         } catch (IOException e) {  
@@ -78,12 +79,12 @@ public class CCompiler {
 	}
 	
 	/**
-	 * Fonction qui gère les lignes du programmme c
+	 * Fonction qui gère les lignes du programmme c avec la bdd
 	 * Affiche dans la console la ligne OU
 	 * Parse la chaine, puis insert les données dans la table Measurement de la bdd
 	 * @param line
 	 */
-	public void HandlePrintProgramme(Measurement measurement, String line){
+	public void HandlePrintBddProgramme(Measurement measurement, String line){
 		// Initialise les variables
 		String[] lineSplit;
 
@@ -92,21 +93,29 @@ public class CCompiler {
     		// Recupere la partie droite de la chaine (nomVar, val)
     		lineSplit = line.split(":")[1].split(";");
 
+    		// Recupere le nom et la valeur de la variable
+    		String nomVar = lineSplit[0];
+			Double val = Double.parseDouble(lineSplit[1]);
+    		
     		// Recupere l'objet measurement de la variable (si existant dans la bdd)
-    		if(measurement.getMeasurementByNomVar(lineSplit[0])){
-    			// Variable existante 
-    			
-    			// Traitement entre min et max 
-    			
-    			// Met à jour la variable dans la bdd
-    			measurement.updateMeasurement();
+    		if(measurement.getMeasurementByNomVar(nomVar)){
+    			// Si la valeur est inférieur à la borne min de la variable (dans la bdd) 
+    			if(measurement.getMin() > val){
+    				measurement.setMin(val); // Affecte la valeur à la borne min
+    				measurement.updateMeasurement(); // Met à jour la variable dans la bdd
+    			}
+    			// Si la valeur est supérieur à la borne max de la variable (dans la bdd)
+    			else if(measurement.getMax() < val){
+    				measurement.setMax(val); // Affecte la valeur à la borne max
+        			measurement.updateMeasurement(); // Met à jour la variable dans la bdd
+    			} 
     		} 
     		// Ajout la variable dans la bdd
     		else {
     			// Rempli l'objet Measurement
-        		measurement.setNomVar(lineSplit[0]);
-        		measurement.setMin(Double.parseDouble(lineSplit[1]));
-        		measurement.setMax(Double.parseDouble(lineSplit[1]));
+        		measurement.setNomVar(nomVar);
+        		measurement.setMin(val);
+        		measurement.setMax(val);
         		// Insert les données dans la table Measurement de la bdd
         		measurement.addMeasurement();
     		}
