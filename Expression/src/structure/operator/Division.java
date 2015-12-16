@@ -1,5 +1,8 @@
 package structure.operator;
 
+import java.util.LinkedList;
+
+import structure.NodeA;
 import structure.SimpleNodeA;
 
 public class Division extends Operator {
@@ -55,5 +58,10 @@ public class Division extends Operator {
 	@Override
 	public SimpleNodeA clone() {
 		return new Division();
+	}
+	@Override
+	public LinkedList<NodeA> NESOE() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

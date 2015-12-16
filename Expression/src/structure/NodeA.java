@@ -40,6 +40,7 @@ public abstract class NodeA extends SimpleNodeA{
 		return A;
 			
 	}
+}
 	
 	
 	

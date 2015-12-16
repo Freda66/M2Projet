@@ -46,10 +46,8 @@ public class Multiplication extends Operator {
 	}
 	
 	@Override
-	public LinkedList<NodeA> BESOE (){
+	public LinkedList<NodeA> NESOE (){
 		LinkedList<NodeA> l = new LinkedList<NodeA>();
-		
-		//TODO sauvegarder le node et le reset a la fin
 		
 		//comutativité
 		
@@ -76,7 +74,28 @@ public class Multiplication extends Operator {
 			
 			root.SetFilsDroit(MDroit);
 			root.SetFilsGauche(MGauche);
+			l.add(root);
 		}
+		
+		copy = (Operator)Clone(this);
+		if (copy.Fd() instanceof Plus){
+			Plus root = new Plus();
+			
+			Multiplication MGauche = new Multiplication();
+			Multiplication MDroit = new Multiplication();
+			MGauche.SetFilsGauche(NodeA.Clone(copy.Fg()));
+			MDroit.SetFilsGauche(NodeA.Clone(copy.Fg()));
+			
+			//Dolipran
+			MGauche.SetFilsDroit(NodeA.Clone(((NodeA)copy.Fd()).Fg()));
+			MDroit.SetFilsDroit(NodeA.Clone(((NodeA)copy.Fd()).Fd()));
+			
+			root.SetFilsDroit(MDroit);
+			root.SetFilsGauche(MGauche);
+			l.add(root);
+		}
+		
+		
 		return l;
 	}
 	

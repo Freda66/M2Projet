@@ -1,5 +1,8 @@
 package structure.operator;
 
+import java.util.LinkedList;
+
+import structure.NodeA;
 import structure.SimpleNodeA;
 
 public class Moins extends Operator {
@@ -22,5 +25,10 @@ public class Moins extends Operator {
 	@Override
 	public SimpleNodeA clone() {
 		return new Moins();
+	}
+	@Override
+	public LinkedList<NodeA> NESOE() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
