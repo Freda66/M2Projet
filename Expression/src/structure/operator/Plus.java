@@ -69,6 +69,7 @@ public class Plus extends Operator {
 			if(root.Fd()!=null){
 				root.setFG(MGauche);
 				l.add((NodeA) NodeA.Clone(root));
+				root.Displayln();
 			}
 		}
 		return l;

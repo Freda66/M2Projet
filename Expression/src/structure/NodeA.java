@@ -10,11 +10,11 @@ public abstract class NodeA extends SimpleNodeA{
 	
 	public void setFG(SimpleNodeA sn){
 		this.fg = sn;
-		this.fg.SetLevel(this.level+1);
+		//this.fg.SetLevel(this.level+1);
 	}
 	public void setFD(SimpleNodeA sn){
 		this.fd = sn;
-		this.fd.SetLevel(this.level+1);
+		//this.fd.SetLevel(this.level+1);
 	}
 	
 	public SimpleNodeA Fd(){return this.fd;}
@@ -31,6 +31,20 @@ public abstract class NodeA extends SimpleNodeA{
 		return A;
 			
 	}
+	
+	/*public abstract NodeA clone();
+	
+	public static NodeA Clone(NodeA n){
+		NodeA A =  n.clone();
+		if(n instanceof NodeA){
+			((NodeA)A).fd = Clone(((NodeA) n).fd);
+			((NodeA)A).fg = Clone(((NodeA) n).fg);
+		}
+		return A;
+			
+	}*/
+	
+	
 	
 	public void Display(){
 		
