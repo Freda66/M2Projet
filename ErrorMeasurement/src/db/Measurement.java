@@ -103,15 +103,20 @@ public class Measurement extends Database{
 	/** 
 	 * Fonction qui recupere un Measurement par son nom de variable
 	 */
-	public void getMeasurementByNomVar(String mNomVar){
+	public boolean getMeasurementByNomVar(String mNomVar){
 		// Met à jour l'objet
         ResultSet resultSet = super.query("SELECT * FROM Measurement WHERE nomVar='"+mNomVar+"'");
+        if(resultSet == null) return false;
+        else return true;/*
         try {
         	this.setId(resultSet.getInt("id"));
         	this.setNomVar(resultSet.getString("nomVar"));
         	this.setMin(resultSet.getDouble("min"));
         	this.setMax(resultSet.getDouble("max"));
+        	return true; // Ligne trouvée
         } catch (SQLException e) { e.printStackTrace(); }
+        
+        return false; // Ligne non trouvée*/
 	}
 	
 	/**

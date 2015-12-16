@@ -36,7 +36,7 @@ public class CCompiler {
 	{
 		try {
 			// Compile le fichier c
-            Runtime.getRuntime().exec("gcc " + fileName + " -o " + exeName, null, dir);
+            Runtime.getRuntime().exec("gcc " + fileName + " -o " + exeName + " -lmpfr -lgmp ", null, dir);
         } catch (IOException e) {  
             e.printStackTrace();  
         }
@@ -89,14 +89,27 @@ public class CCompiler {
 
 		// Si la ligne est destiné à la bdd
     	if(line.contains("BDDMeasurement")){
-    		// Recupere la partie droite de la chaine (nomVar, min, max)
+    		// Recupere la partie droite de la chaine (nomVar, val)
     		lineSplit = line.split(":")[1].split(";");
-    		// Rempli l'objet Measurement
-    		measurement.setNomVar(lineSplit[0]);
-    		measurement.setMin(Double.parseDouble(lineSplit[1]));
-    		measurement.setMax(Double.parseDouble(lineSplit[2]));
-    		// Insert les données dans la table Measurement de la bdd
-    		measurement.addMeasurement();
+
+    		// Recupere l'objet measurement de la variable (si existant dans la bdd)
+    		if(measurement.getMeasurementByNomVar(lineSplit[0])){
+    			// Variable existante 
+    			
+    			// Traitement entre min et max 
+    			
+    			// Met à jour la variable dans la bdd
+    			measurement.updateMeasurement();
+    		} 
+    		// Ajout la variable dans la bdd
+    		else {
+    			// Rempli l'objet Measurement
+        		measurement.setNomVar(lineSplit[0]);
+        		measurement.setMin(Double.parseDouble(lineSplit[1]));
+        		measurement.setMax(Double.parseDouble(lineSplit[1]));
+        		// Insert les données dans la table Measurement de la bdd
+        		measurement.addMeasurement();
+    		}
     	} else {
             System.out.println(line);
     	}  
