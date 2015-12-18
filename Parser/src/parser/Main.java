@@ -1,6 +1,5 @@
 package parser;
 
-import structure.NodeA;
 import structure.PVirg;
 import structure.affectation.Affectation;
 import structure.operator.Plus;

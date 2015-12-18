@@ -3,9 +3,10 @@ package structure;
 
 public abstract class NodeA extends SimpleNodeA{
 
-	public SimpleNodeA fg;
-	public SimpleNodeA fd;
+	private SimpleNodeA fg;
+	private SimpleNodeA fd;
 	public float[] eval=null;
+	public float[] error=null;
 	
 	//build set of equivalent graph
 	
@@ -22,13 +23,11 @@ public abstract class NodeA extends SimpleNodeA{
 	public SimpleNodeA Fg(){return this.fg;}
 	
 	
-	
-	public static SimpleNodeA Clone(SimpleNodeA n){
-		SimpleNodeA A = n.clone();
-		if(n instanceof NodeA){
-			((NodeA)A).fd = Clone(((NodeA) n).fd);
-			((NodeA)A).fg = Clone(((NodeA) n).fg);
-		}
+	@Override
+	public SimpleNodeA Clone(){
+		NodeA A = (NodeA) super.Clone();
+		A.fd = this.fd.Clone();
+		A.fg = this.fg.Clone();
 		return A;
 			
 	}
@@ -48,7 +47,6 @@ public abstract class NodeA extends SimpleNodeA{
 	
 	
 	public void Display(){
-		
 		System.out.print("( ");
 		if(fg instanceof NodeA )
 			((NodeA) fg).Display();
@@ -69,12 +67,18 @@ public abstract class NodeA extends SimpleNodeA{
 		this.Display();
 		System.out.println("");
 	}
-	public boolean equals(NodeA term){
+	
+	@Override
+	public boolean equal(SimpleNodeA term){
 		boolean retour = super.equals(term);
-		if(!this.Fd().equals(term.Fd())){
+		if (this.type() != term.type()){
 			retour=false;
-		}else if(!this.Fg().equals(term.Fg())){
-			retour=false;
+		}else{
+			if(!this.Fd().equals(((NodeA)term).Fd())){
+				retour=false;
+			}else if(!this.Fg().equals(((NodeA)term).Fg())){
+				retour=false;
+			}
 		}
 		return retour;
 	}

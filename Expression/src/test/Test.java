@@ -15,41 +15,37 @@ public class Test {
 
 	public static void main(String args[]){
 		System.out.println();
-		
-		Operator root = new Multiplication();
 		float[] Range=new float[2];
-		Range[0] = 2;
-		Range[1] = 2;
 		
-		Constante c = new Constante(Range);
-		root.setFD(c);
-		
-		Operator addition = new Plus();
-		root.setFG(addition);
-		
+		Operator mult1 = new Multiplication();
+		Range=new float[2];
 		Range[0] = 4;
 		Range[1] = 4;
-		addition.setFD(new Constante(Range));
-		Range[0] = 1;
-		Range[1] = 1;
+		mult1.setFD(new Constante(Range));
+		Range=new float[2];
+		Range[0] = 4;
+		Range[1] = 4;
+		mult1.setFG(new Constante(Range));
 		
+		Operator root = new Plus();
+		root.setFG(mult1);
 		
 		Operator mult2 = new Multiplication();
-		Range[0] = 6;
-		Range[1] = 6;
+		Range[0] = 4;
+		Range[1] = 4;
 		mult2.setFD(new Constante(Range));
 		Range[0] = 5;
 		Range[1] = 5;
 		mult2.setFG(new Constante(Range));
 		
-		addition.setFG(mult2);
+		root.setFD(mult2);
 		
 		root.Displayln();
 		System.out.println(root.sign());
 		
 		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
 		ESOE.add(root);
-		ESOE = root.EUD_K(ESOE, 2);
+		ESOE = root.EUD_K(ESOE, 3);
 		
 		ListIterator<NodeA> li = ESOE.listIterator();
 		Evaluation E = new Evaluation();

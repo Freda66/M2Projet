@@ -16,67 +16,69 @@ public class Plus extends Operator {
 		return " + ";
 	}
 	@Override
+	public SimpleNodeA clone() {
+		return new Plus();
+	}
+	
+	// Evaluation pour 2 terminaux
+	@Override
 	public float[] Eval(float[] range1, float[] range2) {
 		float[] retour= new float[2];
 		retour[0]=range1[0] + range2[0];
 		retour[1]=range1[1] + range2[1];
 		return retour;
 	}
-	@Override
-	public SimpleNodeA clone() {
-		return new Plus();
-	}
 
+	// Decouverte des arbres equivalents
 	@Override
 	public LinkedList<NodeA> NESOE (){
 		LinkedList<NodeA> l = new LinkedList<NodeA>();
-
-		Operator copy = (Operator)Clone(this);
+		Operator copy = (Operator) this.Clone();
 
 		// Commutativite
-		SimpleNodeA tmp =  NodeA.Clone(copy.Fd());
-		copy.setFD(NodeA.Clone(copy.Fg()));
+		SimpleNodeA tmp =  copy.Fd().Clone();
+		copy.setFD(copy.Fg().Clone());
 		copy.setFG(tmp);
-		l.add((NodeA) NodeA.Clone(copy));
+		l.add((NodeA) copy.Clone());
 
 		// Factorise la multiplication
-		copy = (Operator)Clone(this);
+		copy = (Operator)this.Clone();
 		if (copy.Fg() instanceof Multiplication && copy.Fd() instanceof Multiplication){
 			Multiplication root = new Multiplication();
 			Plus MGauche = new Plus();
 			root.setFD(null);
-			
-			if(((NodeA) copy.Fg()).Fg().equals(((NodeA) copy.Fd()).Fg())){
-				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
-				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
-				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
+			System.out.println(((NodeA) copy.Fg()).Fg());
+			System.out.println(((NodeA) copy.Fd()).Fg());
+			System.out.println("Toto");
+			if(((NodeA) copy.Fg()).Fg().equal(((NodeA) copy.Fd()).Fg())){
+				MGauche.setFG(((NodeA) copy.Fg()).Fg().Clone());
+				MGauche.setFD(((NodeA) copy.Fd()).Fg().Clone());
+				root.setFD(((NodeA) copy.Fg()).Fd().Clone());
 				System.out.println("Cas 1");
 
-			}else if(((NodeA) copy.Fg()).Fg().equals(((NodeA) copy.Fd()).Fd())){
-				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
-				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
-				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
+			}else if(((NodeA) copy.Fg()).Fg().equal(((NodeA) copy.Fd()).Fd())){
+				MGauche.setFG(((NodeA) copy.Fg()).Fg().Clone());
+				MGauche.setFD(((NodeA) copy.Fd()).Fd().Clone());
+				root.setFD(((NodeA) copy.Fg()).Fd().Clone());
 				System.out.println("Cas 2");
 
-			}else if(((NodeA) copy.Fg()).Fd().equals(((NodeA) copy.Fd()).Fg())){
-				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
-				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
-				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
+			}else if(((NodeA) copy.Fg()).Fd().equal(((NodeA) copy.Fd()).Fg())){
+				MGauche.setFG(((NodeA) copy.Fg()).Fd().Clone());
+				MGauche.setFD(((NodeA) copy.Fd()).Fg().Clone());
+				root.setFD(((NodeA) copy.Fg()).Fg().Clone());
 				System.out.println("Cas 3");
 
-			}else if(((NodeA) copy.Fg()).Fd().equals(((NodeA) copy.Fd()).Fd())){
-				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
-				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
-				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
+			}else if(((NodeA) copy.Fg()).Fd().equal(((NodeA) copy.Fd()).Fd())){
+				MGauche.setFG(((NodeA) copy.Fg()).Fd().Clone());
+				MGauche.setFD(((NodeA) copy.Fd()).Fd().Clone());
+				root.setFD(((NodeA) copy.Fg()).Fg().Clone());
 				System.out.println("Cas 4");
 			}
 			if(root.Fd()!=null){
-				System.out.println("Tmp");
-				MGauche.Displayln();
+				//MGauche.Displayln();
 				root.setFG(MGauche);
-				l.add((NodeA) NodeA.Clone(root));
+				l.add((NodeA) root.Clone());
 				root.Displayln();
-				System.out.println("TAGADA");
 			}
 		}
 		return l;

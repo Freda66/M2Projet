@@ -16,6 +16,12 @@ public class Division extends Operator {
 		return " / ";
 	}
 	@Override
+	public SimpleNodeA clone() {
+		return new Division();
+	}
+	
+	// Evaluation pour 2 terminaux
+	@Override
 	public float[] Eval(float[] range1, float[] range2) {
 		float val1=range1[0]/range2[0];
 		float val2=val1;
@@ -55,17 +61,12 @@ public class Division extends Operator {
 		retour[1]=val2;
 		return retour;
 	}
-	@Override
-	public SimpleNodeA clone() {
-		return new Division();
-	}
 	
-	
+	// Decouverte des arbres equivalents
 	@Override
 	public LinkedList<NodeA> NESOE (){
 		LinkedList<NodeA> l = new LinkedList<NodeA>();
-
-		Operator copy = (Operator)Clone(this);
+		Operator copy = (Operator) this.Clone();
 		
 		// Distribue la Division par rapport a la multiplication
 		if (copy.Fg() instanceof Multiplication){
@@ -73,11 +74,11 @@ public class Division extends Operator {
 			
 			Division MGauche = new Division();
 			Division MDroit = new Division();
-			MGauche.setFD(NodeA.Clone(copy.Fd()));
-			MDroit.setFD(NodeA.Clone(copy.Fd()));
+			MGauche.setFD(copy.Fd().Clone());
+			MDroit.setFD(copy.Fd().Clone());
 
-			MGauche.setFG(NodeA.Clone(((NodeA)copy.Fg()).Fg()));
-			MDroit.setFG(NodeA.Clone(((NodeA)copy.Fg()).Fd()));
+			MGauche.setFG(((NodeA)copy.Fg()).Fg().Clone());
+			MDroit.setFG(((NodeA)copy.Fg()).Fd().Clone());
 			
 			root.setFD(MDroit);
 			root.setFG(MGauche);

@@ -15,6 +15,12 @@ public class Multiplication extends Operator {
 		return " * ";
 	}
 	@Override
+	public SimpleNodeA clone() {
+		return new Multiplication();
+	}
+	
+	// Evaluation pour 2 terminaux
+	@Override
 	public float[] Eval(float[] range1, float[] range2) {
 		float val1=range1[0]*range2[0];
 		float val2=val1;
@@ -37,24 +43,20 @@ public class Multiplication extends Operator {
 		retour[1]=val2;
 		return retour;
 	}
-	@Override
-	public SimpleNodeA clone() {
-		return new Multiplication();
-	}
 	
+	// Decouverte des arbres equivalents
 	@Override
 	public LinkedList<NodeA> NESOE (){
 		LinkedList<NodeA> l = new LinkedList<NodeA>();
+		Operator copy = (Operator)this.Clone();
 		
 		// Commutativite
-		Operator copy = (Operator)Clone(this);
-		
-		SimpleNodeA tmp = NodeA.Clone(copy.Fd());
+		SimpleNodeA tmp = copy.Fd().Clone();
 		copy.setFD(copy.Fg());
 		copy.setFG(tmp);
-		l.add((NodeA)NodeA.Clone(copy));
+		l.add((NodeA)copy.Clone());
 		
-		copy = (Operator)Clone(this);
+		copy = (Operator)this.Clone();
 		
 		// Distribue la multiplication par rapport a l'addition
 		// Cas ou element multipliant a droit
@@ -63,34 +65,35 @@ public class Multiplication extends Operator {
 			
 			Multiplication MGauche = new Multiplication();
 			Multiplication MDroit = new Multiplication();
-			MGauche.setFG(NodeA.Clone(copy.Fd()));
-			MDroit.setFG(NodeA.Clone(copy.Fd()));
+			
+			MGauche.setFG(copy.Fd().Clone());
+			MDroit.setFG(copy.Fd().Clone());
 
-			MGauche.setFD(NodeA.Clone(((NodeA)copy.Fg()).Fg()));
-			MDroit.setFD(NodeA.Clone(((NodeA)copy.Fg()).Fd()));
+			MGauche.setFD(((NodeA)copy.Fg()).Fg().Clone());
+			MDroit.setFD(((NodeA)copy.Fg()).Fd().Clone());
 			
 			root.setFD(MDroit);
 			root.setFG(MGauche);
-			l.add((NodeA)NodeA.Clone(root));
+			l.add((NodeA)root.Clone());
 
 		}
-		
-		copy = (Operator)Clone(this);
+
+		copy = (Operator)this.Clone();
 		// Cas ou element multipliant a gauche
 		if (copy.Fd() instanceof Plus){
 			Plus root = new Plus();
 			
 			Multiplication MGauche = new Multiplication();
 			Multiplication MDroit = new Multiplication();
-			MGauche.setFG(NodeA.Clone(copy.Fg()));
-			MDroit.setFG(NodeA.Clone(copy.Fg()));
-			
-			MGauche.setFD(NodeA.Clone(((NodeA)copy.Fd()).Fg()));
-			MDroit.setFD(NodeA.Clone(((NodeA)copy.Fd()).Fd()));
+			MGauche.setFG(copy.Fg().Clone());
+			MDroit.setFG(copy.Fg().Clone());
+
+			MGauche.setFD(((NodeA)copy.Fd()).Fg().Clone());
+			MDroit.setFD(((NodeA)copy.Fd()).Fd().Clone());
 			
 			root.setFD(MDroit);
 			root.setFG(MGauche);
-			l.add((NodeA)NodeA.Clone(root));
+			l.add((NodeA)root.Clone());
 		}
 		return l;
 	}
