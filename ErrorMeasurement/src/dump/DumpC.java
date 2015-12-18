@@ -55,6 +55,7 @@ public class DumpC {
 		            fos.write(line+"\n");
 	        	}
 	        }
+	        fos.write("\n");
 	        
         // Gestion des exeptions
 		} catch (FileNotFoundException e) {
