@@ -6,12 +6,13 @@ import java.util.ListIterator;
 import java.util.TreeMap;
 
 import structure.NodeA;
+import structure.terminal.Terminal;
 
 
 public abstract class Operator extends NodeA {
 
 
-	public abstract float[] Eval(float[] range1,float[] range2);
+	public abstract float[] Eval(Terminal term1, Terminal term2);
 	@Override
 	public String type() {
 		return "Operator";
@@ -40,7 +41,6 @@ public abstract class Operator extends NodeA {
 			ListIterator<NodeA> li = work.listIterator();
 			while(li.hasNext()){
 				this.setFD(li.next());
-				//ESOE.add((NodeA) NodeA.Clone(Root));
 				ESOE.add((NodeA) Root.Clone());
 			}
 			this.setFD(initialFD);
@@ -53,7 +53,6 @@ public abstract class Operator extends NodeA {
 			ListIterator<NodeA> li = work.listIterator();
 			while(li.hasNext()){
 				this.setFG( li.next());
-				//ESOE.add((NodeA) NodeA.Clone(Root));
 				ESOE.add((NodeA) Root.Clone());
 			}
 			this.setFG(initialFG);

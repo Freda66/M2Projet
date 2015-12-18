@@ -8,20 +8,6 @@ public class Constante extends Terminal {
 		super(testRange);
 	}
 	
-	@Override
-	public String type() {
-		return "Constante";
-	}
-	@Override
-	public String toString() {
-		float[] range = this.getRange();
-		return "["+range[0]+","+range[1]+"]";
-	}
-	@Override
-	public SimpleNodeA clone() {
-		return new Constante(this.getRange());
-	}
-	
 	public void setValue(float val){
 		float[] tmp=new float [2];
 		tmp[0]=val;
@@ -35,6 +21,21 @@ public class Constante extends Terminal {
 		boolean retour = super.equal(term);
 	
 		return retour;
+	}
+	
+	// Inherit function
+	@Override
+	public String type() {
+		return "Constante";
+	}
+	@Override
+	public String toString() {
+		float[] range = this.getRange();
+		return "["+range[0]+","+range[1]+"]";
+	}
+	@Override
+	public SimpleNodeA clone() {
+		return new Constante(this.getRange());
 	}
 	
 

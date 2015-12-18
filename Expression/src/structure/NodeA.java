@@ -5,8 +5,7 @@ public abstract class NodeA extends SimpleNodeA{
 
 	private SimpleNodeA fg;
 	private SimpleNodeA fd;
-	public float[] eval=null;
-	public float[] error=null;
+	
 	
 	//build set of equivalent graph
 	
@@ -33,7 +32,6 @@ public abstract class NodeA extends SimpleNodeA{
 	}
 	
 	/*public abstract NodeA clone();
-	
 	public static NodeA Clone(NodeA n){
 		NodeA A =  n.clone();
 		if(n instanceof NodeA){
@@ -41,11 +39,10 @@ public abstract class NodeA extends SimpleNodeA{
 			((NodeA)A).fg = Clone(((NodeA) n).fg);
 		}
 		return A;
-			
 	}*/
 	
 	
-	
+	// Affichage d'un Noeud et de ses fils
 	public void Display(){
 		System.out.print("( ");
 		if(fg instanceof NodeA )
@@ -61,7 +58,6 @@ public abstract class NodeA extends SimpleNodeA{
 			System.out.print(fd.toString());
 		
 		System.out.print(" )");
-		
 	}
 	public void Displayln(){
 		this.Display();
@@ -82,6 +78,7 @@ public abstract class NodeA extends SimpleNodeA{
 		}
 		return retour;
 	}
+	
 	/*
 	 * Cette fonction permet de signer les graph en créant une image ne leur structure
 	 * voir https://fr.wikipedia.org/wiki/Arbre_binaire

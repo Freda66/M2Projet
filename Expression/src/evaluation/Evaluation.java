@@ -22,29 +22,24 @@ public class Evaluation {
 				// Fils Gauche
 				if(((NodeA) toTest).Fg() instanceof NodeA){
 					range1=this.Eval(((NodeA) toTest).Fg());
-					//System.out.println("Node1 "+range1[0]+" "+range1[1]);
 					
 				}else if (((NodeA) toTest).Fg() instanceof Terminal){
 					value=(Terminal) ((NodeA) toTest).Fg();
 					range1=value.getRange();
-					//System.out.println(range1[0]+" "+range1[1]);
 				}
 				
 				//Fils Droit
 				if(((NodeA) toTest).Fd() instanceof NodeA){
-					range2=Eval(((NodeA) toTest).Fd());
-					//System.out.println("Node2 "+range2[0]+" "+range2[1]);
+					range2=Eval(((NodeA) toTest).Fd());;
 					
 				}else if (((NodeA) toTest).Fd() instanceof Terminal){
 					value=(Terminal) ((NodeA) toTest).Fd();
 					range2=value.getRange();
-					//System.out.println(range2[0]+" "+range2[1]);
 				}
 				
 				if(toTest instanceof Operator){
 					retour=((Operator) toTest).Eval(range1, range2);
 				}
-				((NodeA) toTest).eval=retour;
 			}else{
 				retour=((NodeA) toTest).eval;
 			}

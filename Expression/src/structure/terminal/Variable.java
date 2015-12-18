@@ -11,6 +11,20 @@ public class Variable extends Terminal{
 		this.name = name;
 	}
 	
+	@Override
+	public boolean equal(SimpleNodeA term){
+		boolean retour = super.equals(term);
+		if (this.type() != term.type()) {
+			retour=false;
+		}else{
+			if(this.name != ((Variable)term).name){
+				retour=false;
+			}
+		}
+		
+		return retour;
+	}
+	// Getters and Setters
 	public String getTypeDef() {
 		return typeDef;
 	}
@@ -25,6 +39,7 @@ public class Variable extends Terminal{
 	public void setName(String name) {
 		this.name = name;
 	}
+	// Inherit function
 	@Override
 	public String type() {
 		return "Variable";
@@ -33,23 +48,8 @@ public class Variable extends Terminal{
 	public String toString() {
 		return this.name;
 	}
-
 	@Override
 	public SimpleNodeA clone() {
 		return new Variable(this.getName(),this.getRange());
-	}
-	
-	@Override
-	public boolean equal(SimpleNodeA term){
-		boolean retour = super.equals(term);
-		if (this.type() != term.type()) {
-			retour=false;
-		}else{
-			if(this.name != ((Variable)term).name){
-				retour=false;
-			}
-		}
-		
-		return retour;
 	}
 }

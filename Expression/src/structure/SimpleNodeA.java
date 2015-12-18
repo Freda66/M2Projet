@@ -3,6 +3,8 @@ package structure;
 public abstract class SimpleNodeA {
 
 	public int level;
+	public float[] range=null;
+	public float[] error=null;
 
 	public abstract String type();
 	
@@ -46,6 +48,20 @@ public abstract class SimpleNodeA {
 		public String toString(){
 			return this.name;
 		}
+	}
+	
+	// Getters and Setters
+	public float[] getError() {
+		return error;
+	}
+	public void setError(float[] error) {
+		this.error = error;
+	}
+	public float[] getRange() {
+		return range;
+	}
+	public void setRange(float[] range) {
+		this.range = range;
 	}
 	
 } 

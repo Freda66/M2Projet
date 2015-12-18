@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import structure.NodeA;
 import structure.SimpleNodeA;
+import structure.terminal.Terminal;
 
 public class Division extends Operator {
 
@@ -22,28 +23,19 @@ public class Division extends Operator {
 	
 	// Evaluation pour 2 terminaux
 	@Override
-	public float[] Eval(float[] range1, float[] range2) {
+	public float[] Eval(Terminal term1, Terminal term2) {
+		float[] retour= {1.0f,1.0f};
+		float[] range1= term1.getRange();
+		float[] range2= term2.getRange();
 		float val1=range1[0]/range2[0];
 		float val2=val1;
 		float tmp=0;
-		float[] retour= new float[2];
-		retour[0]=1;
-		retour[1]=1;
 		
 		//Calcul de 1/range2
 		if(range1[0]==1 && range1[1]==1){
-			for (int j = 0; j < range1.length; j++) {
-				tmp=1/range2[j];
-				// Test pour valeur minimal
-				if(tmp<val1){
-					val1=tmp;
-				}
-				if(tmp>val2){
-					val2=tmp;
-				}
-			}
+			EvalDiv(range2);
 		}else{
-			range2=Eval(retour,range2);
+			range2=EvalDiv(range2);
 			for (int i = 0; i < range1.length; i++) {
 				for (int j = 0; j < range2.length; j++) {
 					tmp=range1[i]*range2[j];
@@ -59,6 +51,26 @@ public class Division extends Operator {
 		}
 		retour[0]=val1;
 		retour[1]=val2;
+		this.eval=retour;
+		return retour;
+	}
+	// Si division de 1 par element
+	public float[] EvalDiv(float[] range2) {
+		float[] retour= {1.0f,1.0f};
+		float[] range1= {1.0f,1.0f};
+		float val1=range1[0]/range2[0];
+		float val2=val1;
+		float tmp=0;
+		for (int j = 0; j < range1.length; j++) {
+			tmp=1/range2[j];
+			// Test pour valeur minimal
+			if(tmp<val1){
+				val1=tmp;
+			}
+			if(tmp>val2){
+				val2=tmp;
+			}
+		}
 		return retour;
 	}
 	
