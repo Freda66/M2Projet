@@ -17,10 +17,8 @@ C.jj: C.jjt clean
 	$(JJT) C.jjt
 
 clean:
-	mv MyNode.java ../MyNode.java
 	rm -f *.java *.jj *.class
 	rm -f -r ./structure
-	mv ../MyNode.java MyNode.java
 	clear
 
 run:
