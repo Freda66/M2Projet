@@ -3,6 +3,7 @@ package structure.operator;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.TreeMap;
 
 import structure.NodeA;
 
@@ -67,6 +68,10 @@ public abstract class Operator extends NodeA {
 	 * TODO supprimer les graphes en double
 	 */
 	public LinkedList<NodeA> EUD_K(LinkedList<NodeA> ESOE,int lvl){
+		
+		//mappage pour savoir si un element existe deja
+		TreeMap<String, LinkedList<NodeA>> tm = new TreeMap<String, LinkedList<NodeA>>();
+		
 		LinkedList<NodeA> finalGraphPool = new LinkedList<NodeA>();
 		finalGraphPool.addAll(ESOE);
 		for(int i = 0;i< lvl;i++){
@@ -76,8 +81,9 @@ public abstract class Operator extends NodeA {
 				NodeA A = li.next();
 				if(A instanceof Operator)
 				{
-					//A.Displayln();
-					((Operator)A).BESOE(A, ESOE_lvl2);
+					if(!((Operator) A).inTreeMap(tm)){
+						((Operator)A).BESOE(A, ESOE_lvl2);
+					}
 				}
 			}
 			ESOE.clear();
@@ -86,6 +92,31 @@ public abstract class Operator extends NodeA {
 		}
 		return finalGraphPool;
 		
+	}
+	
+	/*
+	 * Cette fonction va permettre de verifier que il n'y a pas de doublons
+	 * en regardant si le graph n'est pas dans une treeMap avec un tri sur les signatures
+	 */
+	public boolean inTreeMap(TreeMap<String, LinkedList<NodeA>> tm){
+		String s = this.getSignature();
+		
+		if(tm.containsKey(s)){
+			ListIterator<NodeA> li = tm.get(s).listIterator();
+			while(li.hasNext()){
+				if(this.equals(li.next()))
+					return true;
+			}
+			tm.get(s).add(this);;
+			
+		}
+		else{
+			LinkedList<NodeA> l = new LinkedList<NodeA>();
+			l.add(this);
+			tm.put(s, l);
+			
+		}
+		return false;
 	}
 	
 

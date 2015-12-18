@@ -45,7 +45,7 @@ public class Test {
 		
 		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
 		ESOE.add(root);
-		ESOE = root.EUD_K(ESOE, 2);
+		ESOE = root.EUD_K(ESOE, 30);
 		
 		ListIterator<NodeA> li = ESOE.listIterator();
 		Evaluation E = new Evaluation();
