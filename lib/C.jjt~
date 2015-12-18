@@ -65,7 +65,7 @@ import structure.terminal.*;
 
     // Hastable for storing typedef types
     private static Set types = new HashSet();
-
+{
     // Stack for determining when the parser
     // is parsing a typdef definition.
     private static Stack typedefParsingStack = new Stack();
