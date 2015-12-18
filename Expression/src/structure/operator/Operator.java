@@ -78,11 +78,8 @@ public abstract class Operator extends NodeA {
 			while(li.hasNext()){
 				NodeA A = li.next();
 				if(A instanceof Operator)
-				{
-					if(!((Operator) A).inTreeMap(tm)){
+					if(!((Operator) A).inTreeMap(tm))
 						((Operator)A).BESOE(A, ESOE_lvl2);
-					}
-				}
 			}
 			ESOE.clear();
 			ESOE.addAll(ESOE_lvl2);
