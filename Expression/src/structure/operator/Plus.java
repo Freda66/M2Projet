@@ -16,22 +16,23 @@ public class Plus extends Operator {
 		return " + ";
 	}
 	@Override
+	public SimpleNodeA clone() {
+		return new Plus();
+	}
+	
+	// Evaluation pour 2 terminaux
+	@Override
 	public float[] Eval(float[] range1, float[] range2) {
 		float[] retour= new float[2];
 		retour[0]=range1[0] + range2[0];
 		retour[1]=range1[1] + range2[1];
 		return retour;
 	}
-	@Override
-	public SimpleNodeA clone() {
-		return new Plus();
-	}
 
+	// Decouverte des arbres equivalents
 	@Override
 	public LinkedList<NodeA> NESOE (){
 		LinkedList<NodeA> l = new LinkedList<NodeA>();
-
-
 		Operator copy = (Operator) this.Clone();
 
 		// Commutativite
