@@ -32,7 +32,7 @@ public class Test {
 		root.Displayln();
 		
 		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
-		//root.BESOE(root, ESOE, 0);
+		root.BESOE(root, ESOE, 0);
 		
 		ListIterator<NodeA> li = ESOE.listIterator();
 		while(li.hasNext()){

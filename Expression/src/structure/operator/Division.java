@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import structure.NodeA;
 import structure.SimpleNodeA;
+import structure.SimpleNodeA.Signature;
 
 public class Division extends Operator {
 
@@ -86,4 +87,10 @@ public class Division extends Operator {
 		}
 		return l;
 	}
+	
+	@Override
+	protected String getSignature() {
+		return Signature.div.toString() + super.getSignature();
+	}
+	
 }

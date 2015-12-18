@@ -1,6 +1,7 @@
 package structure.terminal;
 
 import structure.SimpleNodeA;
+import structure.SimpleNodeA.Signature;
 
 public abstract class Terminal extends SimpleNodeA {
 	private float[] range;
@@ -30,6 +31,11 @@ public abstract class Terminal extends SimpleNodeA {
 			retour=false;
 		}
 		return retour;
+	}
+	
+	@Override
+	protected String getSignature() {
+		return Signature.ter.toString();
 	}
 	
 

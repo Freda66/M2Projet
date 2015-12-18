@@ -11,7 +11,7 @@ public abstract class NodeA extends SimpleNodeA{
 	
 	public void setFG(SimpleNodeA sn){
 		this.fg = sn;
-		this.fg.SetLevel(this.level+1);
+		//this.fg.SetLevel(this.level+1);
 	}
 	public void setFD(SimpleNodeA sn){
 		this.fd = sn;
@@ -32,6 +32,20 @@ public abstract class NodeA extends SimpleNodeA{
 		return A;
 			
 	}
+	
+	/*public abstract NodeA clone();
+	
+	public static NodeA Clone(NodeA n){
+		NodeA A =  n.clone();
+		if(n instanceof NodeA){
+			((NodeA)A).fd = Clone(((NodeA) n).fd);
+			((NodeA)A).fg = Clone(((NodeA) n).fg);
+		}
+		return A;
+			
+	}*/
+	
+	
 	
 	public void Display(){
 		
@@ -63,6 +77,22 @@ public abstract class NodeA extends SimpleNodeA{
 			retour=false;
 		}
 		return retour;
+	}
+	/*
+	 * Cette fonction permet de signer les graph en créant une image ne leur structure
+	 * voir https://fr.wikipedia.org/wiki/Arbre_binaire
+	 * Cette image est utilisé pour déterminer rapidement si un graph existe deja sur une
+	 * base de donée de graph classé selon leur structure
+	 * le format definit une clef spéciale pour déterminer si on arrive sur une feuille
+	 */
+	public String sign(){
+		
+		return getSignature();
+	}
+	
+	@Override
+	protected String getSignature() {
+		return Fg().getSignature()+Fd().getSignature();
 	}
 	
 }

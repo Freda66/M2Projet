@@ -21,4 +21,22 @@ public abstract class SimpleNodeA {
 		}
 		return retour;
 	}
+	
+	protected abstract String getSignature();
+	public enum Signature{
+		Plus("+"),
+		moins("-"),
+		mult("*"),
+		div("/"),
+		ter("T"),
+		egal("=");
+		private String name;
+		Signature(String a){
+			this.name= a;
+		}
+		public String toString(){
+			return this.name;
+		}
+	}
+	
 } 

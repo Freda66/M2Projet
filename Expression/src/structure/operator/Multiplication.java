@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import structure.NodeA;
 import structure.SimpleNodeA;
+import structure.SimpleNodeA.Signature;
 
 public class Multiplication extends Operator {
 
@@ -94,6 +95,12 @@ public class Multiplication extends Operator {
 			l.add((NodeA)NodeA.Clone(root));
 		}
 		return l;
+	}
+	
+	
+	@Override
+	protected String getSignature() {
+		return Signature.mult.toString() + super.getSignature();
 	}
 	
 	
