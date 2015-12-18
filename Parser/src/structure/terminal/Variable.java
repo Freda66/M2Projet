@@ -3,6 +3,7 @@ package structure.terminal;
 import structure.SimpleNodeA;
 
 public class Variable extends Terminal{
+	
 	private String name;
 	
 	public Variable(String name,float[] range) {
