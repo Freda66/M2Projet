@@ -20,7 +20,7 @@ public abstract class Operator extends NodeA {
 	//Build equivalent set of expression
 	public abstract LinkedList<NodeA> NESOE ();	
 	
-	//parcourt en profondeur
+	//parcours en profondeur
 	//ESOE Equivalent set of expression
 	//BESOE build equivalent set of expression 
 	public void BESOE(NodeA Root,LinkedList<NodeA> ESOE){
@@ -40,7 +40,8 @@ public abstract class Operator extends NodeA {
 			ListIterator<NodeA> li = work.listIterator();
 			while(li.hasNext()){
 				this.setFD(li.next());
-				ESOE.add((NodeA) NodeA.Clone(Root));
+				//ESOE.add((NodeA) NodeA.Clone(Root));
+				ESOE.add((NodeA) Root.Clone());
 			}
 			this.setFD(initialFD);
 			initialFD.BESOE(Root,ESOE);
@@ -52,7 +53,8 @@ public abstract class Operator extends NodeA {
 			ListIterator<NodeA> li = work.listIterator();
 			while(li.hasNext()){
 				this.setFG( li.next());
-				ESOE.add((NodeA) NodeA.Clone(Root));
+				//ESOE.add((NodeA) NodeA.Clone(Root));
+				ESOE.add((NodeA) Root.Clone());
 			}
 			this.setFG(initialFG);
 			initialFG.BESOE(Root,ESOE);

@@ -10,11 +10,20 @@ public abstract class SimpleNodeA {
 		level = lvl;
 	}
 
-	public abstract SimpleNodeA clone();
+	public SimpleNodeA Clone(){
+		SimpleNodeA tmp=null;
+		try {
+			tmp= (SimpleNodeA) this.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tmp;
+	}
 	
 	public abstract String toString();
 
-	public boolean equals(SimpleNodeA term){
+	public boolean equal(SimpleNodeA term){
 		boolean retour=true;
 		if(this.type()!=term.type()){
 			retour=false;

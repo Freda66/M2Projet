@@ -29,8 +29,10 @@ public class Constante extends Terminal {
 		setRange(tmp);
 	}
 	
-	public boolean equals(Constante term){
-		boolean retour = super.equals(term);
+	@Override
+	public boolean equal(SimpleNodeA term){
+		//System.out.println("This");
+		boolean retour = super.equal(term);
 	
 		return retour;
 	}

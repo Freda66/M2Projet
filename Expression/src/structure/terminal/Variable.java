@@ -39,11 +39,17 @@ public class Variable extends Terminal{
 		return new Variable(this.getName(),this.getRange());
 	}
 	
-	public boolean equals(Variable term){
+	@Override
+	public boolean equal(SimpleNodeA term){
 		boolean retour = super.equals(term);
-		if(this.name != term.name){
+		if (this.type() != term.type()) {
 			retour=false;
+		}else{
+			if(this.name != ((Variable)term).name){
+				retour=false;
+			}
 		}
+		
 		return retour;
 	}
 }
