@@ -22,6 +22,7 @@ public abstract class Terminal extends SimpleNodeA {
 		this.range = range;
 	}
 	
+	
 	@Override
 	public boolean equal(SimpleNodeA term){
 		boolean retour = true;

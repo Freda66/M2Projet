@@ -3,9 +3,10 @@ package structure;
 
 public abstract class NodeA extends SimpleNodeA{
 
-	public SimpleNodeA fg;
-	public SimpleNodeA fd;
+	private SimpleNodeA fg;
+	private SimpleNodeA fd;
 	public float[] eval=null;
+	public float[] error=null;
 	
 	//build set of equivalent graph
 	
@@ -22,7 +23,7 @@ public abstract class NodeA extends SimpleNodeA{
 	public SimpleNodeA Fg(){return this.fg;}
 	
 	
-	
+	@Override
 	public SimpleNodeA Clone(){
 		NodeA A = (NodeA) super.Clone();
 		A.fd = this.fd.Clone();
