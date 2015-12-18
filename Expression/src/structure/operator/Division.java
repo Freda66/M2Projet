@@ -65,7 +65,7 @@ public class Division extends Operator {
 	public LinkedList<NodeA> NESOE (){
 		LinkedList<NodeA> l = new LinkedList<NodeA>();
 
-		Operator copy = (Operator)Clone(this);
+		Operator copy = (Operator) this.Clone();
 		
 		// Distribue la Division par rapport a la multiplication
 		if (copy.Fg() instanceof Multiplication){
@@ -73,11 +73,17 @@ public class Division extends Operator {
 			
 			Division MGauche = new Division();
 			Division MDroit = new Division();
+			/*
 			MGauche.setFD(NodeA.Clone(copy.Fd()));
 			MDroit.setFD(NodeA.Clone(copy.Fd()));
 
 			MGauche.setFG(NodeA.Clone(((NodeA)copy.Fg()).Fg()));
-			MDroit.setFG(NodeA.Clone(((NodeA)copy.Fg()).Fd()));
+			MDroit.setFG(NodeA.Clone(((NodeA)copy.Fg()).Fd()));*/
+			MGauche.setFD(copy.Fd().Clone());
+			MDroit.setFD(copy.Fd().Clone());
+
+			MGauche.setFG(((NodeA)copy.Fg()).Fg().Clone());
+			MDroit.setFG(((NodeA)copy.Fg()).Fd().Clone());
 			
 			root.setFD(MDroit);
 			root.setFG(MGauche);

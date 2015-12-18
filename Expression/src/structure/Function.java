@@ -40,7 +40,7 @@ public class Function extends NodeA {
 	@Override
 	// TODO
 	public String toString() {
-		return null;
+		return "";
 	}
 	
 	// Getters and Setters
