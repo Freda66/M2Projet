@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 import structure.NodeA;
 import structure.SimpleNodeA;
-import structure.SimpleNodeA.Signature;
 
 public class Plus extends Operator {
 
@@ -48,26 +47,32 @@ public class Plus extends Operator {
 			root.setFD(null);
 			
 			if(((NodeA) copy.Fg()).Fg().equals(((NodeA) copy.Fd()).Fg())){
-				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
-				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
-				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
+				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
+				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
+				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
+				System.out.println("Cas 1");
 
 			}else if(((NodeA) copy.Fg()).Fg().equals(((NodeA) copy.Fd()).Fd())){
-				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
-				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
-				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
-
-			}else if(((NodeA) copy.Fg()).Fd().equals(((NodeA) copy.Fd()).Fg())){
 				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
 				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
 				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
+				System.out.println("Cas 2");
+
+			}else if(((NodeA) copy.Fg()).Fd().equals(((NodeA) copy.Fd()).Fg())){
+				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
+				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
+				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
+				System.out.println("Cas 3");
 
 			}else if(((NodeA) copy.Fg()).Fd().equals(((NodeA) copy.Fd()).Fd())){
-				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
-				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fg()));
-				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
+				MGauche.setFG(NodeA.Clone(((NodeA) copy.Fg()).Fd()));
+				MGauche.setFD(NodeA.Clone(((NodeA) copy.Fd()).Fd()));
+				root.setFD(NodeA.Clone(((NodeA) copy.Fg()).Fg()));
+				System.out.println("Cas 4");
 			}
 			if(root.Fd()!=null){
+				System.out.println("Tmp");
+				MGauche.Displayln();
 				root.setFG(MGauche);
 				l.add((NodeA) NodeA.Clone(root));
 				root.Displayln();
