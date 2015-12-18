@@ -1,7 +1,6 @@
 package structure.terminal;
 
 import structure.SimpleNodeA;
-import structure.SimpleNodeA.Signature;
 
 public abstract class Terminal extends SimpleNodeA {
 	private float[] range;

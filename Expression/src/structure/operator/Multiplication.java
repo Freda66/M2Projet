@@ -4,8 +4,6 @@ import java.util.LinkedList;
 
 import structure.NodeA;
 import structure.SimpleNodeA;
-import structure.SimpleNodeA.Signature;
-
 public class Multiplication extends Operator {
 
 	@Override
