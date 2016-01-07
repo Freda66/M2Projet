@@ -6,6 +6,9 @@ import java.util.ListIterator;
 import java.util.TreeMap;
 
 import structure.NodeA;
+import structure.NoeudDeCoupure;
+import structure.SimpleNodeA;
+import structure.terminal.Constante;
 
 
 public abstract class Operator extends NodeA {
@@ -65,10 +68,9 @@ public abstract class Operator extends NodeA {
 	 * Applique un eud-k avec k passes
 	 * ESOE_lvl2 permet de stocker les nouveaux graphes evite de passer plusierus
 	 * fois sur le meme graphe et de générer les memes equivalences
-	 * TODO supprimer les graphes en double
+	 * DONE supprimer les graphes en double
 	 */
 	public LinkedList<NodeA> EUD_K(LinkedList<NodeA> ESOE,int lvl){
-		
 		//mappage pour savoir si un element existe deja
 		TreeMap<String, LinkedList<NodeA>> tm = new TreeMap<String, LinkedList<NodeA>>();
 		
@@ -114,6 +116,48 @@ public abstract class Operator extends NodeA {
 			
 		}
 		return false;
+	}
+	
+	// applique un pattern P qui transforme l'arbre en T
+	//retourne si tout c'est bien passe
+	public boolean applyPattern ( NodeA P){
+		
+		//TODO probleme de typage et recurence
+		
+		boolean fg_ok = false;
+		boolean fd_ok = false;
+		
+		if(P.fg instanceof NoeudDeCoupure){
+			//variable
+			if(((NoeudDeCoupure)P.fg).getSon() instanceof Constante){
+				if (this.fg instanceof Constante){
+					((NoeudDeCoupure)P.fg).setSon(this.fg);
+					fg_ok = true;
+				}
+				else
+					fg_ok = false;
+			}
+			
+		}
+		else if(P.fg instanceof Operator && this.fg instanceof Operator){
+			if(((Operator) this.fg).type() == ((Operator) P.fg).type())
+				fg_ok = ((Operator) this.fg).applyPattern((Operator) P.fg);
+			else fg_ok = false;
+		}
+		
+		
+		
+		if(P.fd instanceof NoeudDeCoupure){
+			((NoeudDeCoupure)P.fd).setSon(this.fd);
+		}
+		else if(P.fd instanceof Operator && this.fd instanceof Operator){
+			if(((Operator) this.fd).type() == ((Operator) P.fd).type())
+				((Operator) this.fd).applyPattern((Operator) P.fd);
+			else return false;
+		}
+		
+		return true;
+		
 	}
 	
 

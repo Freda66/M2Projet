@@ -1,5 +1,7 @@
 package structure;
 
+import structure.terminal.Constante;
+
 public abstract class SimpleNodeA {
 
 	public int level;
@@ -47,5 +49,27 @@ public abstract class SimpleNodeA {
 			return this.name;
 		}
 	}
+	
+	public boolean isPattern( SimpleNodeA S){
+	
+		if(this instanceof NodeA){
+			if (this.type() == S.type()){
+				return 	((NodeA)this).fd.isPattern(((NodeA)S).fd) &&
+						((NodeA)this).fg.isPattern(((NodeA)S).fg);
+			}
+			else
+				return false;
+		}
+		else if (this instanceof Constante ){
+			if(S instanceof Constante)
+				return true;
+			else
+				return false;
+		}
+		return true;
+	}
+	
+	
+	
 	
 } 
