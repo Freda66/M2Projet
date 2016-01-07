@@ -42,11 +42,26 @@
 
   */
 
+options {
+  MULTI=true;
+  KEEP_LINE_COLUMN = false;
+  NODE_DEFAULT_VOID=false;
+}
+
 PARSER_BEGIN(CParser)
 
 import java.util.*;
+import java.util.HashMap;
+import structure.*;
+import structure.affectation.*;
+import structure.operator.*;
+import structure.terminal.*;
+
 
   public class CParser{
+
+
+    //HashMap<String,Func> functions = new HashMap<String,Func>();
 
     // Hastable for storing typedef types
     private static Set types = new HashSet();
@@ -82,12 +97,8 @@ import java.util.*;
 	    types.add("__const");
 	    types.add("__inline__");
 	    types.add("__signed");
-
-      if(args.length == 0){
-        System.out.println("C Parser Version 0.1Alpha:  Reading from standard input . . .");
-        parser = new CParser(System.in);
-      }
-      else if(args.length == 1){
+	// File handler
+      if(args.length == 1){
         System.out.println("C Parser Version 0.1Alpha:  Reading from file " + args[0] + " . . ." );
       try {
         parser = new CParser(new java.io.FileInputStream(args[0]));
@@ -98,14 +109,14 @@ import java.util.*;
         }
       }
       else {
-        System.out.println("C Parser Version 0.1Alpha:  Usage is one of:");
-        System.out.println("         java CParser < inputfile");
-        System.out.println("OR");
+        System.out.println("C Parser Version 0.1Alpha:  Usage is :");
         System.out.println("         java CParser inputfile");
         return ;
       }
+
+	// End of file handler
       try {
-	SimpleNode parseTree = parser.Start();
+	ASTStart parseTree = parser.Start();
         System.out.println("C Parser Version 0.1Alpha:  Java program parsed successfully.");
 	parseTree.dump("");
 	System.out.println("End");
@@ -118,6 +129,7 @@ import java.util.*;
   }
 
 PARSER_END(CParser)
+
 
 SKIP : {
  " "
@@ -197,7 +209,8 @@ TOKEN : {
 |  <#DIGIT: ["0"-"9"]>
 }
 
-SimpleNode Start() : {}
+/** Main production **/
+ASTStart Start() #Start: {}
 {
 	(LOOKAHEAD(ExternalDeclaration()) ExternalDeclaration()) +
 	{return jjtThis;}
@@ -207,15 +220,17 @@ void ExternalDeclaration() : {}
 	( LOOKAHEAD( FunctionDefinition() ) FunctionDefinition() | Declaration())
 }
 
-void FunctionDefinition() : {}
+void FunctionDefinition() #FunctionDefinition: {}
 {
+	{System.out.println("in fct Definition ");}
 	[LOOKAHEAD(DeclarationSpecifiers()) DeclarationSpecifiers()] Declarator() [ DeclarationList() ]
 	CompoundStatement()
+	{System.out.println("out fct Definition ");}
 }
 
 void Declaration() : {}
 {
-	DeclarationSpecifiers() [ InitDeclaratorList() ] ";"
+	DeclarationSpecifiers() [ InitDeclaratorList() ] ";" {System.out.println(";");}
 }
 
 void DeclarationList() : {}
@@ -241,10 +256,9 @@ void StorageClassSpecifier() : {}
 	} )
 }
 
-void TypeSpecifier() : {}
+void TypeSpecifier() #TypeSpecifier: {Token t; t=new Token(); }
 {
-	( <VOID> | <CHAR> | <SHORT> | <INT> | <LONG> | <FLOAT> | <DOUBLE> | <SIGNED> |
-	  <UNSIGNED> | StructOrUnionSpecifier() | EnumSpecifier() | LOOKAHEAD( { isType(getToken(1).image) } )TypedefName() )
+	( t=<VOID> | t=<CHAR> | t=<SHORT> | t=<INT> | t=<LONG> | t=<FLOAT> | t=<DOUBLE> | t=<SIGNED> | t=<UNSIGNED> | StructOrUnionSpecifier() | EnumSpecifier() | LOOKAHEAD( { isType(getToken(1).image) } )TypedefName() ) {System.out.println(t.image+ " ");}
 }
 
 void TypeQualifier() : {}
@@ -324,9 +338,9 @@ void EnumeratorList() : {}
 	Enumerator() ("," Enumerator())*
 }
 
-void Enumerator() : {}
+void Enumerator() : {Token t;}
 {
-	<IDENTIFIER> [ "=" ConstantExpression() ]
+	t=<IDENTIFIER> [ "=" ConstantExpression() ] {System.out.println(t.image+ " ");}
 }
 
 void Declarator() : {}
@@ -337,10 +351,9 @@ void Declarator() : {}
 void DirectDeclarator() : { Token t;}
 {
 	( t = <IDENTIFIER>
-
 	{ if(!(typedefParsingStack.empty()) && ((Boolean)typedefParsingStack.peek()).booleanValue()){
 				addType(t.image);
-	  }
+	  } System.out.println(t.image+ " ");
 	}
 	 | "(" Declarator() ")" )
   
@@ -349,7 +362,7 @@ void DirectDeclarator() : { Token t;}
 	( "[" [ ConstantExpression() ] "]" |
 	    LOOKAHEAD(3) "(" ParameterTypeList() ")" |
 	    "(" [ IdentifierList() ] ")" )*
-      { typedefParsingStack.pop(); }
+      { typedefParsingStack.pop(); System.out.println("YOLOLO!");}
 }
 
 void Pointer() : {}
@@ -485,9 +498,9 @@ void AssignmentExpression() : {}
 	  LOOKAHEAD(3) ConditionalExpression()
 }
 
-void AssignmentOperator() : {}
+void AssignmentOperator() : {Token t;}
 {
-	( "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | "&=" | "^=" | "|=" )
+	( t="=" | t="*=" | t="/=" | t="%=" | t="+=" | t="-=" | t="<<=" | t=">>=" | t="&=" | t="^=" | t="|=" ){System.out.println(t.image+ "");}
 }
 
 void ConditionalExpression() : {}
@@ -580,11 +593,12 @@ void PostfixExpression() : {}
 	  					  "--" )*
 }
 
-void PrimaryExpression() : {}
+void PrimaryExpression() : {Token t; t=new Token();}
 {
-	( <IDENTIFIER> |
+	( t=<IDENTIFIER> |
 	  Constant() |
 	  "(" Expression() ")" )
+	{System.out.println(t.image+ "");}
 }
 
 void ArgumentExpressionList() : {}
@@ -592,15 +606,10 @@ void ArgumentExpressionList() : {}
 	AssignmentExpression() ( "," AssignmentExpression() )*
 }
 
-void Constant() : 
+void Constant() #Constant: {Token t;}
 {
-	Token t;
-}
-{
-	t = <INTEGER_LITERAL> | <FLOATING_POINT_LITERAL> | <CHARACTER_LITERAL> | <STRING_LITERAL>
-	{
-		jjtThis.setName(t.image);
-	}
+	t=<INTEGER_LITERAL> | t=<FLOATING_POINT_LITERAL> | t=<CHARACTER_LITERAL> | t=<STRING_LITERAL>
+	{System.out.println(t.image+ "");}
 }
 
 
