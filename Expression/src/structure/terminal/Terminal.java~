@@ -1,9 +1,8 @@
 package structure.terminal;
 
 import structure.SimpleNodeA;
-import structure.Expression;
 
-public abstract class Terminal extends SimpleNodeA implements Expression{
+public abstract class Terminal extends SimpleNodeA {
 	private float[] range;
 
 	public Terminal(float[] testRange) {

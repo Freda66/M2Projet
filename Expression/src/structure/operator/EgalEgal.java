@@ -19,10 +19,20 @@ public class EgalEgal extends Operator {
 	public SimpleNodeA clone() {
 		return new EgalEgal();
 	}
-	
-	@Override
-	protected String getSignature() {
-		return Signature.EgalEgal.toString()  + super.getSignature();
-	}
 
+	// Evaluation pour 2 terminaux
+	@Override
+	public float[] Eval(float[] range1, float[] range2) {
+		float[] retour= new float[2];
+		retour[0]=0;
+		retour[1]=0;
+		return retour;
+	}
+	
+	// Decouverte des arbres equivalents
+	@Override
+	public LinkedList<NodeA> NESOE (){
+		LinkedList<NodeA> l = new LinkedList<NodeA>();
+		return l;
+	}
 }

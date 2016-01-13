@@ -12,17 +12,16 @@ public class Function extends NodeA {
 	
 	// Constructor
 	public Function(){
-		this("","");
 	}
 	public Function(String name){
-		this(name,"");
+		this.name=name;
 	}
-	public Function(String name,String typeDef){
+	public Function(String name,Variable returnedValue){
 		this.params=new ArrayList<>();
 		this.name=name;
-		this.typeDef=typeDef;
+		this.returnedValue=returnedValue;
 	}
-	public Function(String name,String returnedValue,ArrayList<Variable> params){
+	public Function(String name,Variable returnedValue,ArrayList<Variable> params){
 		this.params=params;
 		this.name=name;
 		this.returnedValue=returnedValue;
@@ -65,7 +64,7 @@ public class Function extends NodeA {
 	public Variable getReturnedValue() {
 		return returnedValue;
 	}
-	public void setReturnedValue(PVirg returnedValue) {
+	public void setReturnedValue(Variable returnedValue) {
 		this.returnedValue = returnedValue;
 	}
 

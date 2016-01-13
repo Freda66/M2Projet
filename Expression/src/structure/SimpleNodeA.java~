@@ -54,8 +54,8 @@ public abstract class SimpleNodeA {
 	
 		if(this instanceof NodeA){
 			if (this.type() == S.type()){
-				return 	((NodeA)this).Fd().isPattern(((NodeA)S).Fd()) &&
-						((NodeA)this).Fg().isPattern(((NodeA)S).Fg());
+				return 	((NodeA)this).fd.isPattern(((NodeA)S).fd) &&
+						((NodeA)this).fg.isPattern(((NodeA)S).fg);
 			}
 			else
 				return false;

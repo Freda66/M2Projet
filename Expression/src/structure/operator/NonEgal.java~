@@ -20,20 +20,9 @@ public class NonEgal extends Operator {
 		return new NonEgal();
 	}
 	
-	// Evaluation pour 2 terminaux
 	@Override
-	public float[] Eval(float[] range1, float[] range2) {
-		float[] retour= new float[2];
-		retour[0]=0;
-		retour[1]=0;
-		return retour;
-	}
-	
-	// Decouverte des arbres equivalents
-	@Override
-	public LinkedList<NodeA> NESOE (){
-		LinkedList<NodeA> l = new LinkedList<NodeA>();
-		return l;
+	protected String getSignature() {
+		return Signature.NonEgal.toString()  + super.getSignature();
 	}
 
 }

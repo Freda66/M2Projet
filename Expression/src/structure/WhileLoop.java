@@ -7,6 +7,8 @@ public class WhileLoop extends NodeA {
 	private PVirg content;
 	
 	// Constructor
+	public WhileLoop(){
+	}
 	public WhileLoop(Expression myExpression){
 		this.myExpression=myExpression;
 	}
@@ -27,7 +29,7 @@ public class WhileLoop extends NodeA {
 	}
 	
 	// Getters and Setters
-	public String getMyExpression() {
+	public Expression getMyExpression() {
 		return myExpression;
 	}
 	public void setMyExpression(Expression myExpression) {
