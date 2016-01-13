@@ -6,12 +6,7 @@ public class Variable extends Terminal{
 	private String name;
 	private String typeDef;
 	
-	public Variable(String name,float[] range,String typeDef) {
-		super(range);
-		this.name = name;
-		this.typeDef = typeDef;
-	}	
-
+	
 	public Variable(String name,float[] range) {
 		super(range);
 		this.name = name;

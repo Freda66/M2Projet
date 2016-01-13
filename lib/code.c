@@ -1,6 +1,7 @@
-int main(int x){
-    int z = 3;
-    int x = 1;
+int main(float x){
+	int y;
+	
+	y = 2;	
 
-    x = 2;
+	return 0;
 }
