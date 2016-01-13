@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import structure.terminal.Variable;
 
 public class Function extends NodeA {
+	private String typeDef;
 	private Variable returnedValue;
 	private String name;
 	private ArrayList<Variable> params;
@@ -22,10 +23,10 @@ public class Function extends NodeA {
 		this.name=name;
 		this.typeDef=typeDef;
 	}
-	public Function(String name,String returnedValue,ArrayList<Variable> params){
+	public Function(String name,String typeDef,ArrayList<Variable> params){
 		this.params=params;
 		this.name=name;
-		this.returnedValue=returnedValue;
+		this.typeDef=typeDef;
 	}
 	
 	// Inherit function
@@ -44,6 +45,12 @@ public class Function extends NodeA {
 	}
 	
 	// Getters and Setters
+	public String getTypeDef() {
+		return typeDef;
+	}
+	public void setTypeDef(String typeDef) {
+		this.typeDef = typeDef;
+	}
 	public String getName() {
 		return name;
 	}
