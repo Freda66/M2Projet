@@ -64,7 +64,7 @@ public class Function extends NodeA {
 	public Variable getReturnedValue() {
 		return returnedValue;
 	}
-	public void setReturnedValue(Variable returnedValue) {
+	public void setReturnedValue(PVirg returnedValue) {
 		this.returnedValue = returnedValue;
 	}
 

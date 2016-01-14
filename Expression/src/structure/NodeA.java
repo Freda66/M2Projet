@@ -1,5 +1,7 @@
 package structure;
 
+import structure.operator.Operator;
+
 
 public abstract class NodeA extends SimpleNodeA{
 
@@ -94,7 +96,7 @@ public abstract class NodeA extends SimpleNodeA{
 	@Override
 	protected String getSignature() {
 		return Fg().getSignature()+Fd().getSignature();
-	}
+	}	
 	
 }
 	

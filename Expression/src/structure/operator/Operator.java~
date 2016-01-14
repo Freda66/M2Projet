@@ -128,11 +128,11 @@ public abstract class Operator extends NodeA implements Expression{
 		boolean fg_ok = false;
 		boolean fd_ok = false;
 		
-		if(P.Fg() instanceof NoeudDeCoupure){
+		if(P.fg instanceof NoeudDeCoupure){
 			//variable
-			if(((NoeudDeCoupure)P.Fg()).getSon() instanceof Constante){
-				if (this.Fg() instanceof Constante){
-					((NoeudDeCoupure)P.Fg()).setSon(this.Fg());
+			if(((NoeudDeCoupure)P.fg).getSon() instanceof Constante){
+				if (this.fg instanceof Constante){
+					((NoeudDeCoupure)P.fg).setSon(this.fg);
 					fg_ok = true;
 				}
 				else
@@ -140,9 +140,9 @@ public abstract class Operator extends NodeA implements Expression{
 			}
 			
 		}
-		else if(P.Fg() instanceof Operator && this.Fg() instanceof Operator){
-			if(((Operator) this.Fg()).type() == ((Operator) P.Fg()).type())
-				fg_ok = ((Operator) this.Fg()).applyPattern((Operator) P.Fg());
+		else if(P.fg instanceof Operator && this.fg instanceof Operator){
+			if(((Operator) this.fg).type() == ((Operator) P.fg).type())
+				fg_ok = ((Operator) this.fg).applyPattern((Operator) P.fg);
 			else fg_ok = false;
 		}
 		
