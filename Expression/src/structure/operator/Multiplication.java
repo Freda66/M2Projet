@@ -1,10 +1,9 @@
 package structure.operator;
 
 import java.util.LinkedList;
-
 import structure.NodeA;
 import structure.SimpleNodeA;
-import structure.terminal.Terminal;
+
 public class Multiplication extends Operator {
 
 	@Override
@@ -22,7 +21,7 @@ public class Multiplication extends Operator {
 	
 	// Evaluation pour 2 terminaux
 	@Override
-	public float[] Eval(Terminal term1, Terminal term2) {
+	public void Eval(SimpleNodeA term1, SimpleNodeA term2) {
 		float[] retour= {1.0f,1.0f};
 		float[] range1= term1.getRange();
 		float[] range2= term2.getRange();
@@ -45,8 +44,8 @@ public class Multiplication extends Operator {
 		
 		retour[0]=val1;
 		retour[1]=val2;
-		this.eval=retour;
-		return retour;
+		this.range=retour;
+		//return retour;
 	}
 	
 	// Decouverte des arbres equivalents

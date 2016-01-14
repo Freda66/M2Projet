@@ -7,48 +7,47 @@ import structure.terminal.*;
 
 public class Evaluation {
 
+	// TODO Debug de la fonction et ajout des calculs d'erreur
 	// Fonction d'evaluation de l'arbre
-	public float[] Eval(SimpleNodeA toTest){
-		float[] retour= new float[2];
-		Terminal value;
-		float[] range1= new float[2];
-		float[] range2= new float[2];
+	public void Eval(SimpleNodeA toTest){
+		SimpleNodeA term1=toTest;
+		SimpleNodeA term2=toTest;
+		
 		
 		// Parcours de l'arbre de facon recursive
 		if (toTest instanceof NodeA){
-			if(((NodeA) toTest).eval == null){
-				((NodeA) toTest).eval=new float[2];
+			//if(((NodeA) toTest).range == null){
+				toTest.range=new float[2];
 				
 				// Fils Gauche
 				if(((NodeA) toTest).Fg() instanceof NodeA){
-					range1=this.Eval(((NodeA) toTest).Fg());
+					this.Eval(((NodeA) toTest).Fg());
+					term1.setRange(toTest.getRange());
 					
 				}else if (((NodeA) toTest).Fg() instanceof Terminal){
-					value=(Terminal) ((NodeA) toTest).Fg();
-					range1=value.getRange();
+					term1=((NodeA) toTest).Fg();
 				}
 				
 				//Fils Droit
 				if(((NodeA) toTest).Fd() instanceof NodeA){
-					range2=Eval(((NodeA) toTest).Fd());;
+					Eval(((NodeA) toTest).Fd());
+					term2.setRange(toTest.getRange());
 					
 				}else if (((NodeA) toTest).Fd() instanceof Terminal){
-					value=(Terminal) ((NodeA) toTest).Fd();
-					range2=value.getRange();
+					term2=((NodeA) toTest).Fd();
 				}
 				
 				if(toTest instanceof Operator){
-					retour=((Operator) toTest).Eval(range1, range2);
+					((Operator) toTest).Eval(term1, term2);
 				}
-			}else{
-				retour=((NodeA) toTest).eval;
-			}
-			//System.out.println("Test : " +((NodeA) toTest).eval[0]+ " "+((NodeA) toTest).eval[1]);
+			//}else{
+				//retour=((NodeA) toTest).range;
+			//}
+			System.out.println("Test : " + toTest.getRange()[0]+ " "+toTest.getRange()[1]);
 		}
 		
-		return retour;
 	}
-	
+	/*
 	// Main de Test
 	public static void main(String args[]){
 		Evaluation test=new Evaluation();
@@ -78,5 +77,5 @@ public class Evaluation {
 		testRange=test.Eval(tmp2);
 		System.out.println("Final : " +testRange[0]+ " "+testRange[1]);
 
-	}
+	}*/
 }

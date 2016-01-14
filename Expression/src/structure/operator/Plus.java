@@ -4,8 +4,6 @@ import java.util.LinkedList;
 
 import structure.NodeA;
 import structure.SimpleNodeA;
-import structure.terminal.Terminal;
-
 public class Plus extends Operator {
 
 	@Override
@@ -23,12 +21,12 @@ public class Plus extends Operator {
 	
 	// Evaluation pour 2 terminaux
 	@Override
-	public float[] Eval(Terminal term1, Terminal term2) {
+	public void Eval(SimpleNodeA term1, SimpleNodeA term2) {
 		float[] retour= new float[2];
 		retour[0]=term1.getRange()[0] + term2.getRange()[0];
 		retour[1]=term1.getRange()[1] + term2.getRange()[1];
-		this.eval=retour;
-		return retour;
+		this.range=retour;
+		//return retour;
 	}
 
 	// Decouverte des arbres equivalents

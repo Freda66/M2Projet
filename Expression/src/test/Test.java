@@ -45,7 +45,7 @@ public class Test {
 		
 		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
 		ESOE.add(root);
-		ESOE = root.EUD_K(ESOE, 3);
+		ESOE = root.EUD_K(ESOE, 1);
 		
 		ListIterator<NodeA> li = ESOE.listIterator();
 		Evaluation E = new Evaluation();
@@ -53,7 +53,8 @@ public class Test {
 			NodeA tmp = li.next();
 			
 			tmp.Displayln();
-			System.out.println("range " + E.Eval(tmp)[0] + " " + E.Eval(tmp)[1]);
+			E.Eval(tmp);
+			System.out.println("range " + tmp.getRange()[0] + " " + tmp.getRange()[1]);
 			
 		}
 		
