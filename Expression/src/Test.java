@@ -1,4 +1,4 @@
-package structure.operator;
+
 
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -6,6 +6,7 @@ import java.util.ListIterator;
 import evaluation.Evaluation;
 
 import structure.NodeA;
+import structure.operator.*;
 import structure.terminal.Constante;
 
 public class Test {
@@ -54,7 +55,8 @@ public class Test {
 			NodeA tmp = li.next();
 			
 			tmp.Displayln();
-			System.out.println("range " + E.Eval(tmp)[0] + " " + E.Eval(tmp)[1]);
+			E.Eval(tmp);
+			System.out.println("range " + tmp.error[0] + " " + tmp.error[0]);
 			
 		}
 		

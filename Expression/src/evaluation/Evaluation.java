@@ -13,7 +13,6 @@ public class Evaluation {
 		SimpleNodeA term1=toTest;
 		SimpleNodeA term2=toTest;
 		
-		
 		// Parcours de l'arbre de facon recursive
 		if (toTest instanceof NodeA){
 			//if(((NodeA) toTest).range == null){
