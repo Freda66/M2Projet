@@ -7,7 +7,7 @@ import structure.terminal.*;
 
 public class Evaluation {
 
-	// TODO Debug de la fonction et ajout des calculs d'erreur
+	// TODO Ajout des calculs d'erreurs
 	// Fonction d'evaluation de l'arbre
 	public void Eval(SimpleNodeA toTest){
 		SimpleNodeA term1=toTest;
@@ -51,6 +51,12 @@ public class Evaluation {
 		}
 		
 	}
+	
+	// Function to call 
+	public NodeA Expression(NodeA test){
+		return test;
+	}
+	
 	/*
 	// Main de Test
 	public static void main(String args[]){
