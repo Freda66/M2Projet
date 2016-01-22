@@ -21,7 +21,6 @@ public class Division extends Operator {
 	}
 	
 	// Evaluation pour 2 terminaux
-	@Override
 	public void Eval(SimpleNodeA term1, SimpleNodeA term2) {
 		float[] retour= {1.0f,1.0f};
 		float[] range1= term1.getRange();

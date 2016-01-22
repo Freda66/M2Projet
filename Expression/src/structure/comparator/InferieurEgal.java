@@ -1,32 +1,32 @@
-package structure.operator;
+package structure.comparator;
 
 import java.util.LinkedList;
 
 import structure.NodeA;
 import structure.SimpleNodeA;
+import structure.operator.Operator;
 
-public class Non extends Operator {
+public class InferieurEgal extends Operator {
 
 	@Override
 	public String type() {
-		return "Non";
+		return "InferieurEgal";
 	}
 	@Override
 	public String toString() {
-		return " ! ";
+		return " <= ";
 	}
 	@Override
 	public SimpleNodeA clone() {
-		return new Non();
+		return new InferieurEgal();
 	}
 	
 	// Evaluation pour 2 terminaux
 	@Override
-	public float[] Eval(float[] range1, float[] range2) {
+	public void Eval(SimpleNodeA term1, SimpleNodeA term2) {
 		float[] retour= new float[2];
 		retour[0]=0;
 		retour[1]=0;
-		return retour;
 	}
 	
 	// Decouverte des arbres equivalents

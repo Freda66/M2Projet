@@ -1,6 +1,5 @@
 package structure;
 
-import structure.operator.Operator;
 
 
 public abstract class NodeA extends SimpleNodeA{

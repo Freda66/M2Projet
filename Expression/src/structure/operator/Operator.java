@@ -15,7 +15,7 @@ import structure.Expression;
 public abstract class Operator extends NodeA implements Expression{
 
 
-	public abstract float[] Eval(float[] range1,float[] range2);
+	public abstract void Eval(SimpleNodeA range1,SimpleNodeA range2);
 	@Override
 	public String type() {
 		return "Operator";

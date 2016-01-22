@@ -22,11 +22,10 @@ public class Modulo extends Operator {
 	
 	// Evaluation pour 2 terminaux
 	@Override
-	public float[] Eval(float[] range1, float[] range2) {
+	public void Eval(SimpleNodeA term1, SimpleNodeA term2) {
 		float[] retour= new float[2];
-		retour[0]=range1[0] % range2[0];
-		retour[1]=range1[1] % range2[1];
-		return retour;
+		retour[0]=0;
+		retour[1]=0;
 	}
 	
 	// Decouverte des arbres equivalents

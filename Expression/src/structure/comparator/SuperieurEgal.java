@@ -1,9 +1,10 @@
-package structure.operator;
+package structure.comparator;
 
 import java.util.LinkedList;
 
 import structure.NodeA;
 import structure.SimpleNodeA;
+import structure.operator.Operator;
 
 public class SuperieurEgal extends Operator {
 
@@ -19,13 +20,13 @@ public class SuperieurEgal extends Operator {
 	public SimpleNodeA clone() {
 		return new SuperieurEgal();
 	}
+
 	// Evaluation pour 2 terminaux
 	@Override
-	public float[] Eval(float[] range1, float[] range2) {
+	public void Eval(SimpleNodeA term1, SimpleNodeA term2) {
 		float[] retour= new float[2];
 		retour[0]=0;
 		retour[1]=0;
-		return retour;
 	}
 	
 	// Decouverte des arbres equivalents
