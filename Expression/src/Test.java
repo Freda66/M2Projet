@@ -56,7 +56,7 @@ public class Test {
 			
 			tmp.Displayln();
 			E.Eval(tmp);
-			System.out.println("range " + tmp.error[0] + " " + tmp.error[0]);
+			System.out.println("range " +tmp.type()+" : "+ tmp.range[0] + " " + tmp.range[0]);
 			
 		}
 		

@@ -26,7 +26,6 @@ public class Plus extends Operator {
 		retour[0]=term1.getRange()[0] + term2.getRange()[0];
 		retour[1]=term1.getRange()[1] + term2.getRange()[1];
 		this.range=retour;
-		//return retour;
 	}
 
 	// Decouverte des arbres equivalents

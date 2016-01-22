@@ -25,14 +25,15 @@ public class Division extends Operator {
 		float[] retour= {1.0f,1.0f};
 		float[] range1= term1.getRange();
 		float[] range2= term2.getRange();
-		float val1=range1[0]/range2[0];
-		float val2=val1;
+		float val1=range1[0]*range2[0];
+		float val2=range1[0]/range2[0];
 		float tmp=0;
 		
 		//Calcul de 1/range2
 		if(range1[0]==1 && range1[1]==1){
 			EvalDiv(range2);
 		}else{
+			// Calc de range1 * (1/range2)
 			range2=EvalDiv(range2);
 			for (int i = 0; i < range1.length; i++) {
 				for (int j = 0; j < range2.length; j++) {
@@ -56,8 +57,8 @@ public class Division extends Operator {
 	public float[] EvalDiv(float[] range2) {
 		float[] retour= {1.0f,1.0f};
 		float[] range1= {1.0f,1.0f};
-		float val1=range1[0]/range2[0];
-		float val2=val1;
+		float val1=range1[0]*range2[0];
+		float val2=range1[0]/range2[0];
 		float tmp=0;
 		for (int j = 0; j < range1.length; j++) {
 			tmp=1/range2[j];
@@ -69,6 +70,8 @@ public class Division extends Operator {
 				val2=tmp;
 			}
 		}
+		retour[0]=val1;
+		retour[1]=val2;
 		return retour;
 	}
 	

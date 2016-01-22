@@ -25,10 +25,11 @@ public class Multiplication extends Operator {
 		float[] retour= {1.0f,1.0f};
 		float[] range1= term1.getRange();
 		float[] range2= term2.getRange();
-		float val1=range1[0]/range2[0];
-		float val2=val1;
+		float val1=range1[0]*range2[0];
+		float val2=range1[0]/range2[0];
 		float tmp=0;
 
+		// Boucle pour test toutes les combinaisons possible
 		for (int i = 0; i < range1.length; i++) {
 			for (int j = 0; j < range2.length; j++) {
 				tmp=range1[i]*range2[j];
@@ -36,6 +37,7 @@ public class Multiplication extends Operator {
 				if(tmp<val1){
 					val1=tmp;
 				}
+				// Test pour valeur maximal
 				if(tmp>val2){
 					val2=tmp;
 				}
