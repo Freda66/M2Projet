@@ -52,16 +52,18 @@ PARSER_BEGIN(CParser)
 
 import java.util.*;
 import java.util.HashMap;
+
 import structure.*;
 import structure.affectation.*;
 import structure.operator.*;
 import structure.terminal.*;
+import structure.comparator.*;
 
 
   public class CParser{
 
 
-    //HashMap<String,Func> functions = new HashMap<String,Func>();
+    HashMap<String,Function> functions = new HashMap<String,Function>();
 
     // Hastable for storing typedef types
     private static Set types = new HashSet();
@@ -88,9 +90,8 @@ import structure.terminal.*;
       }
     }
 
-    // Run the parser
-    public static void main ( String args [ ] ) {
-      CParser parser ;
+    public static void parseIt(String args [ ]){
+	CParser parser ;
 
   	  // Hack to include type "special types"
 	    types.add("__signed__");
@@ -125,6 +126,11 @@ import structure.terminal.*;
         System.out.println("C Parser Version 0.1Alpha:  Encountered errors during parse.");
         e.printStackTrace();
       }
+    }
+
+    // Run the parser
+    public static void main ( String args [ ] ) {
+      parseIt(args);
     }
   }
 
@@ -611,5 +617,6 @@ void Constant() #Constant: {Token t;}
 	t=<INTEGER_LITERAL> | t=<FLOATING_POINT_LITERAL> | t=<CHARACTER_LITERAL> | t=<STRING_LITERAL>
 	{System.out.println(t.image+ "");}
 }
+
 
 
