@@ -19,6 +19,7 @@ public class Variable extends Terminal{
 
 	public Variable(float[] range){
 		super(range);
+		this.name = "noName";
 	}
 	
 	@Override
