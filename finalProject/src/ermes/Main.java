@@ -1,3 +1,5 @@
+package ermes;
+
 import data.Database;
 
 public class Main {

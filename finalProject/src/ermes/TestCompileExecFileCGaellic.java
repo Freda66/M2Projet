@@ -1,3 +1,5 @@
+package ermes;
+
 import java.io.File;
 import Compiler.CCompiler;
 

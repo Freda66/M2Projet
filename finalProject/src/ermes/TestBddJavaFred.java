@@ -1,6 +1,8 @@
+package ermes;
+
 import data.Database;
-import db.Measurement;
-import db.Resultat;
+import data.Measurement;
+import data.Resultat;
 
 public class TestBddJavaFred {
  
