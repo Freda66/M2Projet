@@ -1,4 +1,4 @@
-package evaluation;
+package eval;
 
 import structure.NodeA;
 import structure.SimpleNodeA;
