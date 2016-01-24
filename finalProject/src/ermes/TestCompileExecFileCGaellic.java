@@ -1,7 +1,7 @@
 package ermes;
 
 import java.io.File;
-import Compiler.CCompiler;
+import ermes.compiler.CCompiler;
 
 public class TestCompileExecFileCGaellic {
 
