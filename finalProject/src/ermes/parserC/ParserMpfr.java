@@ -1,4 +1,4 @@
-package ParserC_MPFR;
+package ermes.parserC;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Parcer_float_mpfr {
+public class ParserMpfr {
 
 	
 	/**
@@ -25,7 +25,7 @@ public class Parcer_float_mpfr {
 	 * @param f : Nom du fichier c
 	 * @param dir : Repertoire du fichier
 	 */
-	public Parcer_float_mpfr(String f, File dir)
+	public ParserMpfr(String f, File dir)
 	{
 		this.fileName=f;
 		this.dir=dir;
