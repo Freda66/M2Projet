@@ -1,5 +1,4 @@
-
-package ui;
+package gui;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
