@@ -1,4 +1,4 @@
-import db.Database;
+import data.Database;
 import db.Measurement;
 import db.Resultat;
 

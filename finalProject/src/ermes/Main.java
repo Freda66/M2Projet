@@ -1,4 +1,4 @@
-import db.Database;
+import data.Database;
 
 public class Main {
  

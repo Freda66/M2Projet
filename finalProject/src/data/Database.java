@@ -1,4 +1,4 @@
-package db;
+package data;
 
 /**
  * Importe les librairies sql
