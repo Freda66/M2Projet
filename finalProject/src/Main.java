@@ -1,5 +1,4 @@
 
-
 /**
  * This class contains the main runner.
  * After getting parameters from UI_Params, execute the application
