@@ -9,6 +9,7 @@ import java.util.Date;
  * Netbeans Form Designer.
  * 
  * @author pev
+ * @version 1.0.0
  */
 public class Logs extends javax.swing.JFrame {
 	
