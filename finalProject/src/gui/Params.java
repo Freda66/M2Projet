@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import gui.Logs.enumLogType;
+
 /**
  * Parameters Interface : Ask user to fill the application parameters. Class
  * generate from Netbeans Form Designer.
@@ -233,7 +235,9 @@ public class Params extends javax.swing.JFrame {
 
 			// Load next interface
 			this.dispose();
-			new Logs();
+			Logs toto = new Logs();
+			
+			toto.addLogInformation(enumLogType.INFO, "Hello");
 		}
 
 		// If not, show warning box
