@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import data.Database;
-import data.Measurement;
+import data.Variable;
 
 public class CCompiler {
 
@@ -55,7 +55,7 @@ public class CCompiler {
 			// Connexion à la bdd
 			Database db = new Database("../db/PrecisionNumerique.db");
 	        db.connect();
-			Measurement measurement = new Measurement(db);
+			Variable measurement = new Variable(db);
 			System.out.println("");
 	        
 			// Execute le programme c
@@ -84,7 +84,7 @@ public class CCompiler {
 	 * Parse la chaine, puis insert les données dans la table Measurement de la bdd
 	 * @param line
 	 */
-	public void HandlePrintBddProgramme(Measurement measurement, String line){
+	public void HandlePrintBddProgramme(Variable measurement, String line){
 		// Initialise les variables
 		String[] lineSplit;
 
@@ -100,24 +100,24 @@ public class CCompiler {
     		// Recupere l'objet measurement de la variable (si existant dans la bdd)
     		if(measurement.getMeasurementByNomVar(nomVar)){
     			// Si la valeur est inférieur à la borne min de la variable (dans la bdd) 
-    			if(measurement.getMin() > val){
-    				measurement.setMin(val); // Affecte la valeur à la borne min
-    				measurement.updateMeasurement(); // Met à jour la variable dans la bdd
+    			if(measurement.getValueMin() > val){
+    				measurement.setValueMin(val); // Affecte la valeur à la borne min
+    				measurement.updateEntry(); // Met à jour la variable dans la bdd
     			}
     			// Si la valeur est supérieur à la borne max de la variable (dans la bdd)
-    			else if(measurement.getMax() < val){
-    				measurement.setMax(val); // Affecte la valeur à la borne max
-        			measurement.updateMeasurement(); // Met à jour la variable dans la bdd
+    			else if(measurement.getValueMax() < val){
+    				measurement.setValueMax(val); // Affecte la valeur à la borne max
+        			measurement.updateEntry(); // Met à jour la variable dans la bdd
     			} 
     		} 
     		// Ajout la variable dans la bdd
     		else {
     			// Rempli l'objet Measurement
-        		measurement.setNomVar(nomVar);
-        		measurement.setMin(val);
-        		measurement.setMax(val);
+        		measurement.setName(nomVar);
+        		measurement.setValueMin(val);
+        		measurement.setValueMax(val);
         		// Insert les données dans la table Measurement de la bdd
-        		measurement.addMeasurement();
+        		measurement.addEntry();
     		}
     	} else {
             System.out.println(line);

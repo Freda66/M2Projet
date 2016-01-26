@@ -3,7 +3,6 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -145,6 +144,7 @@ public class Variable extends Database {
 			preparedStatement.setString(1, name);
 			preparedStatement.setDouble(2, valueMin);
 			preparedStatement.setDouble(3, valueMax);
+			preparedStatement.executeUpdate();
 			ResultSet rs = preparedStatement.getGeneratedKeys();
 			this.idVar = rs.getInt(1);
 			this.name = name;
@@ -163,7 +163,7 @@ public class Variable extends Database {
 	public void updateEntry() {
 		try {
 			PreparedStatement preparedStatement = super.getConnection()
-					.prepareStatement("UPDATE Variable SET name=?, value_min=?, value_max=?, WHERE id_var=?");
+					.prepareStatement("UPDATE Variable SET name=?, value_min=?, value_max=? WHERE id_var=?");
 			preparedStatement.setString(1, this.name);
 			preparedStatement.setDouble(2, this.valueMin);
 			preparedStatement.setDouble(3, this.valueMax);
@@ -267,12 +267,29 @@ public class Variable extends Database {
 
 		return listVariables;
 	}
+	
+	// --------------------------------------------------------------
+	
+	/**
+	 * Remove all rows from Variable table
+	 */
+	public void clearVariable() {
+		
+		try {
+			PreparedStatement preparedStatement = super.getConnection()
+					.prepareStatement("DELETE FROM Variable");
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	// --------------------------------------------------------------
 
 	@Override
 	public String toString() {
-		return "{" + "id_run:" + this.idVar + ", " + "name" + this.name + ", " + "value_min:" + this.valueMin + ", "
+		return "{" + "id_run:" + this.idVar + ", " + "name:" + this.name + ", " + "value_min:" + this.valueMin + ", "
 				+ "value_max:" + this.valueMax + "}";
 	}
 

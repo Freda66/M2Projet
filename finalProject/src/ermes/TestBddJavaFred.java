@@ -1,57 +1,65 @@
 package ermes;
 
 import data.Database;
-import data.Measurement;
+import data.Variable;
 import data.Resultat;
 
 public class TestBddJavaFred {
  
     public static void main(String[] args) {
-    	// Connexion à la bdd
-        Database db = new Database("../db/PrecisionNumerique.db");
-        db.connect(); 
-        System.out.println();
+    	
+    	System.out.println("---------- TEST BDD ----------");
+    	
+    	// Init Database
+    	System.out.println("Database initialization...");
+        Database db = new Database("db/database2.db");
         
-        /**
-         * MEASUREMENT
-         */
-        System.out.println();
-        System.out.println("MEASUREMENT");
-        // Objet Measurement
-        Measurement measurement = new Measurement(db);
+        // Connect to Database
+        System.out.println("Database connection...");
+        boolean testCo = db.connect();
+        
+        // If true connection
+        if(testCo){ 
+        
+	        // Create Variables table
+	        System.out.println("Create variable object...");
+	        Variable var = new Variable(db);
+        
+        }
 
         // Insert
-        measurement.setNomVar("testInsert");
-        measurement.setMin(1.0);
-        measurement.setMax(6.0);
-        measurement.addMeasurement();
+/*        System.out.println("Insert values...");
+        var.setName("testInsert");
+        var.setValueMin(1.0);
+        var.setValueMax(6.0);
+        var.addEntry();
         
         // Update
-        measurement.setNomVar("testUpdate");
-        measurement.setMin(1.0);
-        measurement.setMax(6.0);
-        measurement.setId(3);
-        measurement.updateMeasurement();
+        var.setName("testUpdate");
+        var.setValueMin(1.0);
+        var.setValueMax(6.0);
+        var.setIdVar(3);
+        var.updateEntry();
         
         // Get measurement id 2
-        measurement.getMeasurementById(2);
-        measurement.printObject();
+        var.getMeasurementById(2);
+        var.printObject();
         System.out.println();
 
         // Get measurement nomVar toto
-        measurement.getMeasurementByNomVar("toto");
-        measurement.printObject();
+        var.getMeasurementByNomVar("toto");
+        var.printObject();
         System.out.println();
         
         // Get Liste Measurement
-        for(Measurement m : measurement.getListeMeasurement(db)){
-        	System.out.println("Var:"+ m.getNomVar() + ", min:max["+ m.getMin() + ":"+ m.getMax() +"]");
+        for(Variables m : var.getEntries(db)){
+        	System.out.println("Var:"+ m.getName() + ", min:max["+ m.getValueMin() + ":"+ m.getValueMax() +"]");
         }
         System.out.println();
         
-        /**
+        *//**
          * RESULTAT
-         */
+         *//*
         System.out.println();
         System.out.println("RESULTAT");
         // Objet Resultat
@@ -79,6 +87,8 @@ public class TestBddJavaFred {
         
         // Déconnexion de la bdd
         db.close();
+*/        
+        System.out.println("---------- END TEST BDD ----------");
     }
  
 }

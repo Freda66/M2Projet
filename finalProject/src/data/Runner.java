@@ -145,7 +145,7 @@ public class Runner extends Database {
 	public void updateEntry() {
 		try {
 			PreparedStatement preparedStatement = super.getConnection()
-					.prepareStatement("UPDATE Runner SET time_in=?, time_out=?, WHERE id_run=?");
+					.prepareStatement("UPDATE Runner SET time_in=?, time_out=? WHERE id_run=?");
 			preparedStatement.setTimestamp(1, this.getTimeIn());
 			preparedStatement.setTimestamp(2, this.getTimeOut());
 			preparedStatement.setDouble(3, this.getIdRun());
@@ -256,6 +256,23 @@ public class Runner extends Database {
 		return listRunners;
 	}
 
+	// --------------------------------------------------------------
+	
+	/**
+	 * Remove all rows from Runner table
+	 */
+	public void clearRunner() {
+		
+		try {
+			PreparedStatement preparedStatement = super.getConnection()
+					.prepareStatement("DELETE FROM Runner");
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	// --------------------------------------------------------------
 
 	@Override

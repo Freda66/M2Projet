@@ -10,7 +10,7 @@ public class Main {
         db.connect(); 
         
         // Déconnexion de la bdd
-        db.close();
+        db.disconnect();
     }
  
 }
