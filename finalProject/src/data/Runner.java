@@ -245,9 +245,11 @@ public class Runner extends Database {
 		ResultSet resultSet = super.query("SELECT * FROM Runner");
 		try {
 			while (resultSet.next()) {
-				// Ajoute l'objet measurement à la liste
-				listRunners.add(new Runner(db, resultSet.getInt("id_run"), resultSet.getTimestamp("time_in"),
-						resultSet.getTimestamp("id_out")));
+				listRunners.add(new Runner(db, 
+						resultSet.getInt("id_run"), 
+						resultSet.getTimestamp("time_in"),
+						resultSet.getTimestamp("time_out")
+				));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -277,7 +279,11 @@ public class Runner extends Database {
 
 	@Override
 	public String toString() {
-		return "{" + "id_run:" + this.idRun + ", " + "time_in:" + this.timeIn + ", " + "time_out:" + this.timeOut + "}";
+		return "{" 
+				+ "id_run:" + this.idRun + ", " 
+				+ "time_in:" + this.timeIn + ", " 
+				+ "time_out:" + this.timeOut 
+			+ "}";
 	}
 
 }
