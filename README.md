@@ -91,4 +91,11 @@ Optimisation des commandes :
 | resultatOpt   | Numeric   | Resultat optimal      |
 | resultatMpfr  | Numeric   | Resultat après mpfr   |
 
+<!-- ====================================================================== -->
+<h2 id="library">Bibliothèques</h2>
 
+<ul>
+    <li><a href="https://github.com/kframework/mpfr-java">mpfr-java</a></li>
+    <li><a href="https://github.com/timmolter/XChart">XChart</a></li>
+    <li><a href="https://github.com/xerial/sqlite-jdbc">sqlite-jdbc</a></li>
+</ul>
