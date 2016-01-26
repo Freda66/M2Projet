@@ -10,8 +10,10 @@ import java.util.ArrayList;
 
 
 public class TestTreeQuentin{
-
-	public static SimpleNodeA BrowseTree(SimpleNodeA myNode){
+	
+	static ArrayList<String> listVariables = new ArrayList<String>();
+	
+	public static void BrowseTree(SimpleNodeA myNode){
 		
 		/**
 		 * Fils Gauche ou Droit
@@ -23,24 +25,35 @@ public class TestTreeQuentin{
 			
 			// Fils Droit
 			// Traitement si le fils droite est null pour un Pvirg
-			if(((PVirg)myNode).Fd() == null) return null;
+			if(((PVirg)myNode).Fd() == null) {}//return null;
 			// Renvoi le noeud du fils droit afin qu'ils soient traités par la fonction
-			else BrowseTree(myNode); 
+			else BrowseTree(((PVirg)myNode).Fd());  
 		}
 		// myNode est une fonction (pas de fils gauche ou droite mais un content)
 		if(myNode instanceof Function){
 			// Ecrit le debut de la fonction (type, nom, params)
-			System.out.println(); // Type de retour de la fonction
-			System.out.println(); // Nom de la fonction
-			System.out.println(); // Paramètre de la fonction
+			System.out.print(((Function) myNode).getReturnedValue().getTypeDef() + " "); // Type de retour de la fonction
+			System.out.print(((Function) myNode).getName()); // Nom de la fonction
+			System.out.print("(");
+
+			ArrayList<Variable> lesParams = new ArrayList<Variable>();
+			lesParams = ((Function) myNode).getParams();
+			//for(Variable param : lesParams){
+				//if(listVariables.contains(param.getName()) == false){
+					//listVariables.add(param.getName()); // Ajoute la variable a la liste
+				//}
+				//System.out.print(param.getTypeDef()); // Affiche le type de la variable
+				//System.out.print(param.getName()); // Affiche le nom de la variable
+				System.out.print(", ");
+			//}
+			System.out.print(") {");
 			
 			// Traitement du contenu de la fonction
 			if(((Function)myNode).getContent() != null) BrowseTree(((Function) myNode).getContent()); 
 			
 			// Ecrit la valeur de retour de la fonction une fois que le contenu soit ecrit
-			System.out.println(((Function)myNode).getReturnedValue().getTypeDef()); // Type de la variable de retour
-			System.out.println(((Function)myNode).getReturnedValue().getName());  // Nom de la variable de retour
-			System.out.println(((Function)myNode).getReturnedValue().getRange()); // Valeur de la variable de retour
+			System.out.print("\nreturn ");
+			System.out.print(((Function)myNode).getReturnedValue().getName() + ";\n}");  // Nom de la variable de retour
 		}
 		// myNode est une Affectation (gauche variable)
 		if(myNode instanceof Affectation){
@@ -48,10 +61,19 @@ public class TestTreeQuentin{
 			if(((Affectation)myNode).Fg() != null) BrowseTree(((Affectation) myNode).Fg());
 			
 			// Ecrit le signe de l'affectation
-			System.out.println("="); 
+			System.out.print("= "); 
 			
-			// Traitement du fils droit de l'affectation (Constante)
-			if(myNode instanceof Constante)	System.out.println(((Constante) myNode).getRange()); // Ecrit la valeur de la variable
+			// Fils droit de l'affectation (Constante)
+			if(((Affectation)myNode).Fd() != null) BrowseTree(((Affectation) myNode).Fd());
+			
+			System.out.print(";");
+		}
+
+		// Traitement du fils droit de l'affectation (Constante)
+		if(myNode instanceof Constante)	
+		{
+			float[] range = ((Constante) myNode).getRange();
+			System.out.print(range[0]); // Ecrit la valeur de la variable 
 		}
 		
 		/**
@@ -59,18 +81,19 @@ public class TestTreeQuentin{
 		 */
 		// myNode est une variable (type, nom, valeur)
 		if(myNode instanceof Variable){
-			System.out.println(((Variable)myNode).getTypeDef()); // Affiche le type de la variable
-			System.out.println(((Variable)myNode).getName()); // Affiche le nom de la variable
-			System.out.println(((Variable)myNode).getRange()); // Affiche la valeur de la variable
-			return null; // Retour null
+			if(listVariables.contains(((Variable)myNode).getName()) == false){
+				listVariables.add(((Variable)myNode).getName()); // Ajoute la variable a la liste
+				System.out.print("\n"+((Variable)myNode).getTypeDef() + " "); // Affiche le type de la variable
+				System.out.print(((Variable)myNode).getName()); // Affiche le nom de la variable
+				System.out.print(";");
+			} else {
+				System.out.print("\n"+((Variable)myNode).getName() + " "); // Affiche le nom de la variable	
+			}
 		}
 		
-		return null;
 	}
 	
 	public static void main ( String args [ ] ) {
-
-		System.out.println("Hello world !");
 		PVirg Code = new PVirg();
 		Function fct1 = new Function();
 		
@@ -105,7 +128,7 @@ public class TestTreeQuentin{
 		range[1] = 2;
 		aff.setFD(new Constante(range2));
 
-		
+		listVariables.clear();
 		BrowseTree(Code);
 
 	}
