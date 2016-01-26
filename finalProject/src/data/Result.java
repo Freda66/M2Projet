@@ -295,7 +295,7 @@ public class Result extends Database {
 		ArrayList<Result> listRunners = new ArrayList<Result>();
 
 		// Query
-		ResultSet resultSet = super.query("SELECT * FROM Runner");
+		ResultSet resultSet = super.query("SELECT * FROM Result");
 		try {
 			while (resultSet.next()) {
 				listRunners.add(new Result(
@@ -305,7 +305,7 @@ public class Result extends Database {
 						resultSet.getDouble("res_init"),
 						resultSet.getDouble("res_opt"),
 						resultSet.getDouble("res_mpfr"),
-						resultSet.getInt("id_run")
+						resultSet.getInt("fk_run")
 				));
 			}
 		} catch (SQLException e) {

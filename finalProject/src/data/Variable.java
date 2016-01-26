@@ -254,7 +254,7 @@ public class Variable extends Database {
 		ArrayList<Variable> listVariables = new ArrayList<Variable>();
 
 		// Query
-		ResultSet resultSet = super.query("SELECT * FROM Runner");
+		ResultSet resultSet = super.query("SELECT * FROM Variable");
 		try {
 			while (resultSet.next()) {
 				listVariables.add(new Variable(db, 

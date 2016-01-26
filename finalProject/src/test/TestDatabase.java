@@ -1,7 +1,9 @@
 package test;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import data.Database;
 import data.Result;
@@ -97,6 +99,31 @@ public class TestDatabase {
 
 		System.out.println("\tDelete Result entry");
 		res.deleteEntry();
+		
+		// --------------------------------------------------------------
+		
+		System.out.println("Tables content ----------");
+		
+		System.out.println("\tGet Entries from Runner");
+		ArrayList<Runner> lstRun = run.getEntries(db);
+		for (Iterator iterator = lstRun.iterator(); iterator.hasNext();) {
+			Runner runner = (Runner) iterator.next();
+			System.out.println(runner.toString());
+		}
+		
+		System.out.println("\tGet Entries from Variables");
+		ArrayList<Variable> lstVar = var.getEntries(db);
+		for (Iterator iterator = lstVar.iterator(); iterator.hasNext();) {
+			Variable variable = (Variable) iterator.next();
+			System.out.println(variable.toString());
+		}
+		
+		System.out.println("\tGet Entries from Result");
+		ArrayList<Result> lstRes = res.getEntries(db);
+		for (Iterator iterator = lstRes.iterator(); iterator.hasNext();) {
+			Result result = (Result) iterator.next();
+			System.out.println(result.toString());
+		}
 		
 		// --------------------------------------------------------------
 
