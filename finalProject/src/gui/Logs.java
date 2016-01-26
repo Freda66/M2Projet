@@ -9,9 +9,10 @@ import java.util.Date;
  * Netbeans Form Designer.
  * 
  * @author pev
+ * @version 1.0.0
  */
 public class Logs extends javax.swing.JFrame {
-	
+
 	// ==============================================================
 	// CONSTRUCTOR
 	// ==============================================================
@@ -27,7 +28,7 @@ public class Logs extends javax.swing.JFrame {
 	public Logs() {
 		initComponents();
 	}
-	
+
 	// ==============================================================
 	// COMPONENTS
 	// ==============================================================
@@ -45,12 +46,15 @@ public class Logs extends javax.swing.JFrame {
 		labelHeader = new javax.swing.JLabel();
 		panelContent = new javax.swing.JPanel();
 		scrollPane = new javax.swing.JScrollPane();
+		areaLog = new javax.swing.JTextArea();
 		panelBottom = new javax.swing.JPanel();
 		btnEnd = new javax.swing.JButton();
 		btnLogs = new javax.swing.JButton();
 		btnResults = new javax.swing.JButton();
 		panelProgressBar = new javax.swing.JPanel();
 		progressBar = new javax.swing.JProgressBar();
+		
+		scrollPane.setViewportView(areaLog);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,11 +65,10 @@ public class Logs extends javax.swing.JFrame {
 		javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
 		panelHeader.setLayout(panelHeaderLayout);
 		panelHeaderLayout
-				.setHorizontalGroup(
-						panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(panelHeaderLayout.createSequentialGroup().addGap(154, 154, 154)
-										.addComponent(labelHeader)
-										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+				.setHorizontalGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(panelHeaderLayout.createSequentialGroup().addGap(154, 154, 154)
+								.addComponent(labelHeader)
+								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panelHeaderLayout
 				.setVerticalGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(panelHeaderLayout.createSequentialGroup().addContainerGap().addComponent(labelHeader)
@@ -182,21 +185,23 @@ public class Logs extends javax.swing.JFrame {
 		pack();
 		setVisible(true);
 	}// </editor-fold>
-	
+
 	// ==============================================================
 	// BUTTONS
 	// ==============================================================
-	
+
 	/**
 	 * UI_Logs End button event
+	 * 
 	 * @param evt
 	 */
 	private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO UI_Logs - Show End
 	}
-	
+
 	/**
 	 * UI_Logs Show Logs file button event
+	 * 
 	 * @param evt
 	 */
 	private void btnLogsActionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,28 +210,43 @@ public class Logs extends javax.swing.JFrame {
 
 	/**
 	 * UI_Logs Show plotting results button event
+	 * 
 	 * @param evt
 	 */
 	private void btnResultsActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO UI_Logs - Show results
 	}
-	
+
 	// ==============================================================
 	// METHODS
 	// ==============================================================
-	
+
+	/**
+	 * Add log information to console.
+	 * 
+	 * @param logType
+	 * @param text
+	 */
 	public void addLogInformation(enumLogType logType, String text) {
+		
+		// Get date format
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
+		
+		// Prepare new line
 		String message = dateFormat.format(date) + "\t|" + logType.toString() + "\t|" + text;
+		
+		// Write in console
 		System.out.println(message);
+		
+		// Write in areaLog
+		areaLog.setText(message);
 	}
-	
 
 	// ==============================================================
 	// VARIABLES
 	// ==============================================================
-	
+
 	// Variables declaration - do not modify
 	private javax.swing.JButton btnEnd;
 	private javax.swing.JButton btnLogs;
@@ -239,9 +259,12 @@ public class Logs extends javax.swing.JFrame {
 	private javax.swing.JPanel panelProgressBar;
 	private javax.swing.JProgressBar progressBar;
 	private javax.swing.JScrollPane scrollPane;
+	private javax.swing.JTextArea areaLog;
 	// End of variables declaration
-	
+
 	// LogType enumeration
-	public enum enumLogType {INFO, WARN, ERROR}
-	
+	public enum enumLogType {
+		INFO, WARN, ERROR
+	}
+
 }

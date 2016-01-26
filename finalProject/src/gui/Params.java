@@ -1,8 +1,13 @@
 package gui;
 
+import java.io.File;
+
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import gui.Logs.enumLogType;
 
 /**
  * Parameters Interface : Ask user to fill the application parameters. Class
@@ -11,7 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author pev
  */
 public class Params extends javax.swing.JFrame {
-	
+
 	// ==============================================================
 	// CONSTRUCTOR
 	// ==============================================================
@@ -27,7 +32,7 @@ public class Params extends javax.swing.JFrame {
 	public Params() {
 		initComponents();
 	}
-	
+
 	// ==============================================================
 	// COMPONENTS
 	// ==============================================================
@@ -208,56 +213,80 @@ public class Params extends javax.swing.JFrame {
 
 		pack();
 	}// </editor-fold>
-	
+
 	// ==============================================================
 	// BUTTONS
 	// ==============================================================
-	
+
+	/**
+	 * UI_Params Execute treatment button event Verify parameters before run
+	 * treatment
+	 * 
+	 * @param evt
+	 */
 	private void btnExecuteActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO UI_Params - Execute
-		
-		this.dispose();
-		new Logs();
+
+		// Get parameters
+		File fileInput = new File(textInput.getText());
+		File fileOutput = new File(textOutput.getText());
+
+		// Test parameters, is everything is clear
+		if (fileInput.exists() && !fileInput.isDirectory() && fileOutput.exists() && fileOutput.isDirectory()) {
+
+			// Load next interface
+			this.dispose();
+			Logs toto = new Logs();
+			
+			toto.addLogInformation(enumLogType.INFO, "Hello");
+		}
+
+		// If not, show warning box
+		else {
+			JOptionPane.showMessageDialog(this, "Bad parameters.", "Error Params", JOptionPane.ERROR_MESSAGE);
+		}
 	}
-	
+
 	/**
 	 * Open a File Chooser, get the selected C file and write path on input text
+	 * 
 	 * @param evt
 	 */
 	private void btnInputActionPerformed(java.awt.event.ActionEvent evt) {
-		
+
 		JFileChooser chooser = new JFileChooser();
 		chooser.setCurrentDirectory(new java.io.File(""));
 		chooser.setDialogTitle("Input File");
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		FileFilter filter = new FileNameExtensionFilter("C File","c");
+		FileFilter filter = new FileNameExtensionFilter("C File", "c");
 		chooser.setFileFilter(filter);
 		chooser.setAcceptAllFileFilterUsed(false);
-		
+
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			textInput.setText(chooser.getSelectedFile().toString());
 		}
 
 	}
-	
+
 	/**
-	 * Open a File Chooser, get the selected folder and write path on output text
+	 * Open a File Chooser, get the selected folder and write path on output
+	 * text
+	 * 
 	 * @param evt
 	 */
 	private void btnOuputActionPerformed(java.awt.event.ActionEvent evt) {
-		
+
 		JFileChooser chooser = new JFileChooser();
-	    chooser.setCurrentDirectory(new java.io.File(""));
-	    chooser.setDialogTitle("choosertitle");
-	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-	    chooser.setAcceptAllFileFilterUsed(false);
-		
+		chooser.setCurrentDirectory(new java.io.File(""));
+		chooser.setDialogTitle("choosertitle");
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		chooser.setAcceptAllFileFilterUsed(false);
+
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			textOutput.setText(chooser.getSelectedFile().toString());
 		}
-		
+
 	}
-	
+
 	// ==============================================================
 	// VARIABLES
 	// ==============================================================
