@@ -28,14 +28,12 @@ public class BrowseTreeC {
 		fileC = new DumpC(nameFile,new File(dir));
 		// Appel la fonction qui ecrit le fichier initialement
 		fileC.DumpInitFileC();
-		// Appel la fonction qui parcours l'arbre
-		//BrowseTree();
 	}
 
 	/**
 	 * Fonction qui parcours un arbre
 	 */
-	public static void BrowseTree(SimpleNodeA myNode){
+	public void BrowseTree(SimpleNodeA myNode){
 		
 		// myNode est un PVirg (il a un fils gauche)
 		if(myNode instanceof PVirg){
@@ -85,23 +83,25 @@ public class BrowseTreeC {
 			if(((Affectation)myNode).Fg() != null) BrowseTree(((Affectation) myNode).Fg());
 			
 			// Ecrit le signe de l'affectation
-			System.out.print("= "); 
+			fileC.addNextLine("= ",false); 
 			
 			// Fils droit de l'affectation (Constante)
 			if(((Affectation)myNode).Fd() != null) BrowseTree(((Affectation) myNode).Fd());
 			
-			System.out.print(";");
+			fileC.addNextLine(";",false);
 		}
 
 		// myNode est une variable (type, nom, valeur)
 		if(myNode instanceof Variable){
 			if(listVariables.contains(((Variable)myNode).getName()) == false){
 				listVariables.add(((Variable)myNode).getName()); // Ajoute la variable a la liste
-				System.out.print("\n"+((Variable)myNode).getTypeDef() + " "); // Affiche le type de la variable
-				System.out.print(((Variable)myNode).getName()); // Affiche le nom de la variable
-				System.out.print(";");
+				fileC.addNextLine("",true);
+				fileC.addNextLine(((Variable)myNode).getTypeDef()+" ",false); // Ecrit le type de la variable
+				fileC.addNextLine(((Variable)myNode).getName(),false); // Affiche le nom de la variable
+				fileC.addNextLine(";",false);
 			} else {
-				System.out.print("\n"+((Variable)myNode).getName() + " "); // Affiche le nom de la variable	
+				fileC.addNextLine("",true); // Saute une ligne
+				fileC.addNextLine(((Variable)myNode).getName() + " ",false); // Affiche le nom de la variable	
 			}
 		}
 		
@@ -109,7 +109,7 @@ public class BrowseTreeC {
 		if(myNode instanceof Constante)	
 		{
 			float[] range = ((Constante) myNode).getRange();
-			System.out.print(range[0]); // Ecrit la valeur de la variable 
+			fileC.addNextLine(Float.toString(range[0]),false); // Ecrit la valeur de la variable 
 		}
 		
 	}
