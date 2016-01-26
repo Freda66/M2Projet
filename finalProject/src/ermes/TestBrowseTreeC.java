@@ -14,7 +14,7 @@ public class TestBrowseTreeC {
     	/**
     	 * 
     	 */
-		BrowseTreeC t = new BrowseTreeC("myProg.c","programmeC");
+		BrowseTreeC t = new BrowseTreeC("ermesMyProg.c","res");
 		
 		
 		/**

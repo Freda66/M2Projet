@@ -64,7 +64,7 @@ public class BrowseTreeC {
 				}
 				fileC.addNextLine(param.getTypeDef() + " ",false); // Affiche le type de la variable
 				fileC.addNextLine(param.getName(),false); // Affiche le nom de la variable
-				if(nbIteration < lesParams.size()) System.out.print(", ");
+				if(nbIteration < lesParams.size()) fileC.addNextLine(", ",false);
 			}
 			fileC.addNextLine(") {",false);
 			
@@ -72,9 +72,11 @@ public class BrowseTreeC {
 			if(((Function)myNode).getContent() != null) BrowseTree(((Function) myNode).getContent()); 
 			
 			// Ecrit la valeur de retour de la fonction une fois que le contenu soit ecrit
-			fileC.addNextLine("\nreturn ",false);
+			fileC.addNextLine("",true);
+			fileC.addNextLine("return ",false);
 			fileC.addNextLine(((Function)myNode).getReturnedValue().getName(),false); // Nom de la variable de retour
 			fileC.addNextLine(";",true);
+			fileC.addNextLine("}",false);
 		}
 		
 		// myNode est une Affectation (gauche variable)
@@ -89,6 +91,19 @@ public class BrowseTreeC {
 			if(((Affectation)myNode).Fd() != null) BrowseTree(((Affectation) myNode).Fd());
 			
 			fileC.addNextLine(";",false);
+			fileC.addNextLine("",true);
+			
+			
+			/**
+			 * 
+			 */
+			// Ajoute le print d'insert dans la bdd
+			fileC.addNextLine("printf(\"BDDMeasurement:var2ProgC;11.0\n\");",true);
+			/**
+			 * 
+			 */
+			
+			
 		}
 
 		// myNode est une variable (type, nom, valeur)
