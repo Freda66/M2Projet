@@ -229,7 +229,7 @@ public class Variable extends Database {
 	public void updateRunnerObject(int idVar) {
 
 		// Execute query
-		ResultSet resultSet = super.query("SELECT * FROM Variable WHERE id_run=" + idVar);
+		ResultSet resultSet = super.query("SELECT * FROM Variable WHERE id_var=" + idVar);
 
 		try {
 
@@ -248,6 +248,40 @@ public class Variable extends Database {
 
 	// --------------------------------------------------------------
 
+	public String getMinMaxById(int idVar) {
+		String ret = "";
+		ResultSet resultSet = super.query("SELECT * FROM Variable WHERE id_var=" + idVar);
+		try {
+			ret = "{" 
+					+ "value_min:" + resultSet.getDouble("value_min") + ", " 
+					+ "value_max:" + resultSet.getDouble("value_max") 
+				+ "}";
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return ret;
+	}
+	
+	// --------------------------------------------------------------
+
+	public String getMinMaxByName(String name) {
+		String ret = "";
+		ResultSet resultSet = super.query("SELECT * FROM Variable WHERE name=" + name);
+		try {
+			ret = "{" 
+					+ "value_min:" + resultSet.getDouble("value_min") + ", " 
+					+ "value_max:" + resultSet.getDouble("value_max") 
+				+ "}";
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return ret;
+	}
+
+	// --------------------------------------------------------------
+
 	public ArrayList<Variable> getEntries(Database db) {
 
 		// Init returner list
@@ -257,12 +291,8 @@ public class Variable extends Database {
 		ResultSet resultSet = super.query("SELECT * FROM Variable");
 		try {
 			while (resultSet.next()) {
-				listVariables.add(new Variable(db, 
-						resultSet.getInt("id_var"), 
-						resultSet.getString("name"),
-						resultSet.getDouble("value_min"), 
-						resultSet.getDouble("value_max")
-				));
+				listVariables.add(new Variable(db, resultSet.getInt("id_var"), resultSet.getString("name"),
+						resultSet.getDouble("value_min"), resultSet.getDouble("value_max")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -270,34 +300,29 @@ public class Variable extends Database {
 
 		return listVariables;
 	}
-	
+
 	// --------------------------------------------------------------
-	
+
 	/**
 	 * Remove all rows from Variable table
 	 */
 	public void clearVariable() {
-		
+
 		try {
-			PreparedStatement preparedStatement = super.getConnection()
-					.prepareStatement("DELETE FROM Variable");
+			PreparedStatement preparedStatement = super.getConnection().prepareStatement("DELETE FROM Variable");
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	// --------------------------------------------------------------
 
 	@Override
 	public String toString() {
-		return "{" 
-				+ "id_var:" + this.idVar + ", " 
-				+ "name:" + this.name + ", " 
-				+ "value_min:" + this.valueMin + ", "
-				+ "value_max:" + this.valueMax 
-			+ "}";
+		return "{" + "id_var:" + this.idVar + ", " + "name:" + this.name + ", " + "value_min:" + this.valueMin + ", "
+				+ "value_max:" + this.valueMax + "}";
 	}
 
 }
