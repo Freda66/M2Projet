@@ -61,9 +61,9 @@ public class TestDatabase {
 
 		System.out.println("\tAdd Result entry");
 		res.addEntry("{e: 10}", 1.10, 1.20, 1.30, run.getIdRun());
-		System.out.println(var.toString());
+		System.out.println(res.toString());
 		res.addEntry("{e: 15}", 1.15, 1.25, 1.35, run.getIdRun());
-		System.out.println(var.toString());
+		System.out.println(res.toString());
 
 		// --------------------------------------------------------------
 
