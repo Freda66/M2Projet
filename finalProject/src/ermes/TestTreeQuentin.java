@@ -1,6 +1,7 @@
 package ermes;
 
 import structure.PVirg;
+import structure.SimpleNodeA;
 import structure.Function;
 import structure.terminal.Variable;
 import structure.affectation.Affectation;
@@ -10,6 +11,63 @@ import java.util.ArrayList;
 
 public class TestTreeQuentin{
 
+	public static SimpleNodeA BrowseTree(SimpleNodeA myNode){
+		
+		/**
+		 * Fils Gauche ou Droit
+		 */
+		// myNode est un PVirg (il a un fils gauche)
+		if(myNode instanceof PVirg){
+			// Fils Gauche
+			if(((PVirg)myNode).Fg() != null) BrowseTree(((PVirg)myNode).Fg()); 
+			
+			// Fils Droit
+			// Traitement si le fils droite est null pour un Pvirg
+			if(((PVirg)myNode).Fd() == null) return null;
+			// Renvoi le noeud du fils droit afin qu'ils soient traités par la fonction
+			else BrowseTree(myNode); 
+		}
+		// myNode est une fonction (pas de fils gauche ou droite mais un content)
+		if(myNode instanceof Function){
+			// Ecrit le debut de la fonction (type, nom, params)
+			System.out.println(); // Type de retour de la fonction
+			System.out.println(); // Nom de la fonction
+			System.out.println(); // Paramètre de la fonction
+			
+			// Traitement du contenu de la fonction
+			if(((Function)myNode).getContent() != null) BrowseTree(((Function) myNode).getContent()); 
+			
+			// Ecrit la valeur de retour de la fonction une fois que le contenu soit ecrit
+			System.out.println(((Function)myNode).getReturnedValue().getTypeDef()); // Type de la variable de retour
+			System.out.println(((Function)myNode).getReturnedValue().getName());  // Nom de la variable de retour
+			System.out.println(((Function)myNode).getReturnedValue().getRange()); // Valeur de la variable de retour
+		}
+		// myNode est une Affectation (gauche variable)
+		if(myNode instanceof Affectation){
+			// Traitement du fils gauche de l'affectation (Variable)
+			if(((Affectation)myNode).Fg() != null) BrowseTree(((Affectation) myNode).Fg());
+			
+			// Ecrit le signe de l'affectation
+			System.out.println("="); 
+			
+			// Traitement du fils droit de l'affectation (Constante)
+			if(myNode instanceof Constante)	System.out.println(((Constante) myNode).getRange()); // Ecrit la valeur de la variable
+		}
+		
+		/**
+		 * Traitement
+		 */
+		// myNode est une variable (type, nom, valeur)
+		if(myNode instanceof Variable){
+			System.out.println(((Variable)myNode).getTypeDef()); // Affiche le type de la variable
+			System.out.println(((Variable)myNode).getName()); // Affiche le nom de la variable
+			System.out.println(((Variable)myNode).getRange()); // Affiche la valeur de la variable
+			return null; // Retour null
+		}
+		
+		return null;
+	}
+	
 	public static void main ( String args [ ] ) {
 
 		System.out.println("Hello world !");
@@ -48,6 +106,7 @@ public class TestTreeQuentin{
 		aff.setFD(new Constante(range2));
 
 		
+		BrowseTree(Code);
 
 	}
 
