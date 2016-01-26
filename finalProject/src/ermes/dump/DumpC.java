@@ -82,14 +82,16 @@ public class DumpC {
 	}
 	
 	// Fonction qui ajoute une ligne au fichier
-	public void addNextLine(String line) {
+	public void addNextLine(String line, boolean newLine) {
 		FileWriter fos = null;
 		
 		try{
 			// Buffer d'ecriture fichier c
 	        fos = new FileWriter(new File(dir+"/"+exeName),true); // True permet d'ajouter à la suite du fichier
 			// Ecrit la ligne à la suite du fichier
-			fos.write(line+"\n");
+			fos.write(line);
+			// Saute une ligne dans le fichier
+			if(newLine) fos.write("\n"); 
 			
 		// Gestion des exeptions
 		} catch (FileNotFoundException e) {

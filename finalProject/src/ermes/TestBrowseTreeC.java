@@ -1,5 +1,8 @@
 package ermes;
 
+import java.io.File;
+
+import ermes.dump.DumpC;
 import ermes.treeLoop.BrowseTreeC;
 
 public class TestBrowseTreeC {

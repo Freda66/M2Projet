@@ -14,9 +14,9 @@ public class TestDumpC {
 		fileC.DumpInitFileC();	
 		
 		// Ajoute de ligne dans le fichier
-		fileC.addNextLine("Fred");
-		fileC.addNextLine("Gaellic");
-		fileC.addNextLine("Pour le fun");
+		fileC.addNextLine("Fred", true);
+		fileC.addNextLine("Gaellic", true);
+		fileC.addNextLine("Pour le fun", true);
     }
 	 
 }
