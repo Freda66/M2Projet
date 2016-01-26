@@ -23,9 +23,9 @@ public class BrowseTreeC {
 	 * @param nameFile
 	 * @param dir
 	 */
-	public BrowseTreeC(String nameFile, String dir){
+	public BrowseTreeC(String nameFile, String dir, boolean isMpfr){
 		// Creer le fichier c mpfr
-		fileC = new DumpC(nameFile,new File(dir));
+		fileC = new DumpC(nameFile,new File(dir), isMpfr);
 		// Appel la fonction qui ecrit le fichier initialement
 		fileC.DumpInitFileC();
 	}
@@ -73,7 +73,7 @@ public class BrowseTreeC {
 			
 			// Ecrit la valeur de retour de la fonction une fois que le contenu soit ecrit
 			fileC.addNextLine("",true);
-			fileC.addNextLine("return ",false);
+			fileC.addNextLine("\treturn ",false);
 			fileC.addNextLine(((Function)myNode).getReturnedValue().getName(),false); // Nom de la variable de retour
 			fileC.addNextLine(";",true);
 			fileC.addNextLine("}",false);
@@ -90,20 +90,14 @@ public class BrowseTreeC {
 			// Fils droit de l'affectation (Constante)
 			if(((Affectation)myNode).Fd() != null) BrowseTree(((Affectation) myNode).Fd());
 			
+			// Fin de l'affectation + Saut de ligne
 			fileC.addNextLine(";",false);
 			fileC.addNextLine("",true);
 			
-			
-			/**
-			 * 
-			 */
 			// Ajoute le print d'insert dans la bdd
-			fileC.addNextLine("printf(\"BDDMeasurement:var2ProgC;11.0\n\");",true);
-			/**
-			 * 
-			 */
-			
-			
+			String nameVar = ((Variable) ((Affectation) myNode).Fg()).getName(); // Recupere le nom de la variable
+			Float valueVar = ((Constante) ((Affectation) myNode).Fd()).getRange()[0]; // Recupere la valeur de la variable
+			fileC.addNextLine("\tprintf(\"BDDMeasurement:"+nameVar+";"+valueVar+"\\n\");",true);
 		}
 
 		// myNode est une variable (type, nom, valeur)
@@ -111,12 +105,12 @@ public class BrowseTreeC {
 			if(listVariables.contains(((Variable)myNode).getName()) == false){
 				listVariables.add(((Variable)myNode).getName()); // Ajoute la variable a la liste
 				fileC.addNextLine("",true);
-				fileC.addNextLine(((Variable)myNode).getTypeDef()+" ",false); // Ecrit le type de la variable
+				fileC.addNextLine("\t"+((Variable)myNode).getTypeDef()+" ",false); // Ecrit le type de la variable
 				fileC.addNextLine(((Variable)myNode).getName(),false); // Affiche le nom de la variable
 				fileC.addNextLine(";",false);
 			} else {
 				fileC.addNextLine("",true); // Saute une ligne
-				fileC.addNextLine(((Variable)myNode).getName() + " ",false); // Affiche le nom de la variable	
+				fileC.addNextLine("\t"+((Variable)myNode).getName() + " ",false); // Affiche le nom de la variable	
 			}
 		}
 		

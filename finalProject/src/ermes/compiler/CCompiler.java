@@ -32,16 +32,20 @@ public class CCompiler {
 	/**
 	 * Fonction qui compile le fichier c
 	 */
-	public void Compile(boolean isMpfr)
+	public boolean Compile(boolean isMpfr)
 	{
 		try {
 			// Compile le fichier c
 			if(isMpfr)Runtime.getRuntime().exec("gcc " + fileName + " -o " + exeName + " -lmpfr -lgmp ", null, dir);
 			else Runtime.getRuntime().exec("gcc " + fileName + " -o " + exeName, null, dir);
+			System.out.println("Compile succès.");
+			return true;
         } catch (IOException e) {  
-            e.printStackTrace();  
+            e.printStackTrace();
+            System.out.println("Compile erreur.");
+			return false;
         }
-		System.out.println("Compile succès.");
+		
 	}
 	
 	/**
@@ -53,7 +57,7 @@ public class CCompiler {
 		
 		try {
 			// Connexion à la bdd
-			Database db = new Database("../db/PrecisionNumerique.db");
+			Database db = new Database("./db/database2.db");
 	        db.connect();
 			Variable measurement = new Variable(db);
 			System.out.println("");

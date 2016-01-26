@@ -302,6 +302,32 @@ public class Variable extends Database {
 	}
 
 	// --------------------------------------------------------------
+	
+	/** 
+	 * Fonction qui recupere un Measurement par son nom de variable
+	 */
+	public boolean getMeasurementByNomVar(String mNomVar){
+		// Met à jour l'objet
+        ResultSet resultSet = super.query("SELECT * FROM Variable WHERE name='"+mNomVar+"'");
+        
+        try {
+        	// Si il y a un resultat
+        	if(!resultSet.isClosed()){
+	        	this.setIdVar(resultSet.getInt("id_var"));
+	        	this.setName(resultSet.getString("name"));
+	        	this.setValueMin(resultSet.getDouble("value_min"));
+	        	this.setValueMax(resultSet.getDouble("value_max"));
+	        	return true; // Ligne trouvée
+        	} 
+        	// Aucun resultat
+        	else return false;
+        } catch (SQLException e) { e.printStackTrace(); }
+        
+        return false; // Ligne non trouvée
+	}
+	
+	
+	// --------------------------------------------------------------
 
 	/**
 	 * Remove all rows from Variable table

@@ -8,7 +8,7 @@ public class TestDumpC {
 	 
 	public static void main(String[] args) {
     	// Créer un objet dump
-		DumpC fileC = new DumpC("myProg.c",new File("programmeC"));
+		DumpC fileC = new DumpC("myProg.c",new File("programmeC"), false);
     	
 		// Appel la fonction qui ecrit le fichier initialement
 		fileC.DumpInitFileC();	
