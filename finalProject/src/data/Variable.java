@@ -128,7 +128,7 @@ public class Variable extends Database {
 
 	/**
 	 * Add one entry into Variable table based on current attributes. Overloaded
-	 * methods. Update the current object. The id_run is automatically generate.
+	 * methods. Update the current object. The id_var is automatically generate.
 	 * 
 	 * @param name
 	 *            : Variable name
@@ -257,9 +257,12 @@ public class Variable extends Database {
 		ResultSet resultSet = super.query("SELECT * FROM Runner");
 		try {
 			while (resultSet.next()) {
-				// Ajoute l'objet measurement à la liste
-				listVariables.add(new Variable(db, resultSet.getInt("id_var"), resultSet.getString("name"),
-						resultSet.getDouble("value_min"), resultSet.getDouble("value_max")));
+				listVariables.add(new Variable(db, 
+						resultSet.getInt("id_var"), 
+						resultSet.getString("name"),
+						resultSet.getDouble("value_min"), 
+						resultSet.getDouble("value_max")
+				));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -289,8 +292,12 @@ public class Variable extends Database {
 
 	@Override
 	public String toString() {
-		return "{" + "id_run:" + this.idVar + ", " + "name:" + this.name + ", " + "value_min:" + this.valueMin + ", "
-				+ "value_max:" + this.valueMax + "}";
+		return "{" 
+				+ "id_var:" + this.idVar + ", " 
+				+ "name:" + this.name + ", " 
+				+ "value_min:" + this.valueMin + ", "
+				+ "value_max:" + this.valueMax 
+			+ "}";
 	}
 
 }

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import data.Database;
+import data.Result;
 import data.Runner;
 import data.Variable;
 
@@ -36,8 +37,8 @@ public class TestDatabase {
 		System.out.println("\tCreate Variables table object");
 		Variable var = new Variable(db);
 
-		// TODO : TestDB Create Result table object
-		//System.out.println("\tCreate Result table object");
+		System.out.println("\tCreate Result table object");
+		Result res = new Result(db);
 
 		// --------------------------------------------------------------
 
@@ -56,8 +57,11 @@ public class TestDatabase {
 		var.addEntry("banana", 20, 30);
 		System.out.println(var.toString());
 
-		// TODO : TestDB Add Result entry
-		//System.out.println("\tAdd Result entry");
+		System.out.println("\tAdd Result entry");
+		res.addEntry("{e: 10}", 1.10, 1.20, 1.30, run.getIdRun());
+		System.out.println(var.toString());
+		res.addEntry("{e: 15}", 1.15, 1.25, 1.35, run.getIdRun());
+		System.out.println(var.toString());
 
 		// --------------------------------------------------------------
 
@@ -75,8 +79,11 @@ public class TestDatabase {
 		var.updateEntry();
 		System.out.println(var.toString());
 
-		// TODO : TestDB Edit Result entry
-		//System.out.println("\tEdit Result entry");
+		System.out.println("\tEdit Result entry");
+		System.out.println(res.toString());
+		res.setResMpfr(10.23);
+		res.updateEntry();
+		System.out.println(res.toString());
 
 		// --------------------------------------------------------------
 		
@@ -85,12 +92,11 @@ public class TestDatabase {
 		System.out.println("\tDelete Runner entry");
 		run.deleteEntry();
 
-		// TODO : TestDB Delete Variables entry
 		System.out.println("\tDelete Variables entry");
 		var.deleteEntry();
 
-		// TODO : TestDB Delete Result entry
-		//System.out.println("\tDelete Result entry");
+		System.out.println("\tDelete Result entry");
+		res.deleteEntry();
 		
 		// --------------------------------------------------------------
 
@@ -102,8 +108,8 @@ public class TestDatabase {
 		System.out.println("\tRemove all entreies in Variable");
 		var.clearVariable();
 		
-		// TODO : TestDB Remove all entries in Result
-		//System.out.println("\tRemove all entries in Result");
+		System.out.println("\tRemove all entries in Result");
+		res.clearResult();
 
 		// --------------------------------------------------------------
 		
