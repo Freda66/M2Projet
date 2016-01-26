@@ -10,7 +10,7 @@ import java.sql.Statement;
  * Relative class to Databse access
  * 
  * @author fred, pev
- *
+ * @version 1.0.1
  */
 public class Database {
 
@@ -23,7 +23,7 @@ public class Database {
 	protected Statement statement = null;
 
 	// ==============================================================
-	// CONSTRUCTOR
+	// CONSTRUCTORS
 	// ==============================================================
 
 	/**
@@ -37,6 +37,8 @@ public class Database {
 		connection = db.getConnection();
 		statement = db.getStatement();
 	}
+	
+	// --------------------------------------------------------------
 
 	/**
 	 * Initialize Database properties - Overloaded constructor
@@ -74,20 +76,21 @@ public class Database {
 
 	/**
 	 * Action method : Connect to Database.
+	 * @return 
 	 */
-	public void connect() {
+	public boolean connect() {
+		boolean ret = false;
 		try {
 			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:" + databasePath);
 			statement = connection.createStatement();
-			System.out.println("Connection to " + databasePath + " succeed.");
+			ret = true;
 		} catch (ClassNotFoundException notFoundException) {
 			notFoundException.printStackTrace();
-			System.out.println("Connection failed. NotFoundException");
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
-			System.out.println("Connection failed. SQLException");
 		}
+		return ret;
 	}
 
 	// --------------------------------------------------------------
@@ -95,14 +98,12 @@ public class Database {
 	/**
 	 * Action method : Disconnect from Database.
 	 */
-	public void close() {
+	public void disconnect() {
 		try {
 			statement.close();
 			connection.close();
-			System.out.println("Disconect from " + databasePath + " succeed.");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Disconnect failed.");
 		}
 	}
 
@@ -121,7 +122,6 @@ public class Database {
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Error in : " + query);
 		}
 		return res;
 	}
