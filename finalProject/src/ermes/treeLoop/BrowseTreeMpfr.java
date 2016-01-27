@@ -105,6 +105,9 @@ public class BrowseTreeMpfr {
 			// Fin de l'affectation + Saut de ligne
 			fileC.addNextLine(",GMP_RNDN);",false);
 			fileC.addNextLine("",true);
+			//fileC.addNextLine("mpfr_printf("Prec %3d: %.41Rg\n", mpfr_get_prec(r),r);", true);
+			String nameVar = ((Variable) ((Affectation) myNode).Fg()).getName(); // Recupere le nom de la variable
+			fileC.addNextLine("\tmpfr_printf(\"BDDMeasurement:"+nameVar+";"+"%.200Rg"+"\\n\""+","+nameVar+");",true);
 			
 			// Ajoute le print d'insert dans la bdd -> inutile dans la version MPFR
 			//String nameVar = ((Variable) ((Affectation) myNode).Fg()).getName(); // Recupere le nom de la variable
@@ -120,7 +123,7 @@ public class BrowseTreeMpfr {
 				fileC.addNextLine("\t"+"mpfr_t"+" ",false); // Ecrit le type de la variable
 				fileC.addNextLine(((Variable)myNode).getName(),false); // Affiche le nom de la variable
 				fileC.addNextLine(";",true);
-				fileC.addNextLine("\t"+"mpfr_init2 ("+((Variable)myNode).getName()+",256);",true);
+				fileC.addNextLine("\t"+"mpfr_init2 ("+((Variable)myNode).getName()+",1024);",true);
 			} else {
 				fileC.addNextLine("",false); // Saute une ligne
 				fileC.addNextLine(((Variable)myNode).getName() + " ",false); // Affiche le nom de la variable	
