@@ -26,6 +26,7 @@ clean:
 	rm -f *.java *.jj *.class
 	rm -f -r ./structure
 	cp ../TestMain.java ./
+	rm ../TestMain.java
 	clear
 
 run:
