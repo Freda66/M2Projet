@@ -7,7 +7,7 @@ import structure.terminal.*;
 
 public class Evaluation {
 
-	// TODO Ajout des calculs d'erreurs
+
 	// Fonction d'evaluation de l'arbre
 	public void eval(SimpleNodeA toTest){
 		SimpleNodeA term1=toTest;
