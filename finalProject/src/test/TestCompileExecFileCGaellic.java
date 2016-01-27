@@ -1,4 +1,4 @@
-package ermes;
+package test;
 
 import java.io.File;
 import ermes.compiler.CCompiler;

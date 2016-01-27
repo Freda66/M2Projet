@@ -1,4 +1,4 @@
-package ermes;
+package test;
 
 import structure.PVirg;
 import structure.SimpleNodeA;

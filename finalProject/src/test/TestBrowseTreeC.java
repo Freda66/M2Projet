@@ -1,4 +1,4 @@
-package ermes;
+package test;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,14 +15,14 @@ public class TestBrowseTreeC {
 		
 	
 	public static void main(String[] args) {
-    	boolean isMpfr = false; // Fichier pour le traitement MPFR
+		boolean isMpfr = false; // Fichier pour le traitement MPFR
 		String nameFileC = "ermesMyProg"; // Nom du fichier c
 		String dirFileC = "res"; // Nom du repertoire du fichier c
     	
 		/**
     	 * Initialise le parcours de l'arbre
     	 */
-		BrowseTreeC t = new BrowseTreeC(nameFileC+".c",dirFileC, isMpfr);
+		BrowseTreeC t = new BrowseTreeC(nameFileC+".c",dirFileC);
 				
 		/**
 		 * ARBRE A LA MAIN
