@@ -80,7 +80,7 @@ public class TestBrowseTreeMpfr {
 		PVirg fct1Content = new PVirg();
 		fct1.setContent(fct1Content);
 
-		Variable var = new Variable("y",range,"int");
+		Variable var = new Variable("y",range,"float");
 		fct1Content.setFG(var);
 		PVirg toto = new PVirg();
 		fct1Content.setFD(toto);
@@ -89,10 +89,10 @@ public class TestBrowseTreeMpfr {
 		toto.setFD(null);
 		toto.setFG(aff);
 
-		aff.setFG(new Variable("y",range,"int"));
+		aff.setFG(new Variable("y",range,"float"));
 		float[] range2 = new float[2];
-		range2[0] = 2; // avant range (c'est pour ca qu'on avait 0)
-		range2[1] = 2; // avant range (c'est pour ca qu'on avait 0)
+		range2[0] = (float) 2.0001; // avant range (c'est pour ca qu'on avait 0)
+		range2[1] = (float) 2.0001; // avant range (c'est pour ca qu'on avait 0)
 		aff.setFD(new Constante(range2));
 	
 		return Code;
