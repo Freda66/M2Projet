@@ -12,8 +12,8 @@ public class Rules {
 
 	static LinkedList<Rule> Rules = null;
 	
-	static void buildRules(){
-		if(Rules == null)
+	public static void buildRules(){
+		if(Rules != null)
 			return;
 		
 		Rules = new LinkedList<Rule>();
@@ -22,12 +22,8 @@ public class Rules {
 	
 	
 	//
-	public void NESOE(Operator root,LinkedList<NodeA> ESOE){
-		
-		
-		
+	public static void NESOE(Operator root,LinkedList<NodeA> ESOE){
 		ListIterator<Rule> rli = Rules.listIterator();
-		
 		while(rli.hasNext()){
 			rli.next().NESOE(root, ESOE);
 		}		
