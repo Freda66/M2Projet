@@ -23,8 +23,8 @@ public class Plus extends Operator {
 	@Override
 	public void Eval(SimpleNodeA term1, SimpleNodeA term2) {
 		float[] retour= new float[2];
-		retour[0]=term1.getRange()[0] + term2.getRange()[0];
-		retour[1]=term1.getRange()[1] + term2.getRange()[1];
+		retour[0]=(float) Math.ceil(term1.getRange()[0] + term2.getRange()[0]);
+		retour[1]=(float) Math.floor(term2.getRange()[1] + term1.getRange()[1]);
 		this.range=retour;
 	}
 	

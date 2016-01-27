@@ -25,49 +25,56 @@ public class Division extends Operator {
 		float[] retour= {1.0f,1.0f};
 		float[] range1= term1.getRange();
 		float[] range2= term2.getRange();
-		float val1=range1[0]*range2[0];
-		float val2=range1[0]/range2[0];
-		float tmp=0;
+		float val1=(float) Math.floor(range1[0]*range2[0]);
+		float val2=(float) Math.floor(range1[0]*range2[0]);
+		float tmpMin=0;
+		float tmpMax=0;
 		
 		//Calcul de 1/range2
 		if(range1[0]==1 && range1[1]==1){
-			EvalDiv(range2);
+			retour=EvalDiv(range2);
 		}else{
 			// Calc de range1 * (1/range2)
 			range2=EvalDiv(range2);
 			for (int i = 0; i < range1.length; i++) {
 				for (int j = 0; j < range2.length; j++) {
-					tmp=range1[i]*range2[j];
+					tmpMax=(float) Math.floor(range1[i]*range2[j]);
+					tmpMin=(float) Math.ceil(range1[i]*range2[j]);
 					// Test pour valeur minimal
-					if(tmp<val1){
-						val1=tmp;
+					if(tmpMin<val1){
+						val1=tmpMin;
 					}
-					if(tmp>val2){
-						val2=tmp;
+					// Test pour valeur maximal
+					if(tmpMax>val2){
+						val2=tmpMax;
 					}
 				}
 			}
+			retour[0]=val1;
+			retour[1]=val2;
 		}
-		retour[0]=val1;
-		retour[1]=val2;
 		this.range=retour;
-		//return retour;
 	}
+	
 	// Si division de 1 par element
 	public float[] EvalDiv(float[] range2) {
 		float[] retour= {1.0f,1.0f};
 		float[] range1= {1.0f,1.0f};
-		float val1=range1[0]*range2[0];
-		float val2=range1[0]/range2[0];
-		float tmp=0;
+		float val1=(float) Math.floor(range1[0]/range2[0]);
+		float val2=(float) Math.floor(range1[0]/range2[0]);
+		float tmpMin=0;
+		float tmpMax=0;
+		
 		for (int j = 0; j < range1.length; j++) {
-			tmp=1/range2[j];
+			tmpMax=(float) Math.floor(1/range2[j]);
+			tmpMin=(float) Math.ceil(1/range2[j]);
 			// Test pour valeur minimal
-			if(tmp<val1){
-				val1=tmp;
+			if(tmpMin<val1){
+				val1=tmpMin;
 			}
-			if(tmp>val2){
-				val2=tmp;
+			// Test pour valeur maximal
+			if(tmpMax>val2){
+				val2=tmpMax;
 			}
 		}
 		retour[0]=val1;

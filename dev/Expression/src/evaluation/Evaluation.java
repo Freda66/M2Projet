@@ -45,7 +45,8 @@ public class Evaluation {
 				// Calc 
 				if(toTest instanceof Operator){
 					((Operator) toTest).Eval(term1, term2);
-					((Operator) toTest).Error(term1, term2);
+					// NOT USE
+					//((Operator) toTest).Error(term1, term2);
 				}
 			//}else{
 				//retour=((NodeA) toTest).range;
@@ -67,17 +68,16 @@ public class Evaluation {
 		float[] testRange=new float[2];
 
 		// Niveau 1
-		Operator tmp=new Plus();
-		testRange[0]=2;
+		Operator tmp=new Puiss();
+		testRange[0]=-2;
 		testRange[1]=4;
 		tmp.setFG(new Constante(testRange));
 		testRange=new float[2];
-		testRange[0]=3;
-		testRange[1]=5;
+		testRange[0]=(float) (1.0/2.0);
+		testRange[1]=(float) (1.0/2.0);
 		tmp.setFD(new Constante(testRange));
 		test.eval(tmp);
 		System.out.println("Etape 1 : "+ tmp.getRange()[0]+ " "+tmp.getRange()[1]);
-		System.out.println("Etape 1 : "+ tmp.getError()[0]+ " "+tmp.getError()[1]);
 		
 		//Niveau 0
 		Operator tmp2=new Plus();
@@ -89,7 +89,6 @@ public class Evaluation {
 		
 		test.eval(tmp2);
 		System.out.println("Final : "+ tmp2.getRange()[0]+ " "+tmp2.getRange()[1]);
-		System.out.println("Final : "+ tmp.getError()[0]+ " "+tmp.getError()[1]);
 
 	}
 }

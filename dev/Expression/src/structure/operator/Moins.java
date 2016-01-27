@@ -28,8 +28,8 @@ public class Moins extends Operator {
 			retour[0]=0;
 			retour[1]=0;
 		}else{
-			retour[0]=term1.getRange()[0] - term2.getRange()[1];
-			retour[1]=term2.getRange()[0] - term1.getRange()[1];
+			retour[0]=(float) Math.ceil(term1.getRange()[0] - term2.getRange()[1]);
+			retour[1]=(float) Math.floor(term2.getRange()[0] - term1.getRange()[1]);
 		}
 
 		this.range=retour;
