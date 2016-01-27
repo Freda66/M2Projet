@@ -23,9 +23,9 @@ public class BrowseTreeC {
 	 * @param nameFile
 	 * @param dir
 	 */
-	public BrowseTreeC(String nameFile, String dir, boolean isMpfr){
+	public BrowseTreeC(String nameFile, String dir){
 		// Creer le fichier c mpfr
-		fileC = new DumpC(nameFile,new File(dir), isMpfr);
+		fileC = new DumpC(nameFile,new File(dir), true);
 		// Appel la fonction qui ecrit le fichier initialement
 		fileC.DumpInitFileC();
 	}
@@ -73,6 +73,12 @@ public class BrowseTreeC {
 			
 			// Ecrit la valeur de retour de la fonction une fois que le contenu soit ecrit
 			fileC.addNextLine("",true);
+			
+			// Stock le resultat de l'execution
+			String nameVar = ((Function)myNode).getReturnedValue().getName();
+			fileC.addNextLine("\tprintf(\"BDDResult:"+nameVar+";%.19f\\n\","+nameVar,false);
+			
+			fileC.addNextLine("",true);
 			fileC.addNextLine("\treturn ",false);
 			fileC.addNextLine(((Function)myNode).getReturnedValue().getName(),false); // Nom de la variable de retour
 			fileC.addNextLine(";",true);
@@ -96,8 +102,9 @@ public class BrowseTreeC {
 			
 			// Ajoute le print d'insert dans la bdd
 			String nameVar = ((Variable) ((Affectation) myNode).Fg()).getName(); // Recupere le nom de la variable
-			Float valueVar = ((Constante) ((Affectation) myNode).Fd()).getRange()[0]; // Recupere la valeur de la variable
-			fileC.addNextLine("\tprintf(\"BDDMeasurement:"+nameVar+";"+valueVar+"\\n\");",true);
+			//Float valueVar = ((Constante) ((Affectation) myNode).Fd()).getRange()[0]; // Recupere la valeur de la variable
+			fileC.addNextLine("\tprintf(\"BDDMeasurement:"+nameVar+";%.19f\\n\","+nameVar,false);
+			fileC.addNextLine(");",true);
 		}
 
 		// myNode est une variable (type, nom, valeur)
