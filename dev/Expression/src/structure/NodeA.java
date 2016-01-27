@@ -26,8 +26,15 @@ public abstract class NodeA extends SimpleNodeA{
 	@Override
 	public SimpleNodeA Clone(){
 		NodeA A = (NodeA) super.Clone();
-		A.fd = this.fd.Clone();
-		A.fg = this.fg.Clone();
+		if(this.fd instanceof NoeudDeCoupure)
+			A.fd = ((NoeudDeCoupure) this.fd).getSon().Clone();
+		else
+			A.fd = this.fd.Clone();
+		
+		if(this.fg instanceof NoeudDeCoupure)
+			A.fg = ((NoeudDeCoupure) this.fg).getSon().Clone();
+		else
+			A.fg = this.fg.Clone();
 		return A;
 			
 	}
