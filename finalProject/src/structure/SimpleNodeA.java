@@ -9,6 +9,7 @@ public abstract class SimpleNodeA {
 	public float[] error=null;
 
 	public abstract String type();
+	public abstract String toString();
 	
 	public void SetLevel(int lvl){
 		level = lvl;
@@ -24,8 +25,6 @@ public abstract class SimpleNodeA {
 		}
 		return tmp;
 	}
-	
-	public abstract String toString();
 
 	public boolean equal(SimpleNodeA term){
 		boolean retour=true;

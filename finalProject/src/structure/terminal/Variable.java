@@ -16,11 +16,6 @@ public class Variable extends Terminal{
 		super(range);
 		this.name = name;
 	}
-
-	public Variable(float[] range){
-		super(range);
-		this.name = "noName";
-	}
 	
 	@Override
 	public boolean equal(SimpleNodeA term){
