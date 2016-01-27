@@ -122,6 +122,7 @@ public abstract class Operator extends NodeA implements Expression{
 	
 	// applique un pattern P qui transforme l'arbre en T
 	//retourne si tout c'est bien passe
+	// attention va modifier le modèle
 	public boolean applyPattern ( NodeA P){
 		
 		//TODO probleme de typage et recurence
