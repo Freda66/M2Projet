@@ -41,7 +41,7 @@ public class Ermes {
 	 * - Execute le fichier c
 	 * - Compile le fichier mpfr
 	 * - Execute le fichier mpfr
-	 * @return
+	 * @return true or false : en fonction du bon deroulement du la fonction
 	 */
 	public boolean RunErmes(){
 		try{
@@ -49,7 +49,7 @@ public class Ermes {
 			 * Fichier c initiale
 			 */
 			// Initialise le fichier c init a génèrer
-			BrowseTreeC browserTree = new BrowseTreeC(nameFileC+".c",dirFileC);
+			BrowseTreeC browserTree = new BrowseTreeC(nameFileC+".c",dirFileC, false);
 			
 			// Parcours l'arbre et génère le nouveau fichier c
 			browserTree.BrowseTree(tree);
@@ -74,6 +74,39 @@ public class Ermes {
 			
 			// Compile le fichier mpfr
 			if(compilerMpfr.Compile(true)) compilerMpfr.Execute();
+		} catch(Exception e){
+			return false;
+		}
+				
+		return true;
+	}
+
+	/**
+	 * Fonction qui 
+	 * - Genère le fichier c optimisé avec les insert bdd 
+	 * - Compile le fichier c optimisé 
+	 * - Execute le fichier c optimisé 
+	 * @return true or false : en fonction du bon deroulement du la fonction
+	 */
+	public boolean RunErmesOpt(PVirg t){
+		// Met à jours l'arbre
+		this.setTree(t);
+	
+		try{
+			/**
+			 * Fichier c optimisé
+			 */
+			// Initialise le fichier c optimisé a génèrer
+			BrowseTreeC browserTree = new BrowseTreeC(nameFileC+".c",dirFileC, true);
+			
+			// Parcours l'arbre et génère le nouveau fichier c optimisé
+			browserTree.BrowseTree(tree);
+			
+			// Creer l'objet pour la compilation et l'execution du fichier optimisé
+			CCompiler compiler = new CCompiler(nameFileC+"_opt.c",new File(dirFileC));
+			
+			// Compile le fichier c
+			if(compiler.Compile(false)) compiler.Execute();
 		} catch(Exception e){
 			return false;
 		}

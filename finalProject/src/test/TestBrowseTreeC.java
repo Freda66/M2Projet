@@ -22,7 +22,7 @@ public class TestBrowseTreeC {
 		/**
     	 * Initialise le parcours de l'arbre
     	 */
-		BrowseTreeC t = new BrowseTreeC(nameFileC+".c",dirFileC);
+		BrowseTreeC t = new BrowseTreeC(nameFileC+".c",dirFileC, false);
 				
 		/**
 		 * ARBRE A LA MAIN

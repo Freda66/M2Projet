@@ -19,14 +19,17 @@ public class DumpC {
 		
 	}
 	
-	public DumpC(String f, File dir, boolean isMpfr)
+	public DumpC(String f, File dir, boolean isMpfr, boolean isOpt)
 	{
 		this.fileName=f;
 		this.dir=dir;
 		this.exeName = fileName.substring(0, fileName.length() - 2);
 		this.includeMpfr = isMpfr;
 		if(includeMpfr) exeName= exeName+"_mpfr.c";
-        else exeName = exeName+".c";
+        else {
+        	if(isOpt) exeName = exeName+"_opt.c";
+        	else exeName = exeName+".c";
+        }
 		
 	}
 	
