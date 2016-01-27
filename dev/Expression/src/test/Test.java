@@ -53,7 +53,7 @@ public class Test {
 			NodeA tmp = li.next();
 			
 			tmp.Displayln();
-			E.Eval(tmp);
+			E.eval(tmp);
 			System.out.println("range " + tmp.getRange()[0] + " " + tmp.getRange()[1]);
 			
 		}

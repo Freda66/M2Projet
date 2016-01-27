@@ -75,6 +75,14 @@ public class Division extends Operator {
 		return retour;
 	}
 	
+	// Evaluation des erreurs pour 2 terminaux
+	@Override
+	public void Error(SimpleNodeA term1, SimpleNodeA term2) {
+		float[] retour= new float[2];
+		retour[0]=term1.getRange()[0] + term2.getRange()[0];
+		retour[1]=term1.getRange()[1] + term2.getRange()[1];
+	}
+	
 	// Decouverte des arbres equivalents
 	@Override
 	public LinkedList<NodeA> NESOE (){
