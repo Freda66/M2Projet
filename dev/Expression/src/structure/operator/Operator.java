@@ -9,6 +9,7 @@ import structure.NodeA;
 import structure.NoeudDeCoupure;
 import structure.SimpleNodeA;
 import structure.terminal.Constante;
+import structure.terminal.Variable;
 import structure.Expression;
 
 
@@ -128,6 +129,7 @@ public abstract class Operator extends NodeA implements Expression{
 		boolean fg_ok = false;
 		boolean fd_ok = false;
 		
+		// si on a une constante en fils gauche
 		if(P.Fg() instanceof NoeudDeCoupure){
 			//variable
 			if(((NoeudDeCoupure)P.Fg()).getSon() instanceof Constante){
@@ -137,9 +139,12 @@ public abstract class Operator extends NodeA implements Expression{
 				}
 				else
 					fg_ok = false;
+			}//la on ce fous de notre fils gauche c'est ok
+			else if (((NoeudDeCoupure)P.Fg()).getSon() instanceof Variable){
+				fg_ok = true;
 			}
 			
-		}
+		}//
 		else if(P.Fg() instanceof Operator && this.Fg() instanceof Operator){
 			if(((Operator) this.Fg()).type() == ((Operator) P.Fg()).type())
 				fg_ok = ((Operator) this.Fg()).applyPattern((Operator) P.Fg());
@@ -148,16 +153,29 @@ public abstract class Operator extends NodeA implements Expression{
 		
 		
 		
-		if(P.Fd() instanceof NoeudDeCoupure){
-			((NoeudDeCoupure)P.Fd()).setSon(this.Fd());
-		}
-		else if(P.Fd() instanceof Operator && this.Fd() instanceof Operator){
-			if(((Operator) this.Fd()).type() == ((Operator) P.Fd()).type())
-				((Operator) this.Fd()).applyPattern((Operator) P.Fd());
-			else return false;
-		}
-		
-		return true;
+		// si on a une constante en fils droit
+			if(P.Fd() instanceof NoeudDeCoupure){
+				//variable
+				if(((NoeudDeCoupure)P.Fd()).getSon() instanceof Constante){
+					if (this.Fd() instanceof Constante){
+						((NoeudDeCoupure)P.Fd()).setSon(this.Fd());
+						fd_ok = true;
+					}
+					else
+						fd_ok = false;
+				}//la on ce fous de notre fils gauche c'est ok
+				else if (((NoeudDeCoupure)P.Fd()).getSon() instanceof Variable){
+					fd_ok = true;
+				}
+				
+			}//
+			else if(P.Fd() instanceof Operator && this.Fd() instanceof Operator){
+				if(((Operator) this.Fd()).type() == ((Operator) P.Fd()).type())
+					fd_ok = ((Operator) this.Fd()).applyPattern((Operator) P.Fd());
+				else fd_ok = false;
+			}
+			
+			return fd_ok && fg_ok;
 		
 	}
 	

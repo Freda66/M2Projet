@@ -4,8 +4,9 @@ public class NoeudDeCoupure extends SimpleNodeA{
 
 	private NodeA father;
 	public enum fils{df,fg};
-	private SimpleNodeA son;
 	public fils fils;
+	private SimpleNodeA son;
+	
 	@Override
 	public String type() {
 		return son.type();
