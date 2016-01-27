@@ -4,6 +4,7 @@ import java.io.File;
 
 import ermes.compiler.CCompiler;
 import ermes.treeLoop.BrowseTreeC;
+import ermes.treeLoop.BrowseTreeMpfr;
 import structure.PVirg;
 
 public class Ermes {
@@ -63,7 +64,7 @@ public class Ermes {
 			 * Fichier c mpfr
 			 */
 			// Initialise le fichier mpfr a génèrer
-			BrowseTreeC browserTreeMpfr = new BrowseTreeC(nameFileC+".c",dirFileC);
+			BrowseTreeMpfr browserTreeMpfr = new BrowseTreeMpfr(nameFileC+"_mpfr.c",dirFileC);
 			
 			// Parcours l'arbre et génère le nouveau fichier mpfr
 			browserTreeMpfr.BrowseTree(tree);
