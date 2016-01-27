@@ -10,6 +10,8 @@ public abstract class Terminal extends SimpleNodeA implements Expression{
 		this.range[0] = testRange[0];
 		this.range[1] = testRange[1];
 		this.error= new float[2];
+		this.error[0] = 0;
+		this.error[1] = 0;
 	}
 	
 	@Override
