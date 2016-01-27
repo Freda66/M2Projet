@@ -24,9 +24,10 @@ public class DumpC {
 		this.fileName=f;
 		this.dir=dir;
 		this.exeName = fileName.substring(0, fileName.length() - 2);
+		this.includeMpfr = isMpfr;
 		if(includeMpfr) exeName= "dump_"+exeName+"_mpfr.c";
         else exeName = "dump_"+exeName+".c";
-		this.includeMpfr = isMpfr;
+		
 	}
 	
 	public void DumpInitFileC(){

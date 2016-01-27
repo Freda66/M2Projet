@@ -24,13 +24,14 @@ public class TestDatabase {
     public static void main(String[] args) {
 
         Logs.logger.addLog(enumLogType.INFO,"========== TEST BDD IN ==========");
+        Logs.logger.updateProgress(Logs.logger.getProgressCurrent()+1);
 
         // --------------------------------------------------------------
 
         Logs.logger.addLog(enumLogType.INFO,"Init process ----------");
 
         Logs.logger.addLog(enumLogType.INFO,"\tCreate Database object");
-        Database db = new Database("db/database2.db");
+        Database db = new Database("db/database.db");
 
         Logs.logger.addLog(enumLogType.INFO,"\tDatabase connection");
         db.connect();
@@ -143,6 +144,8 @@ public class TestDatabase {
         // --------------------------------------------------------------
         
         Logs.logger.addLog(enumLogType.INFO,"========== TEST BDD OUT =========");
+        
+        Logs.logger.updateProgress(100);
 
     }
 
