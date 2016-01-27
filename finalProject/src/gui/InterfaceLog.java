@@ -11,6 +11,6 @@ public interface InterfaceLog {
 	public void addLog(enumLogType logType, String text);
 
 	// Update progress bar
-	//public void updateProgress();
+	public void updateProgress(int value);
 
 }
