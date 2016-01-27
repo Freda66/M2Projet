@@ -21,21 +21,23 @@ public class Multiplication extends Operator {
 	// Calc pour 2 intervall
 	public float[] Calc(float[] range1, float [] range2){
 		float[] retour= {1.0f,1.0f};
-		float val1=range1[0]*range2[0];
-		float val2=range1[0]/range2[0];
-		float tmp=0;
+		float val1=(float) Math.floor(range1[0]*range2[0]);
+		float val2=(float) Math.floor(range1[0]*range2[0]);
+		float tmpMin=0;
+		float tmpMax=0;
 
 		// Boucle pour test toutes les combinaisons possible
 		for (int i = 0; i < range1.length; i++) {
 			for (int j = 0; j < range2.length; j++) {
-				tmp=range1[i]*range2[j];
+				tmpMax=(float) Math.floor(range1[i]*range2[j]);
+				tmpMin=(float) Math.ceil(range1[i]*range2[j]);
 				// Test pour valeur minimal
-				if(tmp<val1){
-					val1=tmp;
+				if(tmpMin<val1){
+					val1=tmpMin;
 				}
 				// Test pour valeur maximal
-				if(tmp>val2){
-					val2=tmp;
+				if(tmpMax>val2){
+					val2=tmpMax;
 				}
 			}
 		}

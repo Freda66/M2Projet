@@ -37,52 +37,67 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
         }
     }
 
-    public static void parseIt(String args []){
-                CParser parser ;
+    public static PVirg parseIt(){
+                PVirg tree = null;
+                /*
 
-                // Hack to include type "special types"
-            types.add("__signed__");
-            types.add("__const");
-            types.add("__inline__");
-            types.add("__signed");
+		CParser parser;
+  	  	// Hack to include type "special types"
+	    types.add("__signed__");
+	    types.add("__const");
+	    types.add("__inline__");
+	    types.add("__signed");
 
-                // File handler
-        if(args.length == 1){
-                System.out.println("C Parser Version 0.1Alpha:  Reading from file " + args[0] + " . . ." );
-                try {
-                        parser = new CParser(new java.io.FileInputStream(args[0]));
-                }catch(java.io.FileNotFoundException e){
-                        System.out.println("C Parser Version 0.1:  File " + args[0] + " not found.");
-                        return ;
-                }
-        }else{
-                System.out.println("C Parser Version 0.1Alpha:  Usage is :");
-                System.out.println("         java CParser inputfile");
-                return ;
+		try {
+        	parser = new CParser(new java.io.FileInputStream(filePath));
+      	}catch(java.io.FileNotFoundException e){
+        	System.out.println("C Parser Version 0.1:  File " + filePath + " not found.");
+        	return null;
         }
+        
+        tree = new PVirg();
+		// End of file handler
+	    try {
+			ASTStart parseTree = parser.Start();
+	        System.out.println("C Parser Version 0.1Alpha:  Java program parsed successfully.");
+			parseTree.dump("");
+			System.out.println("End");
+			for(int index = 0; index < allFunctions.size(); index++){
+				System.out.println("FUNCTION FOUND: " + allFunctions.get(index).getReturnedValue().getTypeDef() + " " +allFunctions.get(index).getName());
+				if(allFunctions.get(index).getParams()!=null)
+					for(int index2=0;index2 < allFunctions.get(index).getParams().size(); index2++){
+						System.out.println("Param "+index2+": "+allFunctions.get(index).getParams().get(index2).getTypeDef()+ " " + allFunctions.get(index).getParams().get(index2).getName());
+					}
+			}
+	    }catch(ParseException e){
+	        System.out.println("C Parser Version 0.1Alpha:  Encountered errors during parse.");
+	        e.printStackTrace();
+	    }
+	    */
 
-                // End of file handler
+            // Hack to include type "special types"
+        types.add("__signed__");
+        types.add("__const");
+        types.add("__inline__");
+        types.add("__signed");
+
             try {
-                        ASTStart parseTree = parser.Start();
+                ASTStart parseTree = Start();
                 System.out.println("C Parser Version 0.1Alpha:  Java program parsed successfully.");
-                        parseTree.dump("");
-                        System.out.println("End");
-                        for(int index = 0; index < allFunctions.size(); index++){
-                                System.out.println("FUNCTION FOUND: " + allFunctions.get(index).getReturnedValue().getTypeDef() + " " +allFunctions.get(index).getName());
-                                if(allFunctions.get(index).getParams()!=null)
-                                        for(int index2=0;index2 < allFunctions.get(index).getParams().size(); index2++){
-                                                System.out.println("Param "+index2+": "+allFunctions.get(index).getParams().get(index2).getTypeDef()+ " " + allFunctions.get(index).getParams().get(index2).getName());
-                                        }
-                        }
-            }catch(ParseException e){
+                parseTree.dump("");
+                System.out.println("End");
+                for(int index = 0; index < allFunctions.size(); index++){
+                  System.out.println("FUNCTION FOUND: " + allFunctions.get(index).getReturnedValue().getTypeDef() + " " +allFunctions.get(index).getName());
+                  if(allFunctions.get(index).getParams()!=null)
+                    for(int index2=0;index2 < allFunctions.get(index).getParams().size(); index2++){
+                      System.out.println("Param "+index2+": "+allFunctions.get(index).getParams().get(index2).getTypeDef()+ " " + allFunctions.get(index).getParams().get(index2).getName());
+                    }
+                }
+        }catch(ParseException e){
                 System.out.println("C Parser Version 0.1Alpha:  Encountered errors during parse.");
                 e.printStackTrace();
-            }
-    }
-
-    // Run the parser
-    public static void main ( String args [ ] ) {
-        parseIt(args);
+        }
+            return tree;
     }
 
 /** Main production **/
@@ -3805,123 +3820,6 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     finally { jj_save(36, xla); }
   }
 
-  static private boolean jj_3R_28() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_58()) jj_scanpos = xsp;
-    if (jj_3R_59()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_14() {
-    if (jj_3R_27()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_13() {
-    if (jj_3R_27()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_202() {
-    if (jj_scan_token(59)) return true;
-    if (jj_3R_166()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_60() {
-    if (jj_scan_token(IDENTIFIER)) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_108()) jj_scanpos = xsp;
-    return false;
-  }
-
-  static private boolean jj_3_17() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(53)) jj_scanpos = xsp;
-    if (jj_scan_token(57)) return true;
-    if (jj_3R_29()) return true;
-    if (jj_scan_token(58)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_29() {
-    if (jj_3R_60()) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_61()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_104() {
-    if (jj_3R_27()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_103() {
-    if (jj_3R_27()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_101() {
-    if (jj_scan_token(ENUM)) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_17()) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(53)) return true;
-    }
-    return false;
-  }
-
-  static private boolean jj_3_16() {
-    if (jj_3R_28()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_166() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_16()) {
-    jj_scanpos = xsp;
-    if (jj_3R_176()) return true;
-    }
-    return false;
-  }
-
-  static private boolean jj_3_5() {
-    if (jj_3R_23()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_138() {
-    if (jj_3R_166()) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_202()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_165() {
-    if (jj_scan_token(60)) return true;
-    if (jj_3R_34()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_57() {
-    if (jj_3R_97()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_104()) jj_scanpos = xsp;
-    return false;
-  }
-
   static private boolean jj_3R_119() {
     if (jj_scan_token(62)) return true;
     if (jj_3R_42()) return true;
@@ -5625,6 +5523,123 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
+  static private boolean jj_3R_28() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_58()) jj_scanpos = xsp;
+    if (jj_3R_59()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_14() {
+    if (jj_3R_27()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_13() {
+    if (jj_3R_27()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_202() {
+    if (jj_scan_token(59)) return true;
+    if (jj_3R_166()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_60() {
+    if (jj_scan_token(IDENTIFIER)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_108()) jj_scanpos = xsp;
+    return false;
+  }
+
+  static private boolean jj_3_17() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(53)) jj_scanpos = xsp;
+    if (jj_scan_token(57)) return true;
+    if (jj_3R_29()) return true;
+    if (jj_scan_token(58)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_29() {
+    if (jj_3R_60()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_61()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_104() {
+    if (jj_3R_27()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_103() {
+    if (jj_3R_27()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_101() {
+    if (jj_scan_token(ENUM)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_17()) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(53)) return true;
+    }
+    return false;
+  }
+
+  static private boolean jj_3_16() {
+    if (jj_3R_28()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_166() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_16()) {
+    jj_scanpos = xsp;
+    if (jj_3R_176()) return true;
+    }
+    return false;
+  }
+
+  static private boolean jj_3_5() {
+    if (jj_3R_23()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_138() {
+    if (jj_3R_166()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_202()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_165() {
+    if (jj_scan_token(60)) return true;
+    if (jj_3R_34()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_57() {
+    if (jj_3R_97()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_104()) jj_scanpos = xsp;
+    return false;
+  }
+
   static private boolean jj_initialized_once = false;
   /** Generated Token Manager. */
   static public CParserTokenManager token_source;
@@ -5993,4 +6008,18 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     JJCalls next;
   }
 
+    // Run the parser
+    /*public static void main ( String args [ ] ) {
+      	
+      	// File handler
+      	if(args.length == 1){
+        	System.out.println("C Parser Version 0.1Alpha:  Reading from file " + args[0] + " . . ." );
+      		String filePath = args[0];
+        	PVirg tree = parseIt(filePath);
+      	}else{
+       		System.out.println("C Parser Version 0.1Alpha:  Usage is :");
+        	System.out.println("         java CParser inputfile");
+        	return ;
+      	}
+    }*/
 }

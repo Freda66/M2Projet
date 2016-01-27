@@ -24,17 +24,33 @@ public class Puiss extends Operator {
 	@Override
 	public void Eval(SimpleNodeA term1, SimpleNodeA term2) {
 		float[] retour= new float[2];
+		float val1=(float) Math.pow(term1.getRange()[0], term2.getRange()[0]);
+		float val2=(float) Math.pow(term1.getRange()[1], term2.getRange()[0]);
+		if(val1>val2){
+			retour[0]=val2;
+			retour[1]=val1;
+		}else{
+			retour[0]=val1;
+			retour[1]=val2;
+		}
+		// Si puissance pair
 		if(term2.getRange()[0]%2 ==0){
-			if (term1.getRange()[0] == 0){
+			if (term1.getRange()[0] <= 0){
 				retour[0]=0;
 			}
-		}
-		if(term1.getRange()[0] == term2.getRange()[0] && term2.getRange()[1] == term1.getRange()[1] ){
-			retour[0]=0;
-			retour[1]=0;
+			// Si puisance entiere
+		}else if (term2.getRange()[0]%1==0){
+			// Bloque pour le prochain else if
+			
+			// Si racine
+		}else if (term2.getRange()[0]%(1.0/2.0) ==0){
+			if (term1.getRange()[0] <= 0){
+				retour[0]=0;
+			}
 		}else{
-			retour[0]=term1.getRange()[0] - term2.getRange()[1];
-			retour[1]=term2.getRange()[0] - term1.getRange()[1];
+			if (term1.getRange()[0] <= 0){
+				retour[0]=0;
+			}
 		}
 
 		this.range=retour;
