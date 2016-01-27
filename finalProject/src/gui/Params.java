@@ -236,7 +236,11 @@ public class Params extends javax.swing.JFrame {
 			// Load next interface
 			this.dispose();
 			
-			// TODO: Run test 
+			// TODO : Pap's Gerer tout ca
+			Logs.logger.setProgressTotal(10);
+			Logs.logger.setProgressCurrent(0);
+			
+			// TODO: Pap's Main run
 			TestDatabase.main(null);
 
 		}

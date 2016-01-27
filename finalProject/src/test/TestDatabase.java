@@ -24,7 +24,7 @@ public class TestDatabase {
     public static void main(String[] args) {
 
         Logs.logger.addLog(enumLogType.INFO,"========== TEST BDD IN ==========");
-        Logs.logger.updateProgress(10);
+        Logs.logger.updateProgress(Logs.logger.getProgressCurrent()+1);
 
         // --------------------------------------------------------------
 
