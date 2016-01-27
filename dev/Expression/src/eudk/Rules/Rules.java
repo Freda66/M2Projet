@@ -3,6 +3,7 @@ package eudk.Rules;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import eudk.Rules.Addition.RAddition;
 import structure.NodeA;
 import structure.NoeudDeCoupure;
 import structure.operator.*;
@@ -15,51 +16,21 @@ public class Rules {
 		if(Rules == null)
 			return;
 		
-		
-		
-		
-		
+		Rules = new LinkedList<Rule>();
+		Rules.add(new RAddition());		
 	}
 	
 	
-	
-	public void BESOE(NodeA Root,LinkedList<NodeA> ESOE){
+	//
+	public void NESOE(Operator root,LinkedList<NodeA> ESOE){
 		
-		LinkedList<NodeA> work;
-		if(this == Root){			
-			work = this.NESOE();
-			ListIterator<NodeA> li = work.listIterator();
-			while(li.hasNext()){
-				ESOE.add(li.next());
-			}
-			
-		}
-		if(this.Fd() instanceof Operator){
-			Operator initialFD = (Operator)this.Fd();
-			work = ((Operator)this.Fd()).NESOE();
-			ListIterator<NodeA> li = work.listIterator();
-			while(li.hasNext()){
-				this.setFD(li.next());
-				//ESOE.add((NodeA) NodeA.Clone(Root));
-				ESOE.add((NodeA) Root.Clone());
-			}
-			this.setFD(initialFD);
-			initialFD.BESOE(Root,ESOE);
-			
-		}
-		if(this.Fg() instanceof Operator){
-			Operator initialFG = (Operator) this.Fg();
-			work = ((Operator)this.Fg()).NESOE();
-			ListIterator<NodeA> li = work.listIterator();
-			while(li.hasNext()){
-				this.setFG( li.next());
-				//ESOE.add((NodeA) NodeA.Clone(Root));
-				ESOE.add((NodeA) Root.Clone());
-			}
-			this.setFG(initialFG);
-			initialFG.BESOE(Root,ESOE);
-		}
 		
+		
+		ListIterator<Rule> rli = Rules.listIterator();
+		
+		while(rli.hasNext()){
+			rli.next().NESOE(root, ESOE);
+		}		
 	}
 	
 	
