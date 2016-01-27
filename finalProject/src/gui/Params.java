@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import gui.Logs.enumLogType;
+import test.TestDatabase;
 
 /**
  * Parameters Interface : Ask user to fill the application parameters. Class
@@ -235,9 +235,14 @@ public class Params extends javax.swing.JFrame {
 
 			// Load next interface
 			this.dispose();
-			Logs toto = new Logs();
 			
-			toto.addLogInformation(enumLogType.INFO, "Hello");
+			// TODO : Pap's Gerer tout ca
+			Logs.logger.setProgressTotal(10);
+			Logs.logger.setProgressCurrent(0);
+			
+			// TODO: Pap's Main run
+			TestDatabase.main(null);
+
 		}
 
 		// If not, show warning box
