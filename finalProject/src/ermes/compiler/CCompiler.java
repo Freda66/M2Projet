@@ -57,7 +57,7 @@ public class CCompiler {
 		
 		try {
 			// Connexion à la bdd
-			Database db = new Database("./db/database2.db");
+			Database db = new Database("./db/database.db");
 	        db.connect();
 			Variable measurement = new Variable(db);
 			System.out.println("");
