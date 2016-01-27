@@ -3,6 +3,7 @@ package ssa;
 import java.util.HashMap;
 
 import structure.SimpleNodeA;
+import structure.Expression;
 import structure.NodeA;
 import structure.affectation.Affectation;
 import structure.operator.Operator;
@@ -23,7 +24,15 @@ public class CmdFormatter {
 	HashMap <String, Variable> varnames = new HashMap<String, Variable>();
 
 
-	void toSSA(SimpleNodeA n){
+	NodeA transformNodeToSSA(NodeA n){
+
+		SimpleNodeA n2 = toSSA( (SimpleNodeA)n );
+
+		return (NodeA)n2;
+
+	}
+
+	SimpleNodeA toSSA(SimpleNodeA n){
 
 		String s = "null";
 		if(n != null){
@@ -145,10 +154,42 @@ public class CmdFormatter {
 
 		}
 
+		return n;
+
 
 	}
 
+	void transformExpressions(SimpleNodeA n){
 
+		String s = "null";
+		if(n != null){
+			s = n.getClass().toString();
+		}
+		System.out.println("in SSA, " + s + " '" + n + "'"  );
+
+
+		if(n instanceof Expression){
+
+			// optimize
+
+		}
+		else if(n instanceof NodeA){
+
+			// do children
+
+			transformExpressions( ( (NodeA)n ).Fd() );
+
+			transformExpressions( ( (NodeA)n ).Fg() );
+
+
+		}
+		else {
+
+			// don't do shit
+
+		}
+
+	}
 
 
 }
