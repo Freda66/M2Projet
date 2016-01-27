@@ -25,7 +25,7 @@ public class BrowseTreeC {
 	 */
 	public BrowseTreeC(String nameFile, String dir){
 		// Creer le fichier c mpfr
-		fileC = new DumpC(nameFile,new File(dir), true);
+		fileC = new DumpC(nameFile,new File(dir), false);
 		// Appel la fonction qui ecrit le fichier initialement
 		fileC.DumpInitFileC();
 	}
