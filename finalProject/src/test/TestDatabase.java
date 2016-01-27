@@ -24,6 +24,7 @@ public class TestDatabase {
     public static void main(String[] args) {
 
         Logs.logger.addLog(enumLogType.INFO,"========== TEST BDD IN ==========");
+        Logs.logger.updateProgress(10);
 
         // --------------------------------------------------------------
 
@@ -143,6 +144,8 @@ public class TestDatabase {
         // --------------------------------------------------------------
         
         Logs.logger.addLog(enumLogType.INFO,"========== TEST BDD OUT =========");
+        
+        Logs.logger.updateProgress(100);
 
     }
 

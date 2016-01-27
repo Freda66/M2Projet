@@ -236,7 +236,7 @@ public class Params extends javax.swing.JFrame {
 			// Load next interface
 			this.dispose();
 			
-			// Run test 
+			// TODO: Run test 
 			TestDatabase.main(null);
 
 		}
