@@ -12,12 +12,14 @@ import java.util.Date;
  * @version 1.0.0
  */
 public class Logs extends javax.swing.JFrame implements InterfaceLog {
-	
+
 	// ==============================================================
 	// ATTRIBUTE
 	// ==============================================================
-	
+
 	public static Logs logger = new Logs();
+	private int progressTotal;
+	private int progressCurrent;
 
 	// ==============================================================
 	// CONSTRUCTOR
@@ -33,6 +35,28 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	 */
 	public Logs() {
 		initComponents();
+	}
+	
+	// ==============================================================
+	// SETTERS / GETTERS
+	// ==============================================================
+	
+	public int getProgressTotal() {
+		return this.progressTotal;
+	}
+	
+	public void setProgressTotal(int progressTotal) {
+		this.progressTotal = progressTotal;
+	}
+	
+	// --------------------------------------------------------------
+	
+	public int getProgressCurrent() {
+		return this.progressCurrent;
+	}
+	
+	public void setProgressCurrent(int progressCurrent) {
+		this.progressCurrent = progressCurrent;
 	}
 
 	// ==============================================================
@@ -59,7 +83,7 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 		btnResults = new javax.swing.JButton();
 		panelProgressBar = new javax.swing.JPanel();
 		progressBar = new javax.swing.JProgressBar();
-		
+
 		scrollPane.setViewportView(areaLog);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -204,6 +228,8 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO UI_Logs - Show End
 	}
+	
+	// --------------------------------------------------------------
 
 	/**
 	 * UI_Logs Show Logs file button event
@@ -213,6 +239,8 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	private void btnLogsActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO UI_Logs - Show End
 	}
+	
+	// --------------------------------------------------------------
 
 	/**
 	 * UI_Logs Show plotting results button event
@@ -234,19 +262,29 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	 * @param text
 	 */
 	public void addLog(enumLogType logType, String text) {
-		
+
 		// Get date format
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
 		Date date = new Date();
-		
+
 		// Prepare new line
 		String message = dateFormat.format(date) + "\t|" + logType.toString() + "\t|" + text;
-		
+
 		// Write in console
 		System.out.println(message);
-		
+
 		// Write in areaLog
-		areaLog.append(message+"\n");
+		areaLog.append(message + "\n");
+	}
+
+	/**
+	 * Update the progress bar.
+	 * 
+	 * @param value
+	 *            : Value to set on the progress bar (in %)
+	 */
+	public void updateProgress(int value) {
+		
 	}
 
 	// ==============================================================
