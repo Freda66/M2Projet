@@ -10,5 +10,3 @@ int main()
     
     return 0;
 }
-
-#DEFINE Toto = 0

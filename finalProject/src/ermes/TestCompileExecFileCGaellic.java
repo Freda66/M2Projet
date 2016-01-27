@@ -1,17 +1,19 @@
+package ermes;
+
 import java.io.File;
-import Compiler.CCompiler;
+import ermes.compiler.CCompiler;
 
 public class TestCompileExecFileCGaellic {
 
 	public static void main(String[] args) {
 		// Creer l'objet pour la compilation et l'execution du fichier
-		CCompiler compiler = new CCompiler("myProg.c",new File("programmeC"));
+		CCompiler compiler = new CCompiler("ermesMyProg.c",new File("res"));
 		
 		// Compile le fichier c
-		compiler.Compile(false);
-		
-		// Execute le fichier c
-		compiler.Execute();
+		if(compiler.Compile(false)){
+			// Execute le fichier c
+			compiler.Execute();
+		}	
 	}
 	
 }

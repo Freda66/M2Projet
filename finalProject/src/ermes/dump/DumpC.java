@@ -1,4 +1,4 @@
-package dump;
+package ermes.dump;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,13 +19,14 @@ public class DumpC {
 		
 	}
 	
-	public DumpC(String f, File dir)
+	public DumpC(String f, File dir, boolean isMpfr)
 	{
 		this.fileName=f;
 		this.dir=dir;
 		this.exeName = fileName.substring(0, fileName.length() - 2);
 		if(includeMpfr) exeName= "dump_"+exeName+"_mpfr.c";
         else exeName = "dump_"+exeName+".c";
+		this.includeMpfr = isMpfr;
 	}
 	
 	public void DumpInitFileC(){
@@ -82,14 +83,16 @@ public class DumpC {
 	}
 	
 	// Fonction qui ajoute une ligne au fichier
-	public void addNextLine(String line) {
+	public void addNextLine(String line, boolean newLine) {
 		FileWriter fos = null;
 		
 		try{
 			// Buffer d'ecriture fichier c
 	        fos = new FileWriter(new File(dir+"/"+exeName),true); // True permet d'ajouter à la suite du fichier
 			// Ecrit la ligne à la suite du fichier
-			fos.write(line+"\n");
+			fos.write(line);
+			// Saute une ligne dans le fichier
+			if(newLine) fos.write("\n"); 
 			
 		// Gestion des exeptions
 		} catch (FileNotFoundException e) {

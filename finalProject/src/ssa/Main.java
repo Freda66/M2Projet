@@ -1,4 +1,4 @@
-package parser;
+package ssa;
 
 import structure.PVirg;
 import structure.affectation.Affectation;
