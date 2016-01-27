@@ -123,6 +123,7 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 		});
 
 		btnLogs.setText("Show Logs");
+		btnLogs.setEnabled(false);
 		btnLogs.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnLogsActionPerformed(evt);
@@ -130,6 +131,7 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 		});
 
 		btnResults.setText("Show Results");
+		btnResults.setEnabled(false);
 		btnResults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnResultsActionPerformed(evt);
@@ -226,7 +228,7 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	 * @param evt
 	 */
 	private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO UI_Logs - Show End
+		System.exit(1);
 	}
 	
 	// --------------------------------------------------------------
@@ -237,7 +239,7 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	 * @param evt
 	 */
 	private void btnLogsActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO UI_Logs - Show End
+		
 	}
 	
 	// --------------------------------------------------------------
@@ -248,7 +250,8 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	 * @param evt
 	 */
 	private void btnResultsActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO UI_Logs - Show results
+		Plot.main(null);
+		this.dispose();
 	}
 
 	// ==============================================================
@@ -281,10 +284,15 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	 * Update the progress bar.
 	 * 
 	 * @param value
-	 *            : Value to set on the progress bar (in %)
+	 *            : Value to set on the progress bar (Ex : 10 => 10%)
 	 */
 	public void updateProgress(int value) {
-		
+		if (value <= 100) {
+			progressBar.setValue(value);
+		}
+		if(value == 100) {
+			btnResults.setEnabled(true);
+		}
 	}
 
 	// ==============================================================
