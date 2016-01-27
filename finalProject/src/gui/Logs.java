@@ -11,7 +11,13 @@ import java.util.Date;
  * @author pev
  * @version 1.0.0
  */
-public class Logs extends javax.swing.JFrame {
+public class Logs extends javax.swing.JFrame implements InterfaceLog {
+	
+	// ==============================================================
+	// ATTRIBUTE
+	// ==============================================================
+	
+	public static Logs logger = new Logs();
 
 	// ==============================================================
 	// CONSTRUCTOR
@@ -227,10 +233,10 @@ public class Logs extends javax.swing.JFrame {
 	 * @param logType
 	 * @param text
 	 */
-	public void addLogInformation(enumLogType logType, String text) {
+	public void addLog(enumLogType logType, String text) {
 		
 		// Get date format
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
 		Date date = new Date();
 		
 		// Prepare new line
@@ -240,7 +246,7 @@ public class Logs extends javax.swing.JFrame {
 		System.out.println(message);
 		
 		// Write in areaLog
-		areaLog.setText(message);
+		areaLog.append(message+"\n");
 	}
 
 	// ==============================================================
@@ -261,10 +267,5 @@ public class Logs extends javax.swing.JFrame {
 	private javax.swing.JScrollPane scrollPane;
 	private javax.swing.JTextArea areaLog;
 	// End of variables declaration
-
-	// LogType enumeration
-	public enum enumLogType {
-		INFO, WARN, ERROR
-	}
 
 }
