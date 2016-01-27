@@ -23,6 +23,7 @@ public class Variable extends Database {
 	private String name;
 	private double valueMin;
 	private double valueMax;
+	private int fkRun;
 
 	// ==============================================================
 	// CONSTRUCTOR
@@ -53,13 +54,16 @@ public class Variable extends Database {
 	 *            : Minimal value
 	 * @param valueMax
 	 *            : Maximal value
+	 * @param fkRun
+	 *            : Foreign key to Runner
 	 */
-	public Variable(Database db, int idVar, String name, double valueMin, double valueMax) {
+	public Variable(Database db, int idVar, String name, double valueMin, double valueMax, int fkRun) {
 		super(db);
 		this.idVar = idVar;
 		this.name = name;
 		this.valueMin = valueMin;
 		this.valueMax = valueMax;
+		this.fkRun = fkRun;
 	}
 
 	// ==============================================================
@@ -104,6 +108,16 @@ public class Variable extends Database {
 		this.valueMax = valueMax;
 	}
 
+	// --------------------------------------------------------------
+
+	public int getFkRun() {
+		return fkRun;
+	}
+
+	public void setFkRun(int fkRun) {
+		this.fkRun = fkRun;
+	}
+
 	// ==============================================================
 	// METHODS
 	// ==============================================================
@@ -114,10 +128,11 @@ public class Variable extends Database {
 	public void addEntry() {
 		try {
 			PreparedStatement preparedStatement = super.getConnection()
-					.prepareStatement("INSERT INTO Variable (name, value_min, value_max) VALUES(?,?,?)");
+					.prepareStatement("INSERT INTO Variable (name, value_min, value_max, fkRun) VALUES(?,?,?,?)");
 			preparedStatement.setString(1, this.getName());
 			preparedStatement.setDouble(2, this.getValueMin());
 			preparedStatement.setDouble(3, this.getValueMax());
+			preparedStatement.setInt(4, this.getFkRun());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -136,20 +151,24 @@ public class Variable extends Database {
 	 *            : Minimal value
 	 * @param valueMax
 	 *            : Maximal value
+	 * @param fkRun
+	 *            : Foreign key to Runner
 	 */
-	public void addEntry(String name, double valueMin, double valueMax) {
+	public void addEntry(String name, double valueMin, double valueMax, int fkRun) {
 		try {
 			PreparedStatement preparedStatement = super.getConnection()
-					.prepareStatement("INSERT INTO Variable (name, value_min, value_max) VALUES(?,?,?)");
+					.prepareStatement("INSERT INTO Variable (name, value_min, value_max, fkRun) VALUES(?,?,?,?)");
 			preparedStatement.setString(1, name);
 			preparedStatement.setDouble(2, valueMin);
 			preparedStatement.setDouble(3, valueMax);
+			preparedStatement.setInt(4, fkRun);
 			preparedStatement.executeUpdate();
 			ResultSet rs = preparedStatement.getGeneratedKeys();
 			this.idVar = rs.getInt(1);
 			this.name = name;
 			this.valueMin = valueMin;
 			this.valueMax = valueMax;
+			this.fkRun = fkRun;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -163,10 +182,12 @@ public class Variable extends Database {
 	public void updateEntry() {
 		try {
 			PreparedStatement preparedStatement = super.getConnection()
-					.prepareStatement("UPDATE Variable SET name=?, value_min=?, value_max=? WHERE id_var=?");
+					.prepareStatement("UPDATE Variable SET name=?, value_min=?, value_max=?, fkRun=? WHERE id_var=?");
 			preparedStatement.setString(1, this.name);
 			preparedStatement.setDouble(2, this.valueMin);
 			preparedStatement.setDouble(3, this.valueMax);
+			preparedStatement.setInt(4, this.fkRun);
+			preparedStatement.setInt(5, this.idVar);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -239,6 +260,7 @@ public class Variable extends Database {
 				this.setName(resultSet.getString("name"));
 				this.setValueMin(resultSet.getDouble("value_min"));
 				this.setValueMax(resultSet.getDouble("value_max"));
+				this.setIdVar(resultSet.getInt("fk_run"));
 			}
 
 		} catch (SQLException e) {
@@ -248,31 +270,41 @@ public class Variable extends Database {
 
 	// --------------------------------------------------------------
 
+	/**
+	 * Get the current bounds for one variable based on variable id.
+	 * 
+	 * @param idVar
+	 *            : Identification number
+	 * @return String JSON like "{val_min: 1, val_max:2}"
+	 */
 	public String getMinMaxById(int idVar) {
 		String ret = "";
 		ResultSet resultSet = super.query("SELECT * FROM Variable WHERE id_var=" + idVar);
 		try {
-			ret = "{" 
-					+ "value_min:" + resultSet.getDouble("value_min") + ", " 
-					+ "value_max:" + resultSet.getDouble("value_max") 
-				+ "}";
+			ret = "{" + "value_min:" + resultSet.getDouble("value_min") + ", " + "value_max:"
+					+ resultSet.getDouble("value_max") + "}";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		return ret;
 	}
-	
+
 	// --------------------------------------------------------------
 
+	/**
+	 * Get the current bounds for one variable based on variable name.
+	 * 
+	 * @param name
+	 *            : Identification number
+	 * @return String JSON like "{val_min: 1, val_max:2}"
+	 */
 	public String getMinMaxByName(String name) {
 		String ret = "";
 		ResultSet resultSet = super.query("SELECT * FROM Variable WHERE name=" + name);
 		try {
-			ret = "{" 
-					+ "value_min:" + resultSet.getDouble("value_min") + ", " 
-					+ "value_max:" + resultSet.getDouble("value_max") 
-				+ "}";
+			ret = "{" + "value_min:" + resultSet.getDouble("value_min") + ", " + "value_max:"
+					+ resultSet.getDouble("value_max") + "}";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -282,6 +314,13 @@ public class Variable extends Database {
 
 	// --------------------------------------------------------------
 
+	/**
+	 * Get all entries from the Variable table.
+	 * 
+	 * @param db
+	 *            : Database object
+	 * @return List of Variable object
+	 */
 	public ArrayList<Variable> getEntries(Database db) {
 
 		// Init returner list
@@ -292,7 +331,8 @@ public class Variable extends Database {
 		try {
 			while (resultSet.next()) {
 				listVariables.add(new Variable(db, resultSet.getInt("id_var"), resultSet.getString("name"),
-						resultSet.getDouble("value_min"), resultSet.getDouble("value_max")));
+						resultSet.getDouble("value_min"), resultSet.getDouble("value_max"),
+						resultSet.getInt("fk_run")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -301,32 +341,6 @@ public class Variable extends Database {
 		return listVariables;
 	}
 
-	// --------------------------------------------------------------
-	
-	/** 
-	 * Fonction qui recupere un Measurement par son nom de variable
-	 */
-	public boolean getMeasurementByNomVar(String mNomVar){
-		// Met à jour l'objet
-        ResultSet resultSet = super.query("SELECT * FROM Variable WHERE name='"+mNomVar+"'");
-        
-        try {
-        	// Si il y a un resultat
-        	if(!resultSet.isClosed()){
-	        	this.setIdVar(resultSet.getInt("id_var"));
-	        	this.setName(resultSet.getString("name"));
-	        	this.setValueMin(resultSet.getDouble("value_min"));
-	        	this.setValueMax(resultSet.getDouble("value_max"));
-	        	return true; // Ligne trouvée
-        	} 
-        	// Aucun resultat
-        	else return false;
-        } catch (SQLException e) { e.printStackTrace(); }
-        
-        return false; // Ligne non trouvée
-	}
-	
-	
 	// --------------------------------------------------------------
 
 	/**
