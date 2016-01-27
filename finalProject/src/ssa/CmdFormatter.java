@@ -24,7 +24,7 @@ public class CmdFormatter {
 	HashMap <String, Variable> varnames = new HashMap<String, Variable>();
 
 
-	NodeA transformNodeToSSA(NodeA n){
+	public NodeA transformNodeToSSA(NodeA n){
 
 		SimpleNodeA n2 = toSSA( (SimpleNodeA)n );
 
@@ -32,7 +32,7 @@ public class CmdFormatter {
 
 	}
 
-	SimpleNodeA toSSA(SimpleNodeA n){
+	public SimpleNodeA toSSA(SimpleNodeA n){
 
 		String s = "null";
 		if(n != null){
@@ -159,13 +159,13 @@ public class CmdFormatter {
 
 	}
 
-	void transformExpressions(SimpleNodeA n){
+	public void transformExpressions(SimpleNodeA n){
 
 		String s = "null";
 		if(n != null){
 			s = n.getClass().toString();
 		}
-		System.out.println("in SSA, " + s + " '" + n + "'"  );
+		System.out.println("in transformExpressions, " + s + " '" + n + "'"  );
 
 
 		if(n instanceof Expression){
@@ -180,7 +180,6 @@ public class CmdFormatter {
 			transformExpressions( ( (NodeA)n ).Fd() );
 
 			transformExpressions( ( (NodeA)n ).Fg() );
-
 
 		}
 		else {
