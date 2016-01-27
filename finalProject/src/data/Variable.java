@@ -128,7 +128,7 @@ public class Variable extends Database {
 	public void addEntry() {
 		try {
 			PreparedStatement preparedStatement = super.getConnection()
-					.prepareStatement("INSERT INTO Variable (name, value_min, value_max, fkRun) VALUES(?,?,?,?)");
+					.prepareStatement("INSERT INTO Variable (name, value_min, value_max, fk_run) VALUES(?,?,?,?)");
 			preparedStatement.setString(1, this.getName());
 			preparedStatement.setDouble(2, this.getValueMin());
 			preparedStatement.setDouble(3, this.getValueMax());
@@ -157,7 +157,7 @@ public class Variable extends Database {
 	public void addEntry(String name, double valueMin, double valueMax, int fkRun) {
 		try {
 			PreparedStatement preparedStatement = super.getConnection()
-					.prepareStatement("INSERT INTO Variable (name, value_min, value_max, fkRun) VALUES(?,?,?,?)");
+					.prepareStatement("INSERT INTO Variable (name, value_min, value_max, fk_run) VALUES(?,?,?,?)");
 			preparedStatement.setString(1, name);
 			preparedStatement.setDouble(2, valueMin);
 			preparedStatement.setDouble(3, valueMax);
@@ -182,7 +182,7 @@ public class Variable extends Database {
 	public void updateEntry() {
 		try {
 			PreparedStatement preparedStatement = super.getConnection()
-					.prepareStatement("UPDATE Variable SET name=?, value_min=?, value_max=?, fkRun=? WHERE id_var=?");
+					.prepareStatement("UPDATE Variable SET name=?, value_min=?, value_max=?, fk_run=? WHERE id_var=?");
 			preparedStatement.setString(1, this.name);
 			preparedStatement.setDouble(2, this.valueMin);
 			preparedStatement.setDouble(3, this.valueMax);

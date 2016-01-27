@@ -30,7 +30,7 @@ public class TestDatabase {
         Logs.logger.addLog(enumLogType.INFO,"Init process ----------");
 
         Logs.logger.addLog(enumLogType.INFO,"\tCreate Database object");
-        Database db = new Database("db/database2.db");
+        Database db = new Database("db/database.db");
 
         Logs.logger.addLog(enumLogType.INFO,"\tDatabase connection");
         db.connect();
