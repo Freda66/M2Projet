@@ -91,6 +91,26 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants/*@egen*/{/*
         	System.out.println(i.next());
       	}
     }
+    private static PVirg functionsToTree(){
+	    PVirg treeOfFunctions=null;
+
+    	if(allFunctions.isEmpty()){
+	    	PVirg tmp = null;
+
+	    	treeOfFunctions = new PVirg();
+	    	tmp = treeOfFunctions;
+	    	treeOfFunctions.setFG(allFunctions.get(0));
+	    	treeOfFunctions.setFD(null);
+
+	    	for(int index = 1; index < allFunctions.size(); index++){
+	    		tmp.setFD(new PVirg());
+	    		tmp = (PVirg)tmp.Fd();
+	    		tmp.setFG(allFunctions.get(index));
+	    		tmp.setFD(null);
+	    	}
+    	}
+    	return treeOfFunctions;
+    }
 
     public static PVirg parseIt(){
 		PVirg tree = null;
@@ -113,6 +133,7 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants/*@egen*/{/*
 	              System.out.println("Param "+index2+": "+allFunctions.get(index).getParams().get(index2).getTypeDef()+ " " + allFunctions.get(index).getParams().get(index2).getName());
 	            }
 	        }
+	        tree = functionsToTree();
       	}catch(ParseException e){
         	System.out.println("C Parser Version 0.1Alpha:  Encountered errors during parse.");
         	e.printStackTrace();
@@ -1086,7 +1107,6 @@ void FunctionParameterDeclaration(ArrayList<Variable> fctParams) : {/*@bgen(jjtr
         }
 /*@egen*/
 	{
-		System.out.println("YOLOLO !");
 		var.setTypeDef(type);
 		var.setName(name);
 		System.out.println("Type: "+type+" name: "+name);
