@@ -8,7 +8,7 @@ import structure.operator.*;
 public class Rule {
 
 	Operator model;
-	LinkedList<NodeA> instances;
+	LinkedList<NodeA> esoe;
 	
 	
 	public Operator getModel() {
@@ -18,10 +18,10 @@ public class Rule {
 		this.model = model;
 	}
 	public LinkedList<NodeA> getInstances() {
-		return instances;
+		return esoe;
 	}
 	public void setInstances(LinkedList<NodeA> instances) {
-		this.instances = instances;
+		this.esoe = instances;
 	}
 	
 }
