@@ -20,6 +20,7 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	public static Logs logger = new Logs();
 	private int progressTotal;
 	private int progressCurrent;
+	private int currentIdRun;
 
 	// ==============================================================
 	// CONSTRUCTOR
@@ -57,6 +58,16 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	
 	public void setProgressCurrent(int progressCurrent) {
 		this.progressCurrent = progressCurrent;
+	}
+	
+	// --------------------------------------------------------------
+	
+	public int getCurrentIdRun() {
+		return this.currentIdRun;
+	}
+	
+	public void setCurrentIdRun(int currentIdRun) {
+		this.currentIdRun =currentIdRun; 
 	}
 
 	// ==============================================================
@@ -250,7 +261,7 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	 * @param evt
 	 */
 	private void btnResultsActionPerformed(java.awt.event.ActionEvent evt) {
-		Plot.main(null);
+		Plot.main(getCurrentIdRun());
 		this.dispose();
 	}
 
