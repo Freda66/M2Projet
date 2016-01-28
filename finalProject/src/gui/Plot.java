@@ -6,7 +6,7 @@ import org.knowm.xchart.SwingWrapper;
 
 public class Plot {
 	
-	public static void main(String[] args) {
+	public static void main(int idRun) {
 		double[] xData = new double[] { 0.0, 1.0, 2.0 };
 	    double[] yData = new double[] { 2.0, 1.0, 0.0 };
 

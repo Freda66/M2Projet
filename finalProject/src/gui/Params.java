@@ -241,7 +241,24 @@ public class Params extends javax.swing.JFrame {
 			Logs.logger.setProgressCurrent(0);
 			
 			// TODO: Pap's Main run
-			TestDatabase.main(null);
+			/*
+			 * Pap's, dans ta methode run() tu dois : 
+			 * 	- Vider la database (pkg data : Result, Runner, Variable | method: clear)
+			 *  - Initialiser un timestamp (voir pkg test : TestDatabase)
+			 *  - Creer une entree dans Runner avec le time_in depuis ton timestamp
+			 *  - Recuperer l'identifiant de ta run en cours
+			 *  - Setter l'identifiant au logger (voir ligne de code de dessous)
+			 *  - Faire ta tambouille avec les methodes des autres
+			 *  - Initialiser un nouveau timestamp
+			 *  - Editer ton l'entree de ta run courante avec time_out=newTimeStamp
+			 */
+			
+			// TODO : setter ton idRun DANS ton run()
+			int currentIdRun = 1;
+			Logs.logger.setCurrentIdRun(currentIdRun);
+			
+			// TODO : executer ton run()
+			TestDatabase.main(null); //a changer par ton run()
 
 		}
 
