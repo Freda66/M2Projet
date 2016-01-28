@@ -109,6 +109,31 @@ public class Runner extends Database {
 			e.printStackTrace();
 		}
 	}
+	
+	// --------------------------------------------------------------
+
+	/**
+	 * Add one entry into Runner table based on current attributes. Overloaded
+	 * methods. Update the current object. The id_run is automatically generate.
+	 * 
+	 * @param timeIn
+	 *            : Input timer
+	 * @param timeOut
+	 *            : Output timer
+	 */
+	public void addEntry(Timestamp timeIn) {
+		try {
+			PreparedStatement preparedStatement = super.getConnection()
+					.prepareStatement("INSERT INTO Runner (time_in) VALUES(?)");
+			preparedStatement.setTimestamp(1, timeIn);
+			preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+			this.idRun = rs.getInt(1);
+			this.timeIn = timeIn;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	// --------------------------------------------------------------
 
