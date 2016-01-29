@@ -50,10 +50,14 @@ public class eudK {
 				Rules.NESOE(node, work);
 				ListIterator<NodeA> li = work.listIterator();
 				while(li.hasNext()){
-					ESOE.add(li.next());
+					NodeA tmp = li.next();
+					System.out.println("BESOE");
+					tmp.Displayln();
+					ESOE.add(tmp);
 				}
 				
 			}
+			work.clear();
 			if(node.Fd() instanceof Operator){
 				Operator initialFD = (Operator)node.Fd();
 				Rules.NESOE((Operator)node.Fd(),work);
@@ -68,6 +72,7 @@ public class eudK {
 				BESOE(initialFD,Root,ESOE);
 				
 			}
+			work.clear();
 			if(node.Fg() instanceof Operator){
 				Operator initialFG = (Operator) node.Fg();
 				Rules.NESOE((Operator)node.Fg(),work);
@@ -80,6 +85,10 @@ public class eudK {
 				node.setFG(initialFG);
 				BESOE(initialFG,Root,ESOE);
 			}
+			
+			
+			
+			
 			
 		}
 	
