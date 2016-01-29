@@ -261,7 +261,7 @@ public class Logs extends javax.swing.JFrame implements InterfaceLog {
 	 * @param evt
 	 */
 	private void btnResultsActionPerformed(java.awt.event.ActionEvent evt) {
-		Plot.main(getCurrentIdRun());
+		Plot.main(null);
 		this.dispose();
 	}
 
