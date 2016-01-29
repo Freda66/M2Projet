@@ -305,9 +305,9 @@ public class Runner extends Database {
 	@Override
 	public String toString() {
 		return "{" 
-				+ "id_run:" + this.idRun + ", " 
-				+ "time_in:" + this.timeIn + ", " 
-				+ "time_out:" + this.timeOut 
+				+ "'id_run':" + this.idRun + ", " 
+				+ "'time_in':" + this.timeIn + ", " 
+				+ "'time_out':" + this.timeOut 
 			+ "}";
 	}
 

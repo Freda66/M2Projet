@@ -386,8 +386,12 @@ public class Variable extends Database {
 
 	@Override
 	public String toString() {
-		return "{" + "id_var:" + this.idVar + ", " + "name:" + this.name + ", " + "value_min:" + this.valueMin + ", "
-				+ "value_max:" + this.valueMax + "}";
+		return "{" 
+				+ "'id_var':" + this.idVar + ", " 
+				+ "'name':" + this.name + ", " 
+				+ "'value_min':" + this.valueMin + ", "
+				+ "'value_max':" + this.valueMax 
+				+ "}";
 	}
 
 }

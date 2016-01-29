@@ -17,6 +17,20 @@ public class Result extends Database {
 	// ATTRIBUTES
 	// ==============================================================
 
+	/**
+	 * Params format : JSON. We don't know how many parameters the C code needs.
+	 * That's why, we will focus on this JSON prototype for each input row :
+	 * 
+	 * { 'nbParams:3, 'parameters'=[ { 'p_1':1, 'p_2':2, 'p_3':3 } ] }
+	 * 
+	 * If we execute a query to get all entries based on idRun, we will return :
+	 * {'nbParams'=3, 
+	 * 	'parameters'=[ 
+	 * 		{ 'p_1':1, 'p_2':2, 'p_3':3 }, 
+	 * 		{ 'p_1':2, 'p_2':3, 'p_3':4 }, 
+	 * 	... ] }
+	 * 
+	 */
 	private int idRes;
 	private String params;
 	private double resInit = 0.0;
@@ -283,7 +297,7 @@ public class Result extends Database {
 	// --------------------------------------------------------------
 
 	/**
-	 * Get all entries from table Runner.
+	 * Get all entries from table Result.
 	 * 
 	 * @param db
 	 *            : Database object
@@ -298,15 +312,40 @@ public class Result extends Database {
 		ResultSet resultSet = super.query("SELECT * FROM Result");
 		try {
 			while (resultSet.next()) {
-				listRunners.add(new Result(
-						db, 
-						resultSet.getInt("id_res"), 
-						resultSet.getString("params"),
-						resultSet.getDouble("res_init"),
-						resultSet.getDouble("res_opt"),
-						resultSet.getDouble("res_mpfr"),
-						resultSet.getInt("fk_run")
-				));
+				listRunners.add(new Result(db, resultSet.getInt("id_res"), resultSet.getString("params"),
+						resultSet.getDouble("res_init"), resultSet.getDouble("res_opt"),
+						resultSet.getDouble("res_mpfr"), resultSet.getInt("fk_run")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listRunners;
+	}
+
+	// --------------------------------------------------------------
+
+	/**
+	 * Get all entries from table Result.
+	 * 
+	 * @param db
+	 *            : Database object
+	 * @return list of Runner objects
+	 */
+	public ArrayList<Result> getEntriesWhere(Database db, String condition) {
+
+		// Init returner list
+		ArrayList<Result> listRunners = new ArrayList<Result>();
+
+		String query = "SELECT * FROM Result WHERE " + condition;
+
+		// Query
+		ResultSet resultSet = super.query(query);
+		try {
+			while (resultSet.next()) {
+				listRunners.add(new Result(db, resultSet.getInt("id_res"), resultSet.getString("params"),
+						resultSet.getDouble("res_init"), resultSet.getDouble("res_opt"),
+						resultSet.getDouble("res_mpfr"), resultSet.getInt("fk_run")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -335,8 +374,12 @@ public class Result extends Database {
 
 	@Override
 	public String toString() {
-		return "{" + "id_res:" + this.idRes + ", " + "params:" + this.params + ", " + "resOpt:" + this.resOpt + ", "
-				+ "resMpfr:" + this.resMpfr + ", " + "fkRun:" + this.fkRun + "}";
+		return "{" 
+				+ "'id_res':" + this.idRes + ", " 
+				+ "'params':" + this.params + ", " 
+				+ "'res_opt':" + this.resOpt + ", "
+				+ "'res_mpfr':" + this.resMpfr + ", " 
+				+ "'fk_run':" + this.fkRun + "}";
 	}
 
 }
