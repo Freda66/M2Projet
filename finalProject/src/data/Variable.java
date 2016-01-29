@@ -317,9 +317,9 @@ public class Variable extends Database {
 	/** 
 	 * Fonction qui recupere un Measurement par son nom de variable
 	 */
-	public boolean getMeasurementByNomVar(String mNomVar){
+	public boolean getMeasurementByNomVar(String mNomVar, int fk_run){
 		// Met à jour l'objet
-        ResultSet resultSet = super.query("SELECT * FROM Variable WHERE name='"+mNomVar+"'");
+        ResultSet resultSet = super.query("SELECT * FROM Variable WHERE fk_run = "+fk_run+" and name='"+mNomVar+"'");
         
         try {
         	// Si il y a un resultat

@@ -353,6 +353,37 @@ public class Result extends Database {
 
 		return listRunners;
 	}
+	
+	// --------------------------------------------------------------
+
+	/**
+	* Get all entries from table Runner.
+	* 
+	* @param db
+	*            : Database object
+	* @return list of Runner objects
+	*/
+	public boolean getEntrieByIdRun(int idRun) {
+		// Query
+		ResultSet resultSet = super.query("SELECT * FROM Result WHERE fk_run="+idRun);
+        try {
+	        // Si il y a un resultat
+	        if(!resultSet.isClosed()){
+	        	this.setIdRes(resultSet.getInt("id_res")); 
+	        	this.setParams(resultSet.getString("params"));
+	        	this.setResInit(resultSet.getDouble("res_init"));
+	        	this.setResOpt(resultSet.getDouble("res_opt"));
+	        	this.setResMpfr(resultSet.getDouble("res_mpfr"));
+	        	this.setFkRun(resultSet.getInt("fk_run"));
+
+	        	return true; // Ligne trouvée
+	        }
+	        // Aucun resultat
+	        else return false;	
+        } catch (SQLException e) { e.printStackTrace(); }
+
+	    return false; // Ligne non trouvée
+	}
 
 	// --------------------------------------------------------------
 
