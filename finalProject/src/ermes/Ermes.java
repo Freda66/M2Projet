@@ -1,7 +1,12 @@
 package ermes;
 
 import java.io.File;
+import java.sql.Timestamp;
+import java.util.Date;
 
+import data.Database;
+import data.Result;
+import data.Runner;
 import ermes.compiler.CCompiler;
 import ermes.treeLoop.BrowseTreeC;
 import ermes.treeLoop.BrowseTreeMpfr;
@@ -12,6 +17,7 @@ public class Ermes {
 	private String nameFileC; // Nom du fichier c
 	private String dirFileC; // Nom du repertoire du fichier c
 	private PVirg tree; // Arbre
+	private Runner run; // Objet Runner
 	
 	/**
 	 * Constructeur par defaut
@@ -27,10 +33,23 @@ public class Ermes {
 	 * @param t : arbre
 	 */
 	public Ermes(String nameFile, String dir, PVirg t){
+		// Connexion à la bdd
+		Database db = new Database("./db/database.db");
+        db.connect();
+        
+		// Set les variables de l'objet
 		this.setNameFileC(nameFile);
 		this.setDirFileC(dir);
 		this.setTree(t);
 		this.setMpfr(false);
+        this.run = new Runner(db);
+        
+		// Debut Run
+        startRun();
+        
+        // Initialise la ligne resultat
+        Result result = new Result(db,-1,"",0.0,0.0,0.0,run.getIdRun()); // Créer un objet Result avec les attributs par defaut (sauf id run)
+        result.addEntry(); // Ajoute la ligne dans la bdd
 	}
 	
 	/**
@@ -49,7 +68,7 @@ public class Ermes {
 			 * Fichier c initiale
 			 */
 			// Initialise le fichier c init a génèrer
-			BrowseTreeC browserTree = new BrowseTreeC(nameFileC+".c",dirFileC, false);
+			BrowseTreeC browserTree = new BrowseTreeC(nameFileC+"_init.c",dirFileC, false);
 			
 			// Parcours l'arbre et génère le nouveau fichier c
 			browserTree.BrowseTree(tree);
@@ -58,7 +77,7 @@ public class Ermes {
 			CCompiler compiler = new CCompiler(nameFileC+"_init.c",new File(dirFileC));
 			
 			// Compile le fichier c
-			if(compiler.Compile(false)) compiler.Execute();
+			if(compiler.Compile(false)) compiler.Execute(run.getIdRun(), 0); // 0 pour prog init
 			
 			/**
 			 * Fichier c mpfr
@@ -73,7 +92,8 @@ public class Ermes {
 			CCompiler compilerMpfr = new CCompiler(nameFileC+"_mpfr.c",new File(dirFileC));
 			
 			// Compile le fichier mpfr
-			if(compilerMpfr.Compile(true)) compilerMpfr.Execute();
+			if(compilerMpfr.Compile(true)) compilerMpfr.Execute(run.getIdRun(), 1); // 1 pour prog mpfr
+			
 		} catch(Exception e){
 			return false;
 		}
@@ -106,14 +126,35 @@ public class Ermes {
 			CCompiler compiler = new CCompiler(nameFileC+"_opt.c",new File(dirFileC));
 			
 			// Compile le fichier c
-			if(compiler.Compile(false)) compiler.Execute();
+			if(compiler.Compile(false)) compiler.Execute(run.getIdRun(), 2); // 2 pour prog opt
+			
+			// Fin du Run 
+			stopRun();
+			
 		} catch(Exception e){
 			return false;
 		}
 				
 		return true;
 	}
-
+	
+	/**
+	 * Start du run
+	 */
+	public void startRun(){
+		Date date = new java.util.Date();
+		run.addEntry(new Timestamp(date.getTime()));
+	}
+	
+	/**
+	 * Stop du run en cours
+	 */
+	public void stopRun(){
+		Date date = new java.util.Date();
+		Timestamp timeOut = new Timestamp(date.getTime());
+		run.setTimeOut(timeOut);
+		run.updateEntry();
+	}
 	
 	/**
 	 * *******************
@@ -151,4 +192,5 @@ public class Ermes {
 	public void setTree(PVirg tree) {
 		this.tree = tree;
 	}
+
 }

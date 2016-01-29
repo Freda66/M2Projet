@@ -77,8 +77,8 @@ public class BrowseTreeC {
 			// Stock le resultat de l'execution
 			String nameVar = ((Function)myNode).getReturnedValue().getName();
 			fileC.addNextLine("\tprintf(\"BDDResult:"+nameVar+";%.19f\\n\","+nameVar,false);
+			fileC.addNextLine(");",true);
 			
-			fileC.addNextLine("",true);
 			fileC.addNextLine("\treturn ",false);
 			fileC.addNextLine(((Function)myNode).getReturnedValue().getName(),false); // Nom de la variable de retour
 			fileC.addNextLine(";",true);
@@ -102,8 +102,7 @@ public class BrowseTreeC {
 			
 			// Ajoute le print d'insert dans la bdd
 			String nameVar = ((Variable) ((Affectation) myNode).Fg()).getName(); // Recupere le nom de la variable
-			//Float valueVar = ((Constante) ((Affectation) myNode).Fd()).getRange()[0]; // Recupere la valeur de la variable
-			fileC.addNextLine("\tprintf(\"BDDMeasurement:"+nameVar+";%.19f\\n\","+nameVar,false);
+			fileC.addNextLine("\tprintf(\"BDDVariable:"+nameVar+";%.19f\\n\","+nameVar,false);
 			fileC.addNextLine(");",true);
 		}
 

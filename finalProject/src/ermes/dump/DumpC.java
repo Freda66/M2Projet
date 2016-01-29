@@ -28,7 +28,7 @@ public class DumpC {
 		if(includeMpfr) exeName= exeName+"_mpfr.c";
         else {
         	if(isOpt) exeName = exeName+"_opt.c";
-        	else exeName = exeName+".c";
+        	else exeName = exeName+"_init.c";
         }
 		
 	}

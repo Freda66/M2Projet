@@ -81,6 +81,10 @@ public class BrowseTreeMpfr {
 			if(((Function)myNode).getContent() != null) BrowseTree(((Function) myNode).getContent()); 
 			
 			// Ecrit la valeur de retour de la fonction une fois que le contenu soit ecrit
+			String nameVar = ((Function)myNode).getReturnedValue().getName(); // Recupere le nom de la variable
+			fileC.addNextLine("\tmpfr_printf(\"BDDResult:"+nameVar+";"+"%.200Rg"+"\\n\""+","+nameVar+");",true);
+			fileC.addNextLine(");",true);
+			
 			fileC.addNextLine("",true);
 			fileC.addNextLine("\treturn ",false);
 			fileC.addNextLine(((Function)myNode).getReturnedValue().getName(),false); // Nom de la variable de retour
@@ -107,7 +111,7 @@ public class BrowseTreeMpfr {
 			fileC.addNextLine("",true);
 			//fileC.addNextLine("mpfr_printf("Prec %3d: %.41Rg\n", mpfr_get_prec(r),r);", true);
 			String nameVar = ((Variable) ((Affectation) myNode).Fg()).getName(); // Recupere le nom de la variable
-			fileC.addNextLine("\tmpfr_printf(\"BDDMeasurement:"+nameVar+";"+"%.200Rg"+"\\n\""+","+nameVar+");",true);
+			fileC.addNextLine("\tmpfr_printf(\"BDDVariable:"+nameVar+";"+"%.200Rg"+"\\n\""+","+nameVar+");",true);
 			
 			// Ajoute le print d'insert dans la bdd -> inutile dans la version MPFR
 			//String nameVar = ((Variable) ((Affectation) myNode).Fg()).getName(); // Recupere le nom de la variable

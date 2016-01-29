@@ -1,8 +1,13 @@
 package test;
 
 import java.io.File;
+import java.util.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import data.Database;
+import data.Result;
+import data.Runner;
 import ermes.compiler.CCompiler;
 import ermes.treeLoop.BrowseTreeC;
 import structure.Function;
@@ -37,18 +42,33 @@ public class TestBrowseTreeC {
 		/**
 		 * Compile et Execute le nouveau fichier c
 		 */
-		// Nom du nouveau fichier c
-		String nameNewFileC;
-		if(isMpfr) nameNewFileC = "dump_"+nameFileC+"_mpfr.c";
-		else nameNewFileC = "dump_"+nameFileC+".c";
 		// Creer l'objet pour la compilation et l'execution du fichier
-		CCompiler compiler = new CCompiler(nameNewFileC,new File(dirFileC));
+		CCompiler compiler = new CCompiler(nameFileC+"_init.c",new File(dirFileC));
+		
+		// Connexion à la bdd
+		Database db = new Database("./db/database.db");
+        db.connect();
+        // Creer l'objet Runner
+		Runner run = new Runner(db);
+		
+		// Debut Run
+		Date date = new java.util.Date();
+		run.addEntry(new Timestamp(date.getTime()));
+		
+        // Initialise la ligne resultat
+        Result result = new Result(db,-1,"",0.0,0.0,0.0,run.getIdRun()); // Créer un objet Result avec les attributs par defaut (sauf id run)
+        result.addEntry(); // Ajoute la ligne dans la bdd
 		
 		// Compile le fichier c
 		if(compiler.Compile(isMpfr)){
 			// Execute le fichier c
-			compiler.Execute();
+			compiler.Execute(run.getIdRun(), 0);
 		}
+		
+		// Fin Run
+		Timestamp timeOut = new Timestamp(date.getTime());
+		run.setTimeOut(timeOut);
+		run.updateEntry();
     }
 	
 	
@@ -65,8 +85,8 @@ public class TestBrowseTreeC {
 		fct1.setName("main");
 		ArrayList<Variable> fct1Params = new ArrayList<Variable>();
 		float[] range = new float[2];
-		range[0] = -1;
-		range[1] = -1;
+		range[0] = (float)-1.0;
+		range[1] = (float)-1.0;
 		
 		//Variable fct1Param = new Variable("x",range,"float");	
 		//fct1Params.add(fct1Param);
@@ -75,7 +95,7 @@ public class TestBrowseTreeC {
 		//fct1Params.add(fct1Param2);
 		
 		fct1.setParams(fct1Params); // Ajouté par Fred
-		Variable fct1RV = new Variable("0",range,"int"); // y
+		Variable fct1RV = new Variable("y",range,"int"); // y
 		fct1.setReturnedValue(fct1RV);
 		PVirg fct1Content = new PVirg();
 		fct1.setContent(fct1Content);
@@ -91,8 +111,8 @@ public class TestBrowseTreeC {
 
 		aff.setFG(new Variable("y",range,"int"));
 		float[] range2 = new float[2];
-		range2[0] = 2; // avant range (c'est pour ca qu'on avait 0)
-		range2[1] = 2; // avant range (c'est pour ca qu'on avait 0)
+		range2[0] = (float)2.3; // avant range (c'est pour ca qu'on avait 0)
+		range2[1] = (float)2.3; // avant range (c'est pour ca qu'on avait 0)
 		aff.setFD(new Constante(range2));
 	
 		return Code;

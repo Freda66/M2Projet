@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import data.Database;
+import data.Result;
 import data.Variable;
 
 public class CCompiler {
@@ -16,6 +17,9 @@ public class CCompiler {
 	public String fileName;
 	public File dir;
 	public String exeName;
+	private Variable variable;
+	private Result result;
+	private int typeExecution; // Type de l'execution (0 prog init; 1 prog mpfr; 2 prog opt)
 	
 	/**
 	 * Constructeur surchargé
@@ -50,16 +54,24 @@ public class CCompiler {
 	
 	/**
 	 * Fonction qui execute le fichier c
+	 * @param idRun : Id du runner
+	 * @param typeExec : 0 Prog init; 1 Prog Mpfr; 2 Prog Opt
 	 */
-	public void Execute()
+	public void Execute(int idRun, int typeExec)
 	{
 		System.out.println("Execution programme "+ exeName + " en cours.");
+		
+		// Met à jours le type d'execution
+		this.typeExecution = typeExec;
 		
 		try {
 			// Connexion à la bdd
 			Database db = new Database("./db/database.db");
 	        db.connect();
-			Variable measurement = new Variable(db);
+	        // Creer un objet Variable (ancien measurement)
+	        variable = new Variable(db);
+			// Creer un objet Result
+	        result = new Result(db);
 			System.out.println("");
 	        
 			// Execute le programme c
@@ -72,7 +84,7 @@ public class CCompiler {
             // Parcours l'affichage du programme
             while ((line = in.readLine()) != null) {
             	// Appel la fonction qui gère les lignes du programme avec la bdd
-            	HandlePrintBddProgramme(measurement, line);
+            	HandlePrintBddProgramme(line, idRun);
             }
             
         } catch (IOException e) {  
@@ -88,44 +100,80 @@ public class CCompiler {
 	 * Parse la chaine, puis insert les données dans la table Measurement de la bdd
 	 * @param line
 	 */
-	public void HandlePrintBddProgramme(Variable measurement, String line){
+	public void HandlePrintBddProgramme(String line, int idRun){
 		// Initialise les variables
 		String[] lineSplit;
 
+		System.out.println(line);
+		
+		/**
+		 * Variable
+		 */
 		// Si la ligne est destiné à la bdd
-    	if(line.contains("BDDMeasurement")){
+    	if(line.contains("BDDVariable")){
     		// Recupere la partie droite de la chaine (nomVar, val)
     		lineSplit = line.split(":")[1].split(";");
 
     		// Recupere le nom et la valeur de la variable
     		String nomVar = lineSplit[0];
 			Double val = Double.parseDouble(lineSplit[1]);
-    		
+    					
     		// Recupere l'objet measurement de la variable (si existant dans la bdd)
-    		if(measurement.getMeasurementByNomVar(nomVar)){
+    		if(variable.getMeasurementByNomVar(nomVar, idRun)){
     			// Si la valeur est inférieur à la borne min de la variable (dans la bdd) 
-    			if(measurement.getValueMin() > val){
-    				measurement.setValueMin(val); // Affecte la valeur à la borne min
-    				measurement.updateEntry(); // Met à jour la variable dans la bdd
-    			}
+    			if(variable.getValueMin() > val) variable.setValueMin(val); // Affecte la valeur à la borne min
+    			
     			// Si la valeur est supérieur à la borne max de la variable (dans la bdd)
-    			else if(measurement.getValueMax() < val){
-    				measurement.setValueMax(val); // Affecte la valeur à la borne max
-        			measurement.updateEntry(); // Met à jour la variable dans la bdd
-    			} 
+    			else if(variable.getValueMax() < val) variable.setValueMax(val); // Affecte la valeur à la borne max
+    			
+    			// Met à jour la variable dans la bdd
+    			variable.updateEntry(); 
     		} 
     		// Ajout la variable dans la bdd
     		else {
     			// Rempli l'objet Measurement
-        		measurement.setName(nomVar);
-        		measurement.setValueMin(val);
-        		measurement.setValueMax(val);
+    			variable.setName(nomVar);
+        		variable.setValueMin(val);
+        		variable.setValueMax(val);
+        		variable.setFkRun(idRun);
         		// Insert les données dans la table Measurement de la bdd
-        		measurement.addEntry();
+        		variable.addEntry();
     		}
-    	} else {
+    	}
+    	
+		/**
+		 * Result
+		 */
+		// Si la ligne est destiné à la bdd
+    	else if(line.contains("BDDResult")){
+    		// Recupere la partie droite de la chaine (nomVar, val)
+    		lineSplit = line.split(":")[1].split(";");
+
+    		// Recupere la valeur du resultat retourné
+			Double val = Double.parseDouble(lineSplit[1]);
+    		
+			System.out.println(val);
+			
+			// Recupere l'objet result à partir de l'id du run
+			if(result.getEntrieByIdRun(idRun)){
+				// Resultat Initial
+				if(typeExecution == 0) result.setResInit(val);
+				// Resultat Mpfr
+				else if(typeExecution == 1) result.setResMpfr(val);
+				// Resultat Optimisé
+				else result.setResOpt(val);
+				
+				// Met à jours les valeurs dans la bdd
+				result.updateEntry();
+			};
+    	} 
+    	
+    	/**
+    	 * Affiche le message sur la console
+    	 */
+    	else {
             System.out.println(line);
-    	}  
+    	} 
 	}
 	
 }
