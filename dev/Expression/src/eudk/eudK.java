@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.TreeMap;
 
+import eudk.Rules.Rules;
 import structure.NodeA;
 import structure.operator.Operator;
 
@@ -38,5 +39,49 @@ public class eudK {
 		return finalGraphPool;
 		
 	}
+	
+	//parcours en profondeur
+		//ESOE Equivalent set of expression
+		//BESOE build equivalent set of expression 
+		public void BESOE(Operator node, NodeA Root,LinkedList<NodeA> ESOE){
+			
+			LinkedList<NodeA> work = new LinkedList<NodeA>();
+			if(node == Root){
+				Rules.NESOE(node, work);
+				ListIterator<NodeA> li = work.listIterator();
+				while(li.hasNext()){
+					ESOE.add(li.next());
+				}
+				
+			}
+			if(node.Fd() instanceof Operator){
+				Operator initialFD = (Operator)node.Fd();
+				work = ((Operator)node.Fd()).NESOE();
+				ListIterator<NodeA> li = work.listIterator();
+				while(li.hasNext()){
+					node.setFD(li.next());
+					//ESOE.add((NodeA) NodeA.Clone(Root));
+					ESOE.add((NodeA) Root.Clone());
+				}
+				node.setFD(initialFD);
+				
+				BESOE(initialFD,Root,ESOE);
+				
+			}
+			if(node.Fg() instanceof Operator){
+				Operator initialFG = (Operator) node.Fg();
+				work = ((Operator)node.Fg()).NESOE();
+				ListIterator<NodeA> li = work.listIterator();
+				while(li.hasNext()){
+					node.setFG( li.next());
+					//ESOE.add((NodeA) NodeA.Clone(Root));
+					ESOE.add((NodeA) Root.Clone());
+				}
+				node.setFG(initialFG);
+				BESOE(initialFG,Root,ESOE);
+			}
+			
+		}
+	
 
 }

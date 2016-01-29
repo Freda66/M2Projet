@@ -25,47 +25,7 @@ public abstract class Operator extends NodeA implements Expression{
 	//Build equivalent set of expression
 	public abstract LinkedList<NodeA> NESOE ();	
 	
-	//parcours en profondeur
-	//ESOE Equivalent set of expression
-	//BESOE build equivalent set of expression 
-	public void BESOE(NodeA Root,LinkedList<NodeA> ESOE){
-		
-		LinkedList<NodeA> work;
-		if(this == Root){			
-			work = this.NESOE();
-			ListIterator<NodeA> li = work.listIterator();
-			while(li.hasNext()){
-				ESOE.add(li.next());
-			}
-			
-		}
-		if(this.Fd() instanceof Operator){
-			Operator initialFD = (Operator)this.Fd();
-			work = ((Operator)this.Fd()).NESOE();
-			ListIterator<NodeA> li = work.listIterator();
-			while(li.hasNext()){
-				this.setFD(li.next());
-				//ESOE.add((NodeA) NodeA.Clone(Root));
-				ESOE.add((NodeA) Root.Clone());
-			}
-			this.setFD(initialFD);
-			initialFD.BESOE(Root,ESOE);
-			
-		}
-		if(this.Fg() instanceof Operator){
-			Operator initialFG = (Operator) this.Fg();
-			work = ((Operator)this.Fg()).NESOE();
-			ListIterator<NodeA> li = work.listIterator();
-			while(li.hasNext()){
-				this.setFG( li.next());
-				//ESOE.add((NodeA) NodeA.Clone(Root));
-				ESOE.add((NodeA) Root.Clone());
-			}
-			this.setFG(initialFG);
-			initialFG.BESOE(Root,ESOE);
-		}
-		
-	}
+	
 	
 	
 	/*
