@@ -46,6 +46,8 @@ public class Test {
 		root.Displayln();
 		System.out.println(root.sign());
 		
+		
+		
 		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
 		ESOE.add(root);
 		ESOE = eudK.EUD_K(ESOE, 2);

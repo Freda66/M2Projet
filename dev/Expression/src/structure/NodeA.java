@@ -74,13 +74,13 @@ public abstract class NodeA extends SimpleNodeA{
 	
 	@Override
 	public boolean equal(SimpleNodeA term){
-		boolean retour = super.equals(term);
+		boolean retour = super.equal(term);
 		if (this.type() != term.type()){
 			retour=false;
 		}else{
-			if(!this.Fd().equals(((NodeA)term).Fd())){
+			if(!this.Fd().equal(((NodeA)term).Fd())){
 				retour=false;
-			}else if(!this.Fg().equals(((NodeA)term).Fg())){
+			}else if(!this.Fg().equal(((NodeA)term).Fg())){
 				retour=false;
 			}
 		}

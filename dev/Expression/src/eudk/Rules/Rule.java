@@ -2,6 +2,7 @@ package eudk.Rules;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.TreeMap;
 
 import structure.NodeA;
 import structure.operator.*;
@@ -33,7 +34,7 @@ public abstract class Rule {
 	
 	
 	//rule equivalent set of expression add into pool equivalent set of expression
-	void RESOE(Operator root, LinkedList<NodeA> NESOE){
+	void RESOE(Operator root, LinkedList<NodeA> NESOE, TreeMap<String,LinkedList<NodeA>> tm){
 		build();
 		System.out.println("RESOE");
 		//si le modele est juste
@@ -43,7 +44,9 @@ public abstract class Rule {
 			root.Displayln();
 			ListIterator<NodeA> li = esoe.listIterator();
 			while(li.hasNext()){
-				NESOE.add( (NodeA) li.next().Clone());
+				Operator totest = (Operator) li.next().Clone();
+				if(!totest.inTreeMap(tm))
+					NESOE.add( totest);
 			}
 		}
 		

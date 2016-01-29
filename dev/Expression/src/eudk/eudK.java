@@ -20,6 +20,13 @@ public class eudK {
 	static public LinkedList<NodeA> EUD_K(LinkedList<NodeA> ESOE,int lvl){
 		//mappage pour savoir si un element existe deja
 		TreeMap<String, LinkedList<NodeA>> tm = new TreeMap<String, LinkedList<NodeA>>();
+		//initialisation
+		NodeA tmp = ESOE.getFirst();
+		LinkedList<NodeA> l = new LinkedList<NodeA>();
+		l.add(tmp);
+		tm.put(tmp.sign(), l);
+				
+		
 		
 		LinkedList<NodeA> finalGraphPool = new LinkedList<NodeA>();
 		finalGraphPool.addAll(ESOE);
@@ -29,8 +36,8 @@ public class eudK {
 			while(li.hasNext()){
 				NodeA A = li.next();
 				if(A instanceof Operator)
-					if(!((Operator) A).inTreeMap(tm))
-						BESOE((Operator)A,A,ESOE_lvl2);
+					//if(!((Operator) A).inTreeMap(tm))
+						BESOE((Operator)A,A,ESOE_lvl2,tm);
 			}
 			ESOE.clear();
 			ESOE.addAll(ESOE_lvl2);
@@ -43,11 +50,11 @@ public class eudK {
 	//parcours en profondeur
 		//ESOE Equivalent set of expression
 		//BESOE build equivalent set of expression 
-		static public void BESOE(Operator node, NodeA Root,LinkedList<NodeA> ESOE){
+		static public void BESOE(Operator node, NodeA Root,LinkedList<NodeA> ESOE, TreeMap<String, LinkedList<NodeA>> tm){
 			
 			LinkedList<NodeA> work = new LinkedList<NodeA>();
 			if(node == Root){
-				Rules.NESOE(node, work);
+				Rules.NESOE(node, work,tm);
 				ListIterator<NodeA> li = work.listIterator();
 				while(li.hasNext()){
 					NodeA tmp = li.next();
@@ -60,7 +67,7 @@ public class eudK {
 			work.clear();
 			if(node.Fd() instanceof Operator){
 				Operator initialFD = (Operator)node.Fd();
-				Rules.NESOE((Operator)node.Fd(),work);
+				Rules.NESOE((Operator)node.Fd(),work,tm);
 				ListIterator<NodeA> li = work.listIterator();
 				while(li.hasNext()){
 					node.setFD(li.next());
@@ -68,14 +75,13 @@ public class eudK {
 					ESOE.add((NodeA) Root.Clone());
 				}
 				node.setFD(initialFD);
-				
-				BESOE(initialFD,Root,ESOE);
+				BESOE(initialFD,Root,ESOE,tm);
 				
 			}
 			work.clear();
 			if(node.Fg() instanceof Operator){
 				Operator initialFG = (Operator) node.Fg();
-				Rules.NESOE((Operator)node.Fg(),work);
+				Rules.NESOE((Operator)node.Fg(),work,tm);
 				ListIterator<NodeA> li = work.listIterator();
 				while(li.hasNext()){
 					node.setFG( li.next());
@@ -83,7 +89,7 @@ public class eudK {
 					ESOE.add((NodeA) Root.Clone());
 				}
 				node.setFG(initialFG);
-				BESOE(initialFG,Root,ESOE);
+				BESOE(initialFG,Root,ESOE,tm);
 			}
 			
 			

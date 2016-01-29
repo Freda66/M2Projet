@@ -2,6 +2,7 @@ package eudk.Rules;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.TreeMap;
 
 import eudk.Rules.Addition.RAddition;
 import structure.NodeA;
@@ -22,10 +23,10 @@ public class Rules {
 	
 	
 	//
-	public static void NESOE(Operator root,LinkedList<NodeA> ESOE){
+	public static void NESOE(Operator root,LinkedList<NodeA> ESOE, TreeMap<String,LinkedList<NodeA>> tm){
 		ListIterator<Rule> rli = Rules.listIterator();
 		while(rli.hasNext()){
-			rli.next().RESOE(root, ESOE);
+			rli.next().RESOE(root, ESOE,tm);
 		}		
 	}
 	

@@ -34,14 +34,15 @@ public abstract class Operator extends NodeA implements Expression{
 	 */
 	public boolean inTreeMap(TreeMap<String, LinkedList<NodeA>> tm){
 		String s = this.getSignature();
-		
+		System.out.println("inTreeMap " + s);
+		this.Displayln();
 		if(tm.containsKey(s)){
 			ListIterator<NodeA> li = tm.get(s).listIterator();
 			while(li.hasNext()){
-				if(this.equals(li.next()))
+				if(this.equal(li.next()))
 					return true;
 			}
-			tm.get(s).add(this);;
+			tm.get(s).add(this);
 			
 		}
 		else{

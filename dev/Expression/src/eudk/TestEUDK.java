@@ -46,6 +46,8 @@ public class TestEUDK {
 		root.Displayln();
 		((NodeA) root.Clone()).Displayln();
 		
+		System.out.println("equals : "+ root.equals(root) );
+		
 		System.out.println(root.sign());
 		
 		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
@@ -53,14 +55,25 @@ public class TestEUDK {
 		Rules.buildRules();
 		ESOE.add(root);
 		
-		ESOE = eudK.EUD_K(ESOE, 1);
+		ESOE = eudK.EUD_K(ESOE, 50);
 		
+		System.out.println("Eud-k result");
 		ListIterator<NodeA> li = ESOE.listIterator();
 		while(li.hasNext()){
 			NodeA tmp = li.next();
 			tmp.Displayln();
 		}
+		System.out.println("Eud-k end result");
 		
+		
+		Operator root1 = new Plus();
+		Operator root2 = new Plus();
+		root1.setFG(new Constante(Range));
+		root1.setFD(new Constante(Range));
+		root2.setFG(new Constante(Range));
+		root2.setFD(new Constante(Range));
+		
+		System.out.println("equals : "+ root1.equal(root2));
 		
 	}
 
