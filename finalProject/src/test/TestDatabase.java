@@ -45,15 +45,26 @@ public class TestDatabase {
         Logs.logger.addLog(enumLogType.INFO,"\tCreate Result table object");
         Result res = new Result(db);
 
+     // --------------------------------------------------------------
+
+        Logs.logger.addLog(enumLogType.INFO,"Clear Database ----------");
+
+        Logs.logger.addLog(enumLogType.INFO,"\tRemove all entries in Runner");
+        run.clearRunner();
+        
+        Logs.logger.addLog(enumLogType.INFO,"\tRemove all entreies in Variable");
+        var.clearVariable();
+        
+        Logs.logger.addLog(enumLogType.INFO,"\tRemove all entries in Result");
+        res.clearResult();
+        
         // --------------------------------------------------------------
 
         Logs.logger.addLog(enumLogType.INFO,"Runner process ----------");
 
         Logs.logger.addLog(enumLogType.INFO,"\tAdd Runner entry");
         Date date = new Date();
-        run.addEntry(new Timestamp(date.getTime()), new Timestamp(date.getTime()));
-        Logs.logger.addLog(enumLogType.INFO,run.toString());
-        run.addEntry(new Timestamp(date.getTime()), new Timestamp(date.getTime()));
+        run.addEntry(new Timestamp(date.getTime()));
         Logs.logger.addLog(enumLogType.INFO,run.toString());
 
         Logs.logger.addLog(enumLogType.INFO,"\tAdd Variables entry");
@@ -63,10 +74,16 @@ public class TestDatabase {
         Logs.logger.addLog(enumLogType.INFO,var.toString());
 
         Logs.logger.addLog(enumLogType.INFO,"\tAdd Result entry");
-        res.addEntry("{e: 10}", 1.10, 1.20, 1.30, run.getIdRun());
+        res.addEntry("{ 'p_1':1.01, 'p_2':2.02, 'p_3':3.03 }", 1.10, 1.20, 1.30, run.getIdRun());
         Logs.logger.addLog(enumLogType.INFO,res.toString());
-        res.addEntry("{e: 15}", 1.15, 1.25, 1.35, run.getIdRun());
+        res.addEntry("{ 'p_1':2.02, 'p_2':3.03, 'p_3':4.04 }", 1.15, 1.25, 1.35, run.getIdRun());
         Logs.logger.addLog(enumLogType.INFO,res.toString());
+        res.addEntry("{ 'p_1':3.03, 'p_2':4.04, 'p_3':5.05 }", 1.15, 1.25, 1.35, run.getIdRun());
+        Logs.logger.addLog(enumLogType.INFO,res.toString());
+        
+        Logs.logger.addLog(enumLogType.INFO, "\tUpdate Runner");
+        run.setTimeOut(new Timestamp(date.getTime()));
+        run.updateEntry();
 
         // --------------------------------------------------------------
 
@@ -95,13 +112,13 @@ public class TestDatabase {
         Logs.logger.addLog(enumLogType.INFO,"Remove process ----------");
 
         Logs.logger.addLog(enumLogType.INFO,"\tDelete Runner entry");
-        run.deleteEntry();
+        //run.deleteEntry();
 
         Logs.logger.addLog(enumLogType.INFO,"\tDelete Variables entry");
-        var.deleteEntry();
+        //var.deleteEntry();
 
         Logs.logger.addLog(enumLogType.INFO,"\tDelete Result entry");
-        res.deleteEntry();
+        //res.deleteEntry();
         
         // --------------------------------------------------------------
         
@@ -133,13 +150,13 @@ public class TestDatabase {
         Logs.logger.addLog(enumLogType.INFO,"Clear Database ----------");
 
         Logs.logger.addLog(enumLogType.INFO,"\tRemove all entries in Runner");
-        run.clearRunner();
+        //run.clearRunner();
         
         Logs.logger.addLog(enumLogType.INFO,"\tRemove all entreies in Variable");
-        var.clearVariable();
+        //var.clearVariable();
         
         Logs.logger.addLog(enumLogType.INFO,"\tRemove all entries in Result");
-        res.clearResult();
+        //res.clearResult();
 
         // --------------------------------------------------------------
         
