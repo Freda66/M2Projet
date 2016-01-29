@@ -30,7 +30,7 @@ public class eudK {
 				NodeA A = li.next();
 				if(A instanceof Operator)
 					if(!((Operator) A).inTreeMap(tm))
-						((Operator)A).BESOE(A, ESOE_lvl2);
+						BESOE((Operator)A,A,ESOE_lvl2);
 			}
 			ESOE.clear();
 			ESOE.addAll(ESOE_lvl2);
@@ -43,7 +43,7 @@ public class eudK {
 	//parcours en profondeur
 		//ESOE Equivalent set of expression
 		//BESOE build equivalent set of expression 
-		public void BESOE(Operator node, NodeA Root,LinkedList<NodeA> ESOE){
+		static public void BESOE(Operator node, NodeA Root,LinkedList<NodeA> ESOE){
 			
 			LinkedList<NodeA> work = new LinkedList<NodeA>();
 			if(node == Root){
@@ -56,7 +56,7 @@ public class eudK {
 			}
 			if(node.Fd() instanceof Operator){
 				Operator initialFD = (Operator)node.Fd();
-				work = ((Operator)node.Fd()).NESOE();
+				Rules.NESOE((Operator)node.Fd(),work);
 				ListIterator<NodeA> li = work.listIterator();
 				while(li.hasNext()){
 					node.setFD(li.next());
@@ -70,7 +70,7 @@ public class eudK {
 			}
 			if(node.Fg() instanceof Operator){
 				Operator initialFG = (Operator) node.Fg();
-				work = ((Operator)node.Fg()).NESOE();
+				Rules.NESOE((Operator)node.Fg(),work);
 				ListIterator<NodeA> li = work.listIterator();
 				while(li.hasNext()){
 					node.setFG( li.next());

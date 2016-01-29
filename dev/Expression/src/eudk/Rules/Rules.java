@@ -25,7 +25,7 @@ public class Rules {
 	public static void NESOE(Operator root,LinkedList<NodeA> ESOE){
 		ListIterator<Rule> rli = Rules.listIterator();
 		while(rli.hasNext()){
-			rli.next().NESOE(root, ESOE);
+			rli.next().RESOE(root, ESOE);
 		}		
 	}
 	

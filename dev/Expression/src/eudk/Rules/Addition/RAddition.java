@@ -5,13 +5,20 @@ import java.util.LinkedList;
 import eudk.Rules.Rule;
 import structure.NodeA;
 import structure.NoeudDeCoupure;
+import structure.NoeudDeCoupure.acceptType;
 import structure.operator.Plus;
+import structure.terminal.Variable;
 
 public class RAddition extends Rule{
 
 	
 	public RAddition() {
 		
+		build();
+		
+	}
+	
+	protected void build(){
 		Plus root = new Plus();
 		NoeudDeCoupure A = new NoeudDeCoupure();
 		NoeudDeCoupure B = new NoeudDeCoupure();
@@ -24,6 +31,9 @@ public class RAddition extends Rule{
 		instance1.setFG(B);
 		instance1.setFD(A);
 		
+		A.acceptAll();
+		B.acceptAll();
+		
 		
 		
 		
@@ -32,7 +42,5 @@ public class RAddition extends Rule{
 		instances.add(instance1);
 		
 		this.setInstances(instances);
-		
-		
 	}
 }

@@ -6,7 +6,7 @@ import java.util.ListIterator;
 import structure.NodeA;
 import structure.operator.*;
 
-public class Rule {
+public abstract class Rule {
 
 	
 	//modele qui va donner plusieurs expressions
@@ -29,10 +29,18 @@ public class Rule {
 		this.esoe = instances;
 	}
 	
-	//node equivalent set of expression
-	void NESOE(Operator root, LinkedList<NodeA> NESOE){
+	protected abstract void build();
+	
+	
+	//rule equivalent set of expression add into pool equivalent set of expression
+	void RESOE(Operator root, LinkedList<NodeA> NESOE){
+		build();
+		System.out.println("RESOE");
 		//si le modele est juste
 		if(root.applyPattern(this.model)){
+			System.out.println("pattern Ok");
+			this.model.Displayln();
+			root.Displayln();
 			ListIterator<NodeA> li = esoe.listIterator();
 			while(li.hasNext()){
 				NESOE.add( (NodeA) li.next().Clone());

@@ -4,6 +4,8 @@ public class NoeudDeCoupure extends SimpleNodeA{
 
 	private NodeA father;
 	public enum fils{df,fg};
+	public enum acceptType{ALL,T}; //all ou terminal uniquement
+	acceptType acceptedtype;
 	public fils fils;
 	private SimpleNodeA son;
 	
@@ -14,7 +16,9 @@ public class NoeudDeCoupure extends SimpleNodeA{
 
 	@Override
 	public String toString() {
-		return son.toString();
+		if(son != null)
+			return son.toString();
+		return "Ncoupure";
 	}
 
 	@Override
@@ -39,6 +43,25 @@ public class NoeudDeCoupure extends SimpleNodeA{
 	public SimpleNodeA Clone(){
 		return this.son.Clone();
 	}
+	
+	public boolean isAcceptingAll(){
+		if(acceptedtype == acceptType.ALL)
+			return true;
+		return false;
+	}
+	public boolean isAcceptingConstanteOnly(){
+		if(acceptedtype == acceptType.T)
+			return true;
+		return false;
+	}
+	
+	public void setAcceptType(acceptType at){
+		acceptedtype = at;
+	}
+	public void acceptAll(){
+		acceptedtype = acceptType.ALL;
+	}
+	
 	
 
 }

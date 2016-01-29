@@ -10,12 +10,12 @@ import structure.operator.Operator;
 import structure.operator.Plus;
 import structure.terminal.Constante;
 
-public class TestRules {
+public class TestEUDK {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Operator root = new Multiplication();
+		Operator root = new Plus();
 		float[] Range=new float[2];
 		Range[0] = 2;
 		Range[1] = 2;
@@ -23,7 +23,7 @@ public class TestRules {
 		Constante c = new Constante(Range);
 		root.setFD(c);
 		
-		Operator addition = new Plus();
+		Operator addition = new Multiplication();
 		root.setFG(addition);
 		
 		Range[0] = 4;
@@ -46,16 +46,21 @@ public class TestRules {
 		root.Displayln();
 		((NodeA) root.Clone()).Displayln();
 		
+		System.out.println(root.sign());
+		
 		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
 		
 		Rules.buildRules();
-		Rules.NESOE(root, ESOE);
+		ESOE.add(root);
+		
+		ESOE = eudK.EUD_K(ESOE, 1);
 		
 		ListIterator<NodeA> li = ESOE.listIterator();
 		while(li.hasNext()){
 			NodeA tmp = li.next();
 			tmp.Displayln();
 		}
+		
 		
 	}
 

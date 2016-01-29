@@ -58,6 +58,8 @@ public abstract class Operator extends NodeA implements Expression{
 	// attention va modifier le modèle
 	public boolean applyPattern ( NodeA P){
 		
+		if(this.type() != P.type())
+			return false;
 		//TODO probleme de typage et recurence
 		
 		boolean fg_ok = false;
@@ -66,7 +68,7 @@ public abstract class Operator extends NodeA implements Expression{
 		// si on a une constante en fils gauche
 		if(P.Fg() instanceof NoeudDeCoupure){
 			//variable
-			if(((NoeudDeCoupure)P.Fg()).getSon() instanceof Constante){
+			if(((NoeudDeCoupure)P.Fg()).isAcceptingConstanteOnly()){
 				if (this.Fg() instanceof Constante){
 					((NoeudDeCoupure)P.Fg()).setSon(this.Fg());
 					fg_ok = true;
@@ -74,7 +76,8 @@ public abstract class Operator extends NodeA implements Expression{
 				else
 					fg_ok = false;
 			}//la on ce fous de notre fils gauche c'est ok
-			else if (((NoeudDeCoupure)P.Fg()).getSon() instanceof Variable){
+			else if (((NoeudDeCoupure)P.Fg()).isAcceptingAll()){
+				((NoeudDeCoupure)P.Fg()).setSon(this.Fg());
 				fg_ok = true;
 			}
 			
@@ -90,7 +93,7 @@ public abstract class Operator extends NodeA implements Expression{
 		// si on a une constante en fils droit
 			if(P.Fd() instanceof NoeudDeCoupure){
 				//variable
-				if(((NoeudDeCoupure)P.Fd()).getSon() instanceof Constante){
+				if(((NoeudDeCoupure)P.Fd()).isAcceptingConstanteOnly()){
 					if (this.Fd() instanceof Constante){
 						((NoeudDeCoupure)P.Fd()).setSon(this.Fd());
 						fd_ok = true;
@@ -98,7 +101,8 @@ public abstract class Operator extends NodeA implements Expression{
 					else
 						fd_ok = false;
 				}//la on ce fous de notre fils gauche c'est ok
-				else if (((NoeudDeCoupure)P.Fd()).getSon() instanceof Variable){
+				else if (((NoeudDeCoupure)P.Fd()).isAcceptingAll()){
+					((NoeudDeCoupure)P.Fd()).setSon(this.Fd());
 					fd_ok = true;
 				}
 				
