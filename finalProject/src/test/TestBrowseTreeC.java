@@ -85,8 +85,8 @@ public class TestBrowseTreeC {
 		fct1.setName("main");
 		ArrayList<Variable> fct1Params = new ArrayList<Variable>();
 		float[] range = new float[2];
-		range[0] = (float)-1.0;
-		range[1] = (float)-1.0;
+		range[0] = -1;
+		range[1] = -1;
 		
 		//Variable fct1Param = new Variable("x",range,"float");	
 		//fct1Params.add(fct1Param);
@@ -111,8 +111,8 @@ public class TestBrowseTreeC {
 
 		aff.setFG(new Variable("y",range,"int"));
 		float[] range2 = new float[2];
-		range2[0] = (float)2.3; // avant range (c'est pour ca qu'on avait 0)
-		range2[1] = (float)2.3; // avant range (c'est pour ca qu'on avait 0)
+		range2[0] = 2; // avant range (c'est pour ca qu'on avait 0)
+		range2[1] = 2; // avant range (c'est pour ca qu'on avait 0)
 		aff.setFD(new Constante(range2));
 	
 		return Code;
