@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.TreeMap;
 
+import eudk.Rules.Addition.Associatif;
 import eudk.Rules.Addition.RAddition;
 import structure.NodeA;
 import structure.NoeudDeCoupure;
@@ -18,7 +19,8 @@ public class Rules {
 			return;
 		
 		Rules = new LinkedList<Rule>();
-		Rules.add(new RAddition());		
+		Rules.add(new RAddition());
+		Rules.add(new Associatif());
 	}
 	
 	

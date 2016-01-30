@@ -16,6 +16,12 @@ public abstract class Rule {
 	LinkedList<NodeA> esoe;
 	
 	
+	public Rule() {
+		// TODO Auto-generated constructor stub
+		//this.esoe = new LinkedList<NodeA>();
+		System.out.println("BUILD");
+		build();
+	}
 	
 	public Operator getModel() {
 		return model;
@@ -30,24 +36,51 @@ public abstract class Rule {
 		this.esoe = instances;
 	}
 	
+	public void addToInstances(NodeA toAdd){
+		if(this.esoe == null){
+			System.out.println("LOL");
+			this.esoe = new LinkedList<NodeA>();
+			
+		}
+		else  System.out.println("NOT LOL");
+		
+		this.esoe.add(toAdd);
+	}
+	
+	
 	protected abstract void build();
+	
+	
+	boolean applyModel(Operator root){
+		return root.applyPattern(this.model);
+	}
+	
+	void addSOE_To_NSOE(LinkedList<NodeA> NESOE, TreeMap<String,LinkedList<NodeA>> tm){
+		ListIterator<NodeA> li = esoe.listIterator();
+		while(li.hasNext()){
+			Operator totest = (Operator) li.next().Clone();
+			if(!totest.inTreeMap(tm))
+				NESOE.add( totest);
+		}
+	}
+	//if you want postrocessing 
+	public void postProcess(){
+		// Add code here for post processing on ESO
+	}
+	
 	
 	
 	//rule equivalent set of expression add into pool equivalent set of expression
 	void RESOE(Operator root, LinkedList<NodeA> NESOE, TreeMap<String,LinkedList<NodeA>> tm){
-		build();
+		
 		System.out.println("RESOE");
 		//si le modele est juste
-		if(root.applyPattern(this.model)){
-			System.out.println("pattern Ok");
+		if(this.applyModel(root)){
+			/*System.out.println("pattern Ok");
 			this.model.Displayln();
-			root.Displayln();
-			ListIterator<NodeA> li = esoe.listIterator();
-			while(li.hasNext()){
-				Operator totest = (Operator) li.next().Clone();
-				if(!totest.inTreeMap(tm))
-					NESOE.add( totest);
-			}
+			root.Displayln();*/
+			postProcess();
+			addSOE_To_NSOE(NESOE,tm);
 		}
 		
 		

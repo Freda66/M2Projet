@@ -9,6 +9,15 @@ public class NoeudDeCoupure extends SimpleNodeA{
 	public fils fils;
 	private SimpleNodeA son;
 	
+	public NoeudDeCoupure(){
+		acceptedtype = acceptType.ALL;
+	}
+	
+	public NoeudDeCoupure(acceptType t){
+		acceptedtype = t;
+	}
+	
+	
 	@Override
 	public String type() {
 		return son.type();

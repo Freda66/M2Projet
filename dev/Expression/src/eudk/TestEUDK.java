@@ -23,7 +23,7 @@ public class TestEUDK {
 		Constante c = new Constante(Range);
 		root.setFD(c);
 		
-		Operator addition = new Multiplication();
+		Operator addition = new Plus();
 		root.setFG(addition);
 		
 		Range[0] = 4;

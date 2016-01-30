@@ -11,14 +11,9 @@ import structure.terminal.Variable;
 
 public class RAddition extends Rule{
 
-	
-	public RAddition() {
-		
-		build();
-		
-	}
-	
+
 	protected void build(){
+		System.out.println("BUILD RADDITION");
 		Plus root = new Plus();
 		NoeudDeCoupure A = new NoeudDeCoupure();
 		NoeudDeCoupure B = new NoeudDeCoupure();
@@ -31,16 +26,11 @@ public class RAddition extends Rule{
 		instance1.setFG(B);
 		instance1.setFD(A);
 		
-		A.acceptAll();
-		B.acceptAll();
 		
-		
-		
-		
+		addToInstances(instance1);
 		this.setModel(root);
-		LinkedList<NodeA> instances = new LinkedList<NodeA>();
-		instances.add(instance1);
 		
-		this.setInstances(instances);
+		
+		//this.setInstances(instances);
 	}
 }
