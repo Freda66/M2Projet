@@ -29,28 +29,36 @@ public abstract class Operator extends NodeA implements Expression{
 	
 	
 	/*
-	 * Cette fonction va permettre de verifier que il n'y a pas de doublons
-	 * en regardant si le graph n'est pas dans une treeMap avec un tri sur les signatures
+	 * Cette fonction va permettre de verifier que il n'y ai pas de doublons
+	 * en regardant si le graph binaire n'est pas dans une treeMap avec un tri sur les signatures
 	 */
 	public boolean inTreeMap(TreeMap<String, LinkedList<NodeA>> tm){
 		String s = this.getSignature();
 		System.out.println("inTreeMap " + s);
 		this.Displayln();
+		System.out.println("parcourt");
 		if(tm.containsKey(s)){
 			ListIterator<NodeA> li = tm.get(s).listIterator();
 			while(li.hasNext()){
-				if(this.equal(li.next()))
+				NodeA blop = li.next();
+				blop.Display();
+				System.out.println(" sign " + blop.sign());
+				if(this.equal(blop)){
+					System.out.println("equal");
 					return true;
+				}
+					
 			}
-			tm.get(s).add(this);
+			tm.get(s).add((NodeA) this.Clone());
 			
 		}
 		else{
 			LinkedList<NodeA> l = new LinkedList<NodeA>();
-			l.add(this);
+			l.add((NodeA) this.Clone());
 			tm.put(s, l);
 			
 		}
+		System.out.println("not inTreeMap " + s);
 		return false;
 	}
 	

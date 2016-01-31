@@ -2,6 +2,7 @@ package eudk;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import eudk.Rules.Rules;
@@ -43,6 +44,26 @@ public class eudK {
 			ESOE.addAll(ESOE_lvl2);
 			finalGraphPool.addAll(ESOE_lvl2);
 		}
+		//display treemap
+		for(Entry<String, LinkedList<NodeA>> entry : tm.entrySet()) {
+			  String key = entry.getKey();
+			  System.out.print(key + " => ");
+			  ListIterator<NodeA> li = entry.getValue().listIterator();
+			  while(li.hasNext()){
+				  NodeA blop = li.next();
+				  if(! key.equals(blop.sign()))
+					  System.out.print(" ERREUR ");
+				  System.out.println(blop.sign());
+				  blop.Displayln();
+			  }
+			  System.out.println("//"+key);
+
+			  
+		}
+		
+		
+		
+		
 		return finalGraphPool;
 		
 	}
@@ -60,7 +81,8 @@ public class eudK {
 					NodeA tmp = li.next();
 					System.out.println("BESOE");
 					tmp.Displayln();
-					ESOE.add(tmp);
+					if(!((Operator) tmp).inTreeMap(tm))
+						ESOE.add(tmp);
 				}
 				
 			}
@@ -71,8 +93,8 @@ public class eudK {
 				ListIterator<NodeA> li = work.listIterator();
 				while(li.hasNext()){
 					node.setFD(li.next());
-					//ESOE.add((NodeA) NodeA.Clone(Root));
-					ESOE.add((NodeA) Root.Clone());
+					if(!((Operator) Root).inTreeMap(tm))
+						ESOE.add((NodeA) Root.Clone());
 				}
 				node.setFD(initialFD);
 				BESOE(initialFD,Root,ESOE,tm);
@@ -85,8 +107,8 @@ public class eudK {
 				ListIterator<NodeA> li = work.listIterator();
 				while(li.hasNext()){
 					node.setFG( li.next());
-					//ESOE.add((NodeA) NodeA.Clone(Root));
-					ESOE.add((NodeA) Root.Clone());
+					if(!((Operator) Root).inTreeMap(tm))
+						ESOE.add((NodeA) Root.Clone());
 				}
 				node.setFG(initialFG);
 				BESOE(initialFG,Root,ESOE,tm);

@@ -59,7 +59,7 @@ public abstract class Rule {
 		ListIterator<NodeA> li = esoe.listIterator();
 		while(li.hasNext()){
 			Operator totest = (Operator) li.next().Clone();
-			if(!totest.inTreeMap(tm))
+			//if(!totest.inTreeMap(tm))
 				NESOE.add( totest);
 		}
 	}

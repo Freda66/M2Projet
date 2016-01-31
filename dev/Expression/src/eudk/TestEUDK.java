@@ -55,7 +55,7 @@ public class TestEUDK {
 		Rules.buildRules();
 		ESOE.add(root);
 		
-		ESOE = eudK.EUD_K(ESOE, 50);
+		ESOE = eudK.EUD_K(ESOE, 3);
 		
 		System.out.println("Eud-k result");
 		ListIterator<NodeA> li = ESOE.listIterator();
