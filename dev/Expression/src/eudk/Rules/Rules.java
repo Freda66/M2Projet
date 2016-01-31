@@ -20,7 +20,7 @@ public class Rules {
 		
 		Rules = new LinkedList<Rule>();
 		Rules.add(new RAddition());
-		//Rules.add(new Associatif());
+		Rules.add(new Associatif());
 	}
 	
 	

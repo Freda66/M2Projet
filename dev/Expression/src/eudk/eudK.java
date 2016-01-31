@@ -81,7 +81,7 @@ public class eudK {
 					NodeA tmp = li.next();
 					System.out.println("BESOE");
 					tmp.Displayln();
-					if(!((Operator) tmp).inTreeMap(tm))
+					if(!inTreeMap((Operator) tmp,tm))
 						ESOE.add(tmp);
 				}
 				
@@ -93,7 +93,7 @@ public class eudK {
 				ListIterator<NodeA> li = work.listIterator();
 				while(li.hasNext()){
 					node.setFD(li.next());
-					if(!((Operator) Root).inTreeMap(tm))
+					if(!inTreeMap((Operator) Root,tm))
 						ESOE.add((NodeA) Root.Clone());
 				}
 				node.setFD(initialFD);
@@ -107,17 +107,45 @@ public class eudK {
 				ListIterator<NodeA> li = work.listIterator();
 				while(li.hasNext()){
 					node.setFG( li.next());
-					if(!((Operator) Root).inTreeMap(tm))
+					if(!inTreeMap((Operator) Root, tm))
 						ESOE.add((NodeA) Root.Clone());
 				}
 				node.setFG(initialFG);
 				BESOE(initialFG,Root,ESOE,tm);
 			}
-			
-			
-			
-			
-			
+		}
+		/*
+		 * Cette fonction va permettre de verifier que il n'y ai pas de doublons
+		 * en regardant si le graph binaire n'est pas dans une treeMap avec un tri sur les signatures
+		 */
+		public static boolean inTreeMap(Operator root,TreeMap<String, LinkedList<NodeA>> tm){
+			String s = root.sign();
+			System.out.println("inTreeMap " + s);
+			root.Displayln();
+			System.out.println("parcourt");
+			if(tm.containsKey(s)){
+				ListIterator<NodeA> li = tm.get(s).listIterator();
+				while(li.hasNext()){
+					NodeA blop = li.next();
+					blop.Display();
+					System.out.println(" sign " + blop.sign());
+					if(root.equal(blop)){
+						System.out.println("equal");
+						return true;
+					}
+						
+				}
+				tm.get(s).add((NodeA) root.Clone());
+				
+			}
+			else{
+				LinkedList<NodeA> l = new LinkedList<NodeA>();
+				l.add((NodeA) root.Clone());
+				tm.put(s, l);
+				
+			}
+			System.out.println("not inTreeMap " + s);
+			return false;
 		}
 	
 

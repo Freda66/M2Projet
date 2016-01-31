@@ -73,7 +73,6 @@ public class TestEUDK {
 		root2.setFG(new Constante(Range));
 		root2.setFD(new Constante(Range));
 		
-		System.out.println("equals : "+ root1.equal(root2));
 		
 	}
 

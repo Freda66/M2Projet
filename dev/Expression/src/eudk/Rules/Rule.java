@@ -5,7 +5,9 @@ import java.util.ListIterator;
 import java.util.TreeMap;
 
 import structure.NodeA;
+import structure.NoeudDeCoupure;
 import structure.operator.*;
+import structure.terminal.Constante;
 
 public abstract class Rule {
 
@@ -52,7 +54,7 @@ public abstract class Rule {
 	
 	
 	boolean applyModel(Operator root){
-		return root.applyPattern(this.model);
+		return applyPattern(root, this.model);
 	}
 	
 	void addSOE_To_NSOE(LinkedList<NodeA> NESOE, TreeMap<String,LinkedList<NodeA>> tm){
@@ -85,5 +87,72 @@ public abstract class Rule {
 		
 		
 	}
+	
+	// applique un pattern P qui transforme l'arbre en T
+		//retourne si tout c'est bien passe
+		// attention va modifier le modèle
+	public boolean applyPattern ( NodeA s, NodeA P){
+		
+		if(s.type() != P.type())
+			return false;
+		//TODO probleme de typage et recurence
+		
+		boolean fg_ok = false;
+		boolean fd_ok = false;
+		
+		// si on a une constante en fils gauche
+		if(P.Fg() instanceof NoeudDeCoupure){
+			//variable
+			if(((NoeudDeCoupure)P.Fg()).isAcceptingConstanteOnly()){
+				if (s.Fg() instanceof Constante){
+					((NoeudDeCoupure)P.Fg()).setSon(s.Fg());
+					fg_ok = true;
+				}
+				else
+					fg_ok = false;
+			}//la on ce fous de notre fils gauche c'est ok
+			else if (((NoeudDeCoupure)P.Fg()).isAcceptingAll()){
+				((NoeudDeCoupure)P.Fg()).setSon(s.Fg());
+				fg_ok = true;
+			}
+			
+		}//
+		else if(P.Fg() instanceof Operator && s.Fg() instanceof Operator){
+			if(((Operator) s.Fg()).type() == ((Operator) P.Fg()).type())
+				fg_ok = applyPattern((Operator)s.Fg(), (Operator)P.Fg());
+			else fg_ok = false;
+		}
+		
+		
+		
+		// si on a une constante en fils droit
+			if(P.Fd() instanceof NoeudDeCoupure){
+				//variable
+				if(((NoeudDeCoupure)P.Fd()).isAcceptingConstanteOnly()){
+					if (s.Fd() instanceof Constante){
+						((NoeudDeCoupure)P.Fd()).setSon(s.Fd());
+						fd_ok = true;
+					}
+					else
+						fd_ok = false;
+				}//la on ce fous de notre fils gauche c'est ok
+				else if (((NoeudDeCoupure)P.Fd()).isAcceptingAll()){
+					((NoeudDeCoupure)P.Fd()).setSon(s.Fd());
+					fd_ok = true;
+				}
+				
+			}//
+			else if(P.Fd() instanceof Operator && s.Fd() instanceof Operator){
+				if(((Operator) s.Fd()).type() == ((Operator) P.Fd()).type())
+					fd_ok = applyPattern((Operator)s.Fd(), (Operator)P.Fd());
+				else fd_ok = false;
+			}
+			
+			return fd_ok && fg_ok;
+			
+		}
+	
+	
+	
 	
 }

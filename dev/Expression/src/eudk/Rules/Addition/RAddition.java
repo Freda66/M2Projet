@@ -13,7 +13,7 @@ public class RAddition extends Rule{
 
 
 	protected void build(){
-		System.out.println("BUILD RADDITION");
+		
 		Plus root = new Plus();
 		NoeudDeCoupure A = new NoeudDeCoupure();
 		NoeudDeCoupure B = new NoeudDeCoupure();
