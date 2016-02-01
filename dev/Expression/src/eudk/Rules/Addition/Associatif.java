@@ -10,6 +10,9 @@ public class Associatif extends Rule{
 	protected void build() {
 		// TODO Auto-generated method stub
 		
+		// Le model 
+		//C + (A + B) 
+		
 		Plus root = new Plus();
 		NoeudDeCoupure A = new NoeudDeCoupure();
 		NoeudDeCoupure B = new NoeudDeCoupure();
@@ -27,7 +30,7 @@ public class Associatif extends Rule{
 		
 		
 		// transformations
-		
+		//C + (A + B) => A + (C + B) 
 		
 		Plus root2 = new Plus();
 		Plus node2 = new Plus();
@@ -39,6 +42,8 @@ public class Associatif extends Rule{
 		
 		addToInstances(root2);
 		
+		//C + (A + B) => B + (C + A) 
+		
 		Plus root3 = new Plus();
 		Plus node3 = new Plus();
 		node3.setFD(A);
@@ -47,8 +52,6 @@ public class Associatif extends Rule{
 		root3.setFD(node3);
 		root3.setFG(B);
 		addToInstances(root3);
-		
-		
 		
 	}
 	
