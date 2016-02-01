@@ -17,6 +17,7 @@ public abstract class Operator extends NodeA implements Expression{
 
 
 	public abstract void Eval(SimpleNodeA range1,SimpleNodeA range2);
+	public abstract void Error(SimpleNodeA range1,SimpleNodeA range2);
 	@Override
 	public String type() {
 		return "Operator";
@@ -24,7 +25,6 @@ public abstract class Operator extends NodeA implements Expression{
 	
 	//Build equivalent set of expression
 	public abstract LinkedList<NodeA> NESOE ();	
-	
 	
 
 }

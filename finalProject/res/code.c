@@ -1,7 +1,10 @@
-int main(float x){
-	int y;
+int main(float x, int y){
+	int z;
 	
-	y = 2;	
+	z = 2;	
 
-	return 0;
+	return z;
+}
+void fct(){
+
 }

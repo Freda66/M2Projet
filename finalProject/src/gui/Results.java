@@ -1,5 +1,4 @@
-
-package ui;
+package gui;
 
 /**
  * Results Interface : Show to users the applications results. Class generate

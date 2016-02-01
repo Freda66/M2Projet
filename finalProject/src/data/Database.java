@@ -1,100 +1,129 @@
-package db;
+package data;
 
-/**
- * Importe les librairies sql
- */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Relative class to Databse access
+ * 
+ * @author fred, pev
+ * @version 1.0.1
+ */
 public class Database {
-	
+
+	// ==============================================================
+	// ATTRIBUTES
+	// ==============================================================
+
+	protected String databasePath;
+	protected Connection connection = null;
+	protected Statement statement = null;
+
+	// ==============================================================
+	// CONSTRUCTORS
+	// ==============================================================
+
 	/**
-	 * Attributs de la classe
+	 * Initialize Database properties
+	 * 
+	 * @param db
+	 *            : Database object
 	 */
-    protected String DBPath; // Chemin de la bdd sqlite
-    protected Connection connection = null;
-    protected Statement statement = null;
- 
-    /**
-     * Constructeur qui initialise l'objet pour les enfants de la classe
-     * @param p : DBPath
-     * @param c : Connection
-     * @param s : Statement
-     */
-    public Database(Database db) {
-    	DBPath = db.getDBPath();
-    	connection = db.getConnection();
-    	statement = db.getStatement();
-    }
-    
-    /**
-     * Constructeur surchargé
-     * @param dBPath : Chemin de la bdd
-     */
-    public Database(String dBPath) {
-        DBPath = dBPath;
-    }
- 
-    /**
-     * Fonction de connexion à la bdd
-     */
-    public void connect() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:" + DBPath);
-            statement = connection.createStatement();
-            System.out.println("Connexion a " + DBPath + " avec succès");
-        } catch (ClassNotFoundException notFoundException) {
-            notFoundException.printStackTrace();
-            System.out.println("Erreur de connexion");
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-            System.out.println("Erreur de connexion");
-        }
-    }
- 
-    /**
-     * Fonction de deconnexion à la bdd
-     */
-    public void close() {
-        try {
-            statement.close();
-            connection.close();
-            System.out.println("Déconnexion a " + DBPath + " avec succès");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Erreur de déconnexion");
-        }
-    }
-    
-    /**
-     * Fonction qui permet l'execution d'une requete sql dans la bdd et renvoi le resultat
-     * @param requet : Requete sql (String)
-     * @return resultat : Resultat de la requete sql
-     */
-    public ResultSet query(String requet) {
-        ResultSet resultat = null;
-        try {
-            resultat = statement.executeQuery(requet);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Erreur dans la requet : " + requet);
-        }
-        return resultat;
-    }
-    
-    // Getteurs bdd
-    public String getDBPath() {
-		return DBPath;
-    }
-    public Connection getConnection() {
+	public Database(Database db) {
+		databasePath = db.getDatabasePath();
+		connection = db.getConnection();
+		statement = db.getStatement();
+	}
+	
+	// --------------------------------------------------------------
+
+	/**
+	 * Initialize Database properties - Overloaded constructor
+	 * 
+	 * @param db
+	 *            : String path do Database
+	 */
+	public Database(String db) {
+		databasePath = db;
+	}
+
+	// ==============================================================
+	// GETTERS
+	// ==============================================================
+
+	public String getDatabasePath() {
+		return this.databasePath;
+	}
+
+	// --------------------------------------------------------------
+
+	public Connection getConnection() {
 		return connection;
-    }
-    public Statement getStatement() {
+	}
+
+	// --------------------------------------------------------------
+
+	public Statement getStatement() {
 		return statement;
-    }
-    
+	}
+
+	// ==============================================================
+	// METHODS
+	// ==============================================================
+
+	/**
+	 * Action method : Connect to Database.
+	 * @return 
+	 */
+	public boolean connect() {
+		boolean ret = false;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			connection = DriverManager.getConnection("jdbc:sqlite:" + databasePath);
+			statement = connection.createStatement();
+			ret = true;
+		} catch (ClassNotFoundException notFoundException) {
+			notFoundException.printStackTrace();
+		} catch (SQLException sqlException) {
+			sqlException.printStackTrace();
+		}
+		return ret;
+	}
+
+	// --------------------------------------------------------------
+
+	/**
+	 * Action method : Disconnect from Database.
+	 */
+	public void disconnect() {
+		try {
+			statement.close();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// --------------------------------------------------------------
+
+	/**
+	 * Execute SQL query and return result.
+	 * 
+	 * @param query
+	 *            : SQL string query
+	 * @return : Result from SQL query
+	 */
+	public ResultSet query(String query) {
+		ResultSet res = null;
+		try {
+			res = statement.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }
