@@ -1,10 +1,7 @@
-finalProject/bin/*
-/bin/*
+/bin/
 */.metadata
 /nbproject/
 build.xml
 manifest.mf
 *.class
 *.java~
-.classpath
-*.db

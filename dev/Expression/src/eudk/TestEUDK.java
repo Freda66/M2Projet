@@ -1,21 +1,21 @@
-
+package eudk;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-import eudk.eudK;
-import evaluation.Evaluation;
-
+import eudk.Rules.Rules;
 import structure.NodeA;
-import structure.operator.*;
+import structure.operator.Multiplication;
+import structure.operator.Operator;
+import structure.operator.Plus;
 import structure.terminal.Constante;
 
-public class Test {
+public class TestEUDK {
 
-	public static void main(String args[]){
-		System.out.println();
-		
-		Operator root = new Multiplication();
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Operator root = new Plus();
 		float[] Range=new float[2];
 		Range[0] = 2;
 		Range[1] = 2;
@@ -44,39 +44,36 @@ public class Test {
 		addition.setFG(mult2);
 		
 		root.Displayln();
+		((NodeA) root.Clone()).Displayln();
+		
+		System.out.println("equals : "+ root.equals(root) );
+		
 		System.out.println(root.sign());
 		
-		
-		
 		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
-		ESOE.add(root);
-		ESOE = eudK.EUD_K(ESOE, 2);
 		
+		Rules.buildRules();
+		ESOE.add(root);
+		
+		ESOE = eudK.EUD_K(ESOE, 3);
+		
+		System.out.println("Eud-k result");
 		ListIterator<NodeA> li = ESOE.listIterator();
-		Evaluation E = new Evaluation();
 		while(li.hasNext()){
 			NodeA tmp = li.next();
-			
 			tmp.Displayln();
-			E.eval(tmp);
-			System.out.println("range " +tmp.type()+" : "+ tmp.range[0] + " " + tmp.range[0]);
-			
 		}
+		System.out.println("Eud-k end result");
 		
-		System.out.println("NB ELEM "+ESOE.size());
+		
+		Operator root1 = new Plus();
+		Operator root2 = new Plus();
+		root1.setFG(new Constante(Range));
+		root1.setFD(new Constante(Range));
+		root2.setFG(new Constante(Range));
+		root2.setFD(new Constante(Range));
 		
 		
-		//test egalitée
-		
-		Multiplication M = new Multiplication();
-		M.setFD(new Constante(Range));
-		M.setFG(new Constante(Range));
-		
-		Plus M2 = new Plus();
-		M2.setFD(new Constante(Range));
-		M2.setFG(new Constante(Range));
-		
-		System.out.println(M2.equals(M));
 	}
-	
+
 }
