@@ -2,6 +2,7 @@ package ssa;
 
 import java.util.HashMap;
 
+import eval.Evaluation;
 import structure.SimpleNodeA;
 import structure.Expression;
 import structure.NodeA;
@@ -168,9 +169,13 @@ public class CmdFormatter {
 		System.out.println("in transformExpressions, " + s + " '" + n + "'"  );
 
 
-		if(n instanceof Expression){
+		if( (n instanceof Expression) && (n instanceof NodeA) ){
 
 			// optimize
+
+			Evaluation e = new Evaluation();
+
+			e.expression( (NodeA)n );
 
 		}
 		else if(n instanceof NodeA){
