@@ -8,7 +8,7 @@ A + ( B + C ) -> ( A + B ) + C, ( A + C ) + B OK
 
 Multiplication
 
-A * B -> B * C
+A * B -> B * A
 
 A * (B * C) -> (A * B) * C , (A * C) * B
 
@@ -49,5 +49,15 @@ Puissance
 
 ( A p B ) * ( A p C ) -> ( A p ( B + C ) )
 
+1 et 0
 
+A * 0 -> 0
+
+A * 1 -> A
+
+A / 1 -> A
+
+A / 0 -> ???
+
+A / A -> 1
 
