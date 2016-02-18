@@ -2,8 +2,13 @@ package ermes.compiler;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import org.json.JSONObject;
 
 import data.Database;
 import data.Result;
@@ -57,7 +62,7 @@ public class CCompiler {
 	 * @param idRun : Id du runner
 	 * @param typeExec : 0 Prog init; 1 Prog Mpfr; 2 Prog Opt
 	 */
-	public void Execute(int idRun, int typeExec)
+	public void Execute(int idRun, int typeExec, String cheminFileParams)
 	{
 		System.out.println("Execution programme "+ exeName + " en cours.");
 		
@@ -70,22 +75,57 @@ public class CCompiler {
 	        db.connect();
 	        // Creer un objet Variable (ancien measurement)
 	        variable = new Variable(db);
-			// Creer un objet Result
-	        result = new Result(db);
 			System.out.println("");
-	        
-			// Execute le programme c
-            Process p = Runtime.getRuntime().exec("./"+exeName, null, dir);
-            
-            // Lit les print du programme
-            BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));  
-            // Chaine de lecture des valeurs du programme
-            String line = null;
-            // Parcours l'affichage du programme
-            while ((line = in.readLine()) != null) {
-            	// Appel la fonction qui gère les lignes du programme avec la bdd
-            	HandlePrintBddProgramme(line, idRun);
-            }
+			
+			// Lecteur de fichier
+			BufferedReader fis = null;
+			// Ligne du fichier paramètre
+			String ligneParams = "";
+			
+	    	// Lecture du fichier
+		    try {
+		    	fis = new BufferedReader(new FileReader(dir+"/"+cheminFileParams));
+		    }	
+	    	// Gestion des exeptions
+	 		catch (Exception e) {
+	 			e.printStackTrace(); // Cette exception est levée si l'objet FileInputStream ne trouve aucun fichier
+	 	    } finally {
+	 	        try { if (fis != null) fis.close(); } catch (IOException e) { e.printStackTrace(); } // On ferme nos flux de données dans un bloc finally pour s'assurer que ces instructions seront exécutées dans tous les cas même si une exception est levée !
+	 	    }
+		
+			// Parcours les paramètres afin d'executer le programme à chaque fois
+	        while((ligneParams = fis.readLine()) != null)
+	        {
+	        	// Créer un objet JSON avec la ligne parametre
+				JSONObject obj = new JSONObject(ligneParams);
+
+				String paramsExec = "";
+				
+				// Parcours les parametres et les concatene
+				for(int i = 0; i < obj.length(); i++)					
+				{	
+					paramsExec += obj.get("p_"+i) + " ";
+				} 
+				
+		       	// Initialise la ligne resultat
+		        Result result = new Result(db,-1,ligneParams,0.0,0.0,0.0,idRun); // Créer un objet Result avec les attributs par defaut (sauf id run)
+		        
+				// Execute le programme c
+	            Process p = Runtime.getRuntime().exec("./"+exeName + " " + paramsExec, null, dir);
+	            
+	            // Lit les print du programme
+	            BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));  
+	            // Chaine de lecture des valeurs du programme
+	            String line = null;
+	            // Parcours l'affichage du programme
+	            while ((line = in.readLine()) != null) {
+	            	// Appel la fonction qui gère les lignes du programme avec la bdd
+	            	HandlePrintBddProgramme(line, idRun, result);
+	            }
+	            
+	            // Ajoute la ligne dans la bdd
+	            result.addEntry(); 
+			}
             
         } catch (IOException e) {  
             e.printStackTrace();  
@@ -100,7 +140,7 @@ public class CCompiler {
 	 * Parse la chaine, puis insert les données dans la table Measurement de la bdd
 	 * @param line
 	 */
-	public void HandlePrintBddProgramme(String line, int idRun){
+	public void HandlePrintBddProgramme(String line, int idRun, Result result){
 		// Initialise les variables
 		String[] lineSplit;
 
@@ -154,18 +194,12 @@ public class CCompiler {
     		
 			System.out.println(val);
 			
-			// Recupere l'objet result à partir de l'id du run
-			if(result.getEntrieByIdRun(idRun)){
-				// Resultat Initial
-				if(typeExecution == 0) result.setResInit(val);
-				// Resultat Mpfr
-				else if(typeExecution == 1) result.setResMpfr(val);
-				// Resultat Optimisé
-				else result.setResOpt(val);
-				
-				// Met à jours les valeurs dans la bdd
-				result.updateEntry();
-			};
+			// Resultat Initial
+			if(typeExecution == 0) result.setResInit(val);
+			// Resultat Mpfr
+			else if(typeExecution == 1) result.setResMpfr(val);
+			// Resultat Optimisé
+			else result.setResOpt(val);
     	} 
     	
     	/**

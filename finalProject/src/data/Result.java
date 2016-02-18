@@ -24,11 +24,7 @@ public class Result extends Database {
 	 * { 'nbParams:3, 'parameters'=[ { 'p_1':1, 'p_2':2, 'p_3':3 } ] }
 	 * 
 	 * If we execute a query to get all entries based on idRun, we will return :
-	 * {'nbParams'=3, 
-	 * 	'parameters'=[ 
-	 * 		{ 'p_1':1, 'p_2':2, 'p_3':3 }, 
-	 * 		{ 'p_1':2, 'p_2':3, 'p_3':4 }, 
-	 * 	... ] }
+	 * { 'p_1':1, 'p_2':2, 'p_3':3 }
 	 * 
 	 */
 	private int idRes;

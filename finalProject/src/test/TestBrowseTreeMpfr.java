@@ -58,7 +58,7 @@ public class TestBrowseTreeMpfr {
 			run.addEntry(new Timestamp(0)); // Insert le debut du run (met à jours l'id run de lobjet)
 			
 			// Execute le fichier c
-			compiler.Execute(run.getIdRun(), 1);
+			compiler.Execute(run.getIdRun(), 1, "cheminFichierParams");
 		}
     }
 	

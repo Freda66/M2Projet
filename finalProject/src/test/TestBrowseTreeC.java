@@ -62,7 +62,7 @@ public class TestBrowseTreeC {
 		// Compile le fichier c
 		if(compiler.Compile(isMpfr)){
 			// Execute le fichier c
-			compiler.Execute(run.getIdRun(), 0);
+			compiler.Execute(run.getIdRun(), 0, "cheminFichierParams");
 		}
 		
 		// Fin Run
