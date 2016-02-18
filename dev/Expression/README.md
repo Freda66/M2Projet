@@ -43,6 +43,7 @@ Identités remarquables
 ( A - B ) * ( A - B ) -> A² - ( ( 2 * A ) * B ) + B²
 
 Puissance
+
 ( p pour puissance )
 
 ( A * A ) -> ( A p 2 )
