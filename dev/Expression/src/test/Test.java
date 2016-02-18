@@ -3,6 +3,7 @@ package test;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import eudk.eudK;
 import evaluation.Evaluation;
 
 import structure.NodeA;
@@ -45,7 +46,7 @@ public class Test {
 		
 		LinkedList<NodeA> ESOE = new LinkedList<NodeA>();
 		ESOE.add(root);
-		ESOE = root.EUD_K(ESOE, 1);
+		ESOE = eudK.EUD_K(ESOE, 2);
 		
 		ListIterator<NodeA> li = ESOE.listIterator();
 		Evaluation E = new Evaluation();
