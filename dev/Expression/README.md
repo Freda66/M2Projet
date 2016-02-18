@@ -11,6 +11,7 @@ A * B -> B * C
 A * (B * C) -> (A * B) * C, (A * C) * B 
 
 Distributivité 
+
 ( A + B ) * C -> ( C * A ) + ( C * B )
 ( A - B ) * C -> ( C * A ) - ( C * B )
 
