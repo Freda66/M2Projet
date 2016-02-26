@@ -6,6 +6,8 @@ import java.util.TreeMap;
 
 import eudk.Rules.Addition.Associatif;
 import eudk.Rules.Addition.RAddition;
+import eudk.Rules.Division.*;
+import eudk.Rules.Multiplication.*;
 import structure.NodeA;
 import structure.NoeudDeCoupure;
 import structure.operator.*;
@@ -21,6 +23,15 @@ public class Rules {
 		Rules = new LinkedList<Rule>();
 		Rules.add(new RAddition());
 		Rules.add(new Associatif());
+		//division
+		Rules.add(new D1());
+		Rules.add(new D2());
+		Rules.add(new D3());
+		Rules.add(new D4());
+		//multiplication
+		Rules.add(new M1());
+		Rules.add(new M2());
+		
 	}
 	
 	

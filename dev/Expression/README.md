@@ -18,7 +18,7 @@ A * ( B / C ) -> ( A * B ) / C , B * ( A / C )
 
 ( A * B ) / C -> A * ( B / C ) , B * ( A / C )
 
-A / B * C / D -> ( A * C ) / ( B * D )
+( A / B ) * ( C / D ) -> ( A * C ) / ( B * D )
 
 A + ( B / C ) -> ( ( A * C ) + B ) / C
 
