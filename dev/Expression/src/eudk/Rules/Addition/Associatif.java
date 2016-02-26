@@ -8,7 +8,6 @@ public class Associatif extends Rule{
 
 	@Override
 	protected void build() {
-		// TODO Auto-generated method stub
 		
 		// Le model 
 		//C + (A + B) 
