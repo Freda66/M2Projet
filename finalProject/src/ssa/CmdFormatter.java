@@ -169,22 +169,37 @@ public class CmdFormatter {
 		System.out.println("in transformExpressions, " + s + " '" + n + "'"  );
 
 
-		if( (n instanceof Expression) && (n instanceof NodeA) ){
-
-			// optimize
-
-			Evaluation e = new Evaluation();
-
-			e.expression( (NodeA)n );
-
-		}
-		else if(n instanceof NodeA){
+		if(n instanceof NodeA){
 
 			// do children
+			if ( ( (NodeA)n ).Fd() instanceof Expression){
 
-			transformExpressions( ( (NodeA)n ).Fd() );
+				Evaluation e = new Evaluation();
 
-			transformExpressions( ( (NodeA)n ).Fg() );
+				NodeA result = e.expression( (NodeA)( ( (NodeA)n ).Fd() ) );
+
+				( (NodeA)n ).setFD(result);
+
+			}
+			else{
+
+				transformExpressions( ( (NodeA)n ).Fd() );
+			}
+
+			if ( ( (NodeA)n ).Fg() instanceof Expression){
+
+				Evaluation e = new Evaluation();
+
+				NodeA result = e.expression( (NodeA)( ( (NodeA)n ).Fg() ) );
+
+				( (NodeA)n ).setFG(result);
+
+			}
+			else {
+
+				transformExpressions( ( (NodeA)n ).Fg() );
+			}
+
 
 		}
 		else {
