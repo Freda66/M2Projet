@@ -4,79 +4,82 @@ public interface CParserTreeConstants
   public int JJTSTART = 0;
   public int JJTVOID = 1;
   public int JJTFUNCTIONDEFINITION = 2;
-  public int JJTDECLARATION = 3;
-  public int JJTDECLARATIONLIST = 4;
-  public int JJTDECLARATIONSPECIFIERS = 5;
-  public int JJTSTORAGECLASSSPECIFIER = 6;
-  public int JJTTYPESPECIFIER = 7;
-  public int JJTTYPEQUALIFIER = 8;
-  public int JJTSTRUCTORUNIONSPECIFIER = 9;
-  public int JJTSTRUCTORUNION = 10;
-  public int JJTSTRUCTDECLARATIONLIST = 11;
-  public int JJTINITDECLARATORLIST = 12;
-  public int JJTINITDECLARATOR = 13;
-  public int JJTSTRUCTDECLARATION = 14;
-  public int JJTSPECIFIERQUALIFIERLIST = 15;
-  public int JJTSTRUCTDECLARATORLIST = 16;
-  public int JJTSTRUCTDECLARATOR = 17;
-  public int JJTENUMSPECIFIER = 18;
-  public int JJTENUMERATORLIST = 19;
-  public int JJTENUMERATOR = 20;
-  public int JJTDECLARATOR = 21;
-  public int JJTFUNCTIONDECLARATOR = 22;
-  public int JJTFUNCTIONDIRECTDECLARATOR = 23;
-  public int JJTFUNCTIONPARAMETERTYPELIST = 24;
-  public int JJTFUNCTIONPARAMETERLIST = 25;
-  public int JJTFUNCTIONPARAMETERDECLARATION = 26;
-  public int JJTDIRECTDECLARATOR = 27;
-  public int JJTPOINTER = 28;
-  public int JJTTYPEQUALIFIERLIST = 29;
-  public int JJTPARAMETERTYPELIST = 30;
-  public int JJTPARAMETERLIST = 31;
-  public int JJTPARAMETERDECLARATION = 32;
-  public int JJTIDENTIFIERLIST = 33;
-  public int JJTINITIALIZER = 34;
-  public int JJTINITIALIZERLIST = 35;
-  public int JJTTYPENAME = 36;
-  public int JJTABSTRACTDECLARATOR = 37;
-  public int JJTDIRECTABSTRACTDECLARATOR = 38;
-  public int JJTTYPEDEFNAME = 39;
-  public int JJTSTATEMENT = 40;
-  public int JJTLABELEDSTATEMENT = 41;
-  public int JJTEXPRESSIONSTATEMENT = 42;
-  public int JJTCOMPOUNDSTATEMENT = 43;
-  public int JJTSTATEMENTLIST = 44;
-  public int JJTSELECTIONSTATEMENT = 45;
-  public int JJTITERATIONSTATEMENT = 46;
-  public int JJTJUMPSTATEMENT = 47;
-  public int JJTEXPRESSION = 48;
-  public int JJTASSIGNMENTEXPRESSION = 49;
-  public int JJTASSIGNMENTOPERATOR = 50;
-  public int JJTCONDITIONALEXPRESSION = 51;
-  public int JJTCONSTANTEXPRESSION = 52;
-  public int JJTLOGICALOREXPRESSION = 53;
-  public int JJTLOGICALANDEXPRESSION = 54;
-  public int JJTINCLUSIVEOREXPRESSION = 55;
-  public int JJTEXCLUSIVEOREXPRESSION = 56;
-  public int JJTANDEXPRESSION = 57;
-  public int JJTEQUALITYEXPRESSION = 58;
-  public int JJTRELATIONALEXPRESSION = 59;
-  public int JJTSHIFTEXPRESSION = 60;
-  public int JJTADDITIVEEXPRESSION = 61;
-  public int JJTMULTIPLICATIVEEXPRESSION = 62;
-  public int JJTCASTEXPRESSION = 63;
-  public int JJTUNARYEXPRESSION = 64;
-  public int JJTUNARYOPERATOR = 65;
-  public int JJTPOSTFIXEXPRESSION = 66;
-  public int JJTPRIMARYEXPRESSION = 67;
-  public int JJTARGUMENTEXPRESSIONLIST = 68;
-  public int JJTCONSTANT = 69;
+  public int JJTDECLARATIONINAFUNCTION = 3;
+  public int JJTDECLARATION = 4;
+  public int JJTDECLARATIONLIST = 5;
+  public int JJTDECLARATIONSPECIFIERS = 6;
+  public int JJTSTORAGECLASSSPECIFIER = 7;
+  public int JJTTYPESPECIFIER = 8;
+  public int JJTTYPEQUALIFIER = 9;
+  public int JJTSTRUCTORUNIONSPECIFIER = 10;
+  public int JJTSTRUCTORUNION = 11;
+  public int JJTSTRUCTDECLARATIONLIST = 12;
+  public int JJTINITDECLARATORLIST = 13;
+  public int JJTINITDECLARATOR = 14;
+  public int JJTSTRUCTDECLARATION = 15;
+  public int JJTSPECIFIERQUALIFIERLIST = 16;
+  public int JJTSTRUCTDECLARATORLIST = 17;
+  public int JJTSTRUCTDECLARATOR = 18;
+  public int JJTENUMSPECIFIER = 19;
+  public int JJTENUMERATORLIST = 20;
+  public int JJTENUMERATOR = 21;
+  public int JJTDECLARATOR = 22;
+  public int JJTFUNCTIONDECLARATOR = 23;
+  public int JJTFUNCTIONDIRECTDECLARATOR = 24;
+  public int JJTFUNCTIONPARAMETERTYPELIST = 25;
+  public int JJTFUNCTIONPARAMETERLIST = 26;
+  public int JJTFUNCTIONPARAMETERDECLARATION = 27;
+  public int JJTDIRECTDECLARATOR = 28;
+  public int JJTPOINTER = 29;
+  public int JJTTYPEQUALIFIERLIST = 30;
+  public int JJTPARAMETERTYPELIST = 31;
+  public int JJTPARAMETERLIST = 32;
+  public int JJTPARAMETERDECLARATION = 33;
+  public int JJTIDENTIFIERLIST = 34;
+  public int JJTINITIALIZER = 35;
+  public int JJTINITIALIZERLIST = 36;
+  public int JJTTYPENAME = 37;
+  public int JJTABSTRACTDECLARATOR = 38;
+  public int JJTDIRECTABSTRACTDECLARATOR = 39;
+  public int JJTTYPEDEFNAME = 40;
+  public int JJTSTATEMENT = 41;
+  public int JJTLABELEDSTATEMENT = 42;
+  public int JJTEXPRESSIONSTATEMENT = 43;
+  public int JJTCOMPOUNDSTATEMENT = 44;
+  public int JJTSTATEMENTLIST = 45;
+  public int JJTSELECTIONSTATEMENT = 46;
+  public int JJTITERATIONSTATEMENT = 47;
+  public int JJTJUMPSTATEMENT = 48;
+  public int JJTEXPRESSION = 49;
+  public int JJTASSIGNMENTEXPRESSION = 50;
+  public int JJTASSIGNMENTEXPRESSIONINAFUNCTION = 51;
+  public int JJTASSIGNMENTOPERATOR = 52;
+  public int JJTCONDITIONALEXPRESSION = 53;
+  public int JJTCONSTANTEXPRESSION = 54;
+  public int JJTLOGICALOREXPRESSION = 55;
+  public int JJTLOGICALANDEXPRESSION = 56;
+  public int JJTINCLUSIVEOREXPRESSION = 57;
+  public int JJTEXCLUSIVEOREXPRESSION = 58;
+  public int JJTANDEXPRESSION = 59;
+  public int JJTEQUALITYEXPRESSION = 60;
+  public int JJTRELATIONALEXPRESSION = 61;
+  public int JJTSHIFTEXPRESSION = 62;
+  public int JJTADDITIVEEXPRESSION = 63;
+  public int JJTMULTIPLICATIVEEXPRESSION = 64;
+  public int JJTCASTEXPRESSION = 65;
+  public int JJTUNARYEXPRESSION = 66;
+  public int JJTUNARYOPERATOR = 67;
+  public int JJTPOSTFIXEXPRESSION = 68;
+  public int JJTPRIMARYEXPRESSION = 69;
+  public int JJTARGUMENTEXPRESSIONLIST = 70;
+  public int JJTCONSTANT = 71;
 
 
   public String[] jjtNodeName = {
     "Start",
     "void",
     "FunctionDefinition",
+    "DeclarationInAFunction",
     "Declaration",
     "DeclarationList",
     "DeclarationSpecifiers",
@@ -124,6 +127,7 @@ public interface CParserTreeConstants
     "JumpStatement",
     "Expression",
     "AssignmentExpression",
+    "AssignmentExpressionInAFunction",
     "AssignmentOperator",
     "ConditionalExpression",
     "ConstantExpression",
@@ -146,4 +150,4 @@ public interface CParserTreeConstants
     "Constant",
   };
 }
-/* JavaCC - OriginalChecksum=c1d6161313a275b3211c4ddc340e5e2b (do not edit this line) */
+/* JavaCC - OriginalChecksum=320223dc23fc37f08e0688c6dee3c423 (do not edit this line) */
