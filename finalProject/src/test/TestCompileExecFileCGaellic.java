@@ -24,7 +24,7 @@ public class TestCompileExecFileCGaellic {
 			run.addEntry(new Timestamp(0)); // Insert le debut du run (met à jours l'id run de lobjet)
 			
 			// Execute le fichier c
-			compiler.Execute(run.getIdRun(), 0, "cheminFichierParams");
+			compiler.Execute(run.getIdRun(), 0, "fileParams.txt");
 		}	
 	}
 	

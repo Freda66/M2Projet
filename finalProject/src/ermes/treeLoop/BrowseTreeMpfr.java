@@ -37,9 +37,9 @@ public class BrowseTreeMpfr {
 		
 		/*
 		ligne à inserer en debut de programme.
-	mpfr_set_default_prec (53); //Fixer la precision par defaut
-	mpfr_set_emin (-1073); //Fixer l'exposant emin (en realite, emin-precision+2)
-	mpfr_set_emax (1024); // Fixer l'exposant emax (en realite, emax+1) 
+		mpfr_set_default_prec (53); //Fixer la precision par defaut
+		mpfr_set_emin (-1073); //Fixer l'exposant emin (en realite, emin-precision+2)
+		mpfr_set_emax (1024); // Fixer l'exposant emax (en realite, emax+1) 
 		 * */
 		
 		
@@ -83,7 +83,7 @@ public class BrowseTreeMpfr {
 			// Ecrit la valeur de retour de la fonction une fois que le contenu soit ecrit
 			String nameVar = ((Function)myNode).getReturnedValue().getName(); // Recupere le nom de la variable
 			fileC.addNextLine("\tmpfr_printf(\"BDDResult:"+nameVar+";"+"%.200Rg"+"\\n\""+","+nameVar+");",true);
-			fileC.addNextLine(");",true);
+			//fileC.addNextLine(");",true);
 			
 			fileC.addNextLine("",true);
 			fileC.addNextLine("\treturn ",false);
@@ -127,7 +127,7 @@ public class BrowseTreeMpfr {
 				fileC.addNextLine("\t"+"mpfr_t"+" ",false); // Ecrit le type de la variable
 				fileC.addNextLine(((Variable)myNode).getName(),false); // Affiche le nom de la variable
 				fileC.addNextLine(";",true);
-				fileC.addNextLine("\t"+"mpfr_init2 ("+((Variable)myNode).getName()+",1024);",true);
+				fileC.addNextLine("\t"+"mpfr_init2("+((Variable)myNode).getName()+",1024);",true);
 			} else {
 				fileC.addNextLine("",false); // Saute une ligne
 				fileC.addNextLine(((Variable)myNode).getName() + " ",false); // Affiche le nom de la variable	

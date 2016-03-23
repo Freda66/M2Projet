@@ -23,7 +23,7 @@ public class DumpC {
 	{
 		this.fileName=f;
 		this.dir=dir;
-		this.exeName = fileName.substring(0, fileName.length() - 2);
+		this.exeName = fileName.substring(0, fileName.length()/* - 2*/);
 		this.includeMpfr = isMpfr;
 		if(includeMpfr) exeName= exeName+"_mpfr.c";
         else {
@@ -41,9 +41,13 @@ public class DumpC {
 	    try
 	    {
 	    	// Buffer de lecture du fichier c
-		    fis = new BufferedReader(new FileReader(dir+"/"+fileName));
+		    //fis = new BufferedReader(new FileReader(dir+"/"+fileName));
 		    // Buffer d'ecriture du nouveau fichier c
 	        fos = new FileWriter(new File(dir+"/"+exeName));
+	        
+	        // On met les header
+	        fos.write("#include <stdio.h>\n");
+	        fos.write("#include <stdlib.h>\n");
 	        
 	        // Ecrit les include MPFR si le boolen vaut vrai dans le nouveau fichier c
 	        if(includeMpfr){
@@ -53,13 +57,13 @@ public class DumpC {
 	        }
 	        
 	        // Lecture des données ligne par ligne
-	        while((line = fis.readLine()) != null)
+	        /*while((line = fis.readLine()) != null)
 	        {
 	        	if(line.startsWith("#")){
 		        	// Ecriture les données
 		            fos.write(line+"\n");
 	        	}
-	        }
+	        }*/
 	        fos.write("\n");
 	        
         // Gestion des exeptions

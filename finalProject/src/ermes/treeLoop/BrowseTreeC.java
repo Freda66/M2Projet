@@ -102,7 +102,9 @@ public class BrowseTreeC {
 			
 			// Ajoute le print d'insert dans la bdd
 			String nameVar = ((Variable) ((Affectation) myNode).Fg()).getName(); // Recupere le nom de la variable
-			fileC.addNextLine("\tprintf(\"BDDVariable:"+nameVar+";%.19f\\n\","+nameVar,false);
+			//fileC.addNextLine("\tprintf(\"BDDVariable:"+nameVar+";%.19f\\n\","+nameVar,false);
+			// EN DESSOUS A SUPPRIMER APRES LA DEMO ET AU DESSUS A DECOMMENTER
+			fileC.addNextLine("\tprintf(\"BDDVariable:"+nameVar+";%.19f\\n\",("+nameVar+"+atof(argv[1]))",false);
 			fileC.addNextLine(");",true);
 		}
 

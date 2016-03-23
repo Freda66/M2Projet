@@ -65,7 +65,7 @@ public class Ermes {
 			 * Fichier c initiale
 			 */
 			// Initialise le fichier c init a génèrer
-			BrowseTreeC browserTree = new BrowseTreeC(nameFileC+"_init.c",dirFileC, false);
+			BrowseTreeC browserTree = new BrowseTreeC(nameFileC/*+"_init.c"*/,dirFileC, false);
 			
 			// Parcours l'arbre et génère le nouveau fichier c
 			browserTree.BrowseTree(tree);
@@ -80,7 +80,7 @@ public class Ermes {
 			 * Fichier c mpfr
 			 */
 			// Initialise le fichier mpfr a génèrer
-			BrowseTreeMpfr browserTreeMpfr = new BrowseTreeMpfr(nameFileC+"_mpfr.c",dirFileC);
+			BrowseTreeMpfr browserTreeMpfr = new BrowseTreeMpfr(nameFileC/*+"_mpfr.c"*/,dirFileC);
 			
 			// Parcours l'arbre et génère le nouveau fichier mpfr
 			browserTreeMpfr.BrowseTree(tree);

@@ -69,67 +69,66 @@ public class CCompiler {
 		// Met à jours le type d'execution
 		this.typeExecution = typeExec;
 		
-		try {
-			// Connexion à la bdd
-			Database db = new Database("./db/database.db");
-	        db.connect();
-	        // Creer un objet Variable (ancien measurement)
-	        variable = new Variable(db);
-			System.out.println("");
-			
-			// Lecteur de fichier
-			BufferedReader fis = null;
-			// Ligne du fichier paramètre
-			String ligneParams = "";
-			
-	    	// Lecture du fichier
-		    try {
-		    	fis = new BufferedReader(new FileReader(dir+"/"+cheminFileParams));
-		    }	
-	    	// Gestion des exeptions
-	 		catch (Exception e) {
-	 			e.printStackTrace(); // Cette exception est levée si l'objet FileInputStream ne trouve aucun fichier
-	 	    } finally {
-	 	        try { if (fis != null) fis.close(); } catch (IOException e) { e.printStackTrace(); } // On ferme nos flux de données dans un bloc finally pour s'assurer que ces instructions seront exécutées dans tous les cas même si une exception est levée !
-	 	    }
+		// Connexion à la bdd
+		Database db = new Database("./db/database.db");
+		db.connect();
+		// Creer un objet Variable (ancien measurement)
+		variable = new Variable(db);
+		System.out.println("");
 		
+		// Lecteur de fichier
+		BufferedReader fis = null;
+		
+		// Ligne du fichier paramètre
+		String ligneParams = "";
+		
+		// Lecture du fichier
+		try {
+			fis = new BufferedReader(new FileReader(dir+"/"+cheminFileParams));
+			
 			// Parcours les paramètres afin d'executer le programme à chaque fois
-	        while((ligneParams = fis.readLine()) != null)
-	        {
-	        	// Créer un objet JSON avec la ligne parametre
+			while((ligneParams = fis.readLine()) != null)
+			{
+				// Créer un objet JSON avec la ligne parametre
 				JSONObject obj = new JSONObject(ligneParams);
 
 				String paramsExec = "";
 				
 				// Parcours les parametres et les concatene
-				for(int i = 0; i < obj.length(); i++)					
+				for(int i = 1; i < obj.length(); i++)					
 				{	
 					paramsExec += obj.get("p_"+i) + " ";
 				} 
 				
-		       	// Initialise la ligne resultat
-		        Result result = new Result(db,-1,ligneParams,0.0,0.0,0.0,idRun); // Créer un objet Result avec les attributs par defaut (sauf id run)
-		        
+			   	// Initialise la ligne resultat
+			    Result result = new Result(db,-1,ligneParams,0.0,0.0,0.0,idRun); // Créer un objet Result avec les attributs par defaut (sauf id run)
+			    
 				// Execute le programme c
-	            Process p = Runtime.getRuntime().exec("./"+exeName + " " + paramsExec, null, dir);
-	            
-	            // Lit les print du programme
-	            BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));  
-	            // Chaine de lecture des valeurs du programme
-	            String line = null;
-	            // Parcours l'affichage du programme
-	            while ((line = in.readLine()) != null) {
-	            	// Appel la fonction qui gère les lignes du programme avec la bdd
-	            	HandlePrintBddProgramme(line, idRun, result);
-	            }
-	            
-	            // Ajoute la ligne dans la bdd
-	            result.addEntry(); 
+			    Process p = Runtime.getRuntime().exec("./"+exeName + " " + paramsExec, null, dir);
+			    
+			    // Lit les print du programme
+			    BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));  
+			    // Chaine de lecture des valeurs du programme
+			    String line = null;
+			    // Parcours l'affichage du programme
+			    while ((line = in.readLine()) != null) {
+			    	// Appel la fonction qui gère les lignes du programme avec la bdd
+			    	HandlePrintBddProgramme(line, idRun, result);
+			    }
+			    
+			    // Ajoute la ligne dans la bdd
+			    result.addEntry(); 
 			}
-            
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        } 
+		}	
+		// Gestion des exeptions
+		catch (Exception e) {
+			e.printStackTrace(); // Cette exception est levée si l'objet FileInputStream ne trouve aucun fichier
+		} finally {
+		    try { if (fis != null) fis.close(); } catch (IOException e) { e.printStackTrace(); } // On ferme nos flux de données dans un bloc finally pour s'assurer que ces instructions seront exécutées dans tous les cas même si une exception est levée !
+		}
+			
+		// Deconnexion de la bdd
+		db.disconnect();
 		
 		System.out.println("\nExecution programme "+ exeName + " terminé.\n");
 	}
@@ -167,6 +166,7 @@ public class CCompiler {
     			else if(variable.getValueMax() < val) variable.setValueMax(val); // Affecte la valeur à la borne max
     			
     			// Met à jour la variable dans la bdd
+    			variable.setFkRun(idRun);
     			variable.updateEntry(); 
     		} 
     		// Ajout la variable dans la bdd
