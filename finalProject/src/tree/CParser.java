@@ -71,15 +71,15 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
                 System.out.println("C Parser Version 0.1Alpha:  Java program parsed successfully.");
                 parseTree.dump("");
                 System.out.println("End");
-                /*for(int index = 0; index < allFunctions.size(); index++){
-	          System.out.println("FUNCTION FOUND: " + allFunctions.get(index).getReturnedValue().getTypeDef() + " " +allFunctions.get(index).getName());
-	          if(allFunctions.get(index).getParams()!=null)
-	            for(int index2=0;index2 < allFunctions.get(index).getParams().size(); index2++){
-	              System.out.println("Param "+index2+": "+allFunctions.get(index).getParams().get(index2).getTypeDef()+ " " + allFunctions.get(index).getParams().get(index2).getName());
-	            }
-	        }*/
-                System.out.println(allFunctions.get(0).getReturnedValue().getTypeDef() + " " +allFunctions.get(0).getName());
-                //allFunctions.get(0).getContent().Fg();
+                /* Print all functions' head */
+                for(int index = 0; index < allFunctions.size(); index++){
+                  System.out.println("FUNCTION FOUND: " + allFunctions.get(index).getReturnedValue().getTypeDef() + " " +allFunctions.get(index).getName());
+                  if(allFunctions.get(index).getParams()!=null)
+                    for(int index2=0;index2 < allFunctions.get(index).getParams().size(); index2++){
+                      System.out.println("Param "+index2+": "+allFunctions.get(index).getParams().get(index2).getTypeDef()+ " " + allFunctions.get(index).getParams().get(index2).getName());
+                    }
+                }
+
                 tree = functionsToTree();
         }catch(ParseException e){
                 System.out.println("C Parser Version 0.1Alpha:  Encountered errors during parse.");
@@ -2301,14 +2301,10 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
                         contents = statements;
                 }
 
+                {if (true) return contents;} //TODO 
+                /* On reçoit bien les declarations dans declarations. 
+		A tester dans le main la reception.*/
 
-                        /* Print declaration recursively to check all things*/
-                        System.out.println("Testing declarations: ");
-                        System.out.println("Var1: "+((Variable)contents.Fg()).getName());
-                        System.out.println("Var2: "+((Variable)((PVirg)contents.Fd()).Fg()).getName());
-
-
-                {if (true) return contents;}
     } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -3976,6 +3972,79 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
+  static private boolean jj_3_36() {
+    if (jj_scan_token(62)) return true;
+    if (jj_3R_43()) return true;
+    if (jj_scan_token(63)) return true;
+    if (jj_3R_44()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_81() {
+    if (jj_scan_token(SIZEOF)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_119()) {
+    jj_scanpos = xsp;
+    if (jj_3R_120()) return true;
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_80() {
+    if (jj_3R_118()) return true;
+    if (jj_3R_44()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_100() {
+    if (jj_3R_137()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_138()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_79() {
+    if (jj_scan_token(97)) return true;
+    if (jj_3R_40()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_78() {
+    if (jj_scan_token(96)) return true;
+    if (jj_3R_40()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_203() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(90)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(91)) return true;
+    }
+    if (jj_3R_196()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_38() {
+    if (jj_3R_45()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_11() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(53)) jj_scanpos = xsp;
+    if (jj_scan_token(57)) return true;
+    if (jj_3R_26()) return true;
+    if (jj_scan_token(58)) return true;
+    return false;
+  }
+
   static private boolean jj_3R_40() {
     Token xsp;
     xsp = jj_scanpos;
@@ -3995,28 +4064,23 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_100() {
-    if (jj_3R_137()) return true;
+  static private boolean jj_3_12() {
+    if (jj_3R_27()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_26() {
     Token xsp;
+    if (jj_3_12()) return true;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_138()) { jj_scanpos = xsp; break; }
+      if (jj_3_12()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
   static private boolean jj_3R_86() {
     if (jj_3R_40()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_11() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(53)) jj_scanpos = xsp;
-    if (jj_scan_token(57)) return true;
-    if (jj_3R_26()) return true;
-    if (jj_scan_token(58)) return true;
     return false;
   }
 
@@ -4066,18 +4130,18 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3_12() {
-    if (jj_3R_27()) return true;
+  static private boolean jj_3R_139() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(31)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(36)) return true;
+    }
     return false;
   }
 
-  static private boolean jj_3R_26() {
-    Token xsp;
-    if (jj_3_12()) return true;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_12()) { jj_scanpos = xsp; break; }
-    }
+  static private boolean jj_3_5() {
+    if (jj_3R_23()) return true;
     return false;
   }
 
@@ -4095,18 +4159,13 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_139() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(31)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(36)) return true;
-    }
+  static private boolean jj_3_7() {
+    if (jj_3R_22()) return true;
     return false;
   }
 
-  static private boolean jj_3_5() {
-    if (jj_3R_23()) return true;
+  static private boolean jj_3_8() {
+    if (jj_3R_22()) return true;
     return false;
   }
 
@@ -4118,12 +4177,7 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3_7() {
-    if (jj_3R_22()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_8() {
+  static private boolean jj_3_9() {
     if (jj_3R_22()) return true;
     return false;
   }
@@ -4142,14 +4196,30 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3_9() {
-    if (jj_3R_22()) return true;
+  static private boolean jj_3R_101() {
+    if (jj_3R_139()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_11()) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(53)) return true;
+    }
     return false;
   }
 
   static private boolean jj_3R_182() {
     if (jj_scan_token(82)) return true;
     if (jj_3R_173()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_96() {
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_97() {
+    if (jj_3R_22()) return true;
     return false;
   }
 
@@ -4167,23 +4237,17 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_101() {
-    if (jj_3R_139()) return true;
+  static private boolean jj_3R_98() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_11()) {
+    if (jj_scan_token(37)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(53)) return true;
+    if (jj_scan_token(21)) return true;
     }
     return false;
   }
 
-  static private boolean jj_3R_96() {
-    if (jj_3R_22()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_97() {
+  static private boolean jj_3R_99() {
     if (jj_3R_22()) return true;
     return false;
   }
@@ -4196,32 +4260,9 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_98() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(37)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(21)) return true;
-    }
-    return false;
-  }
-
   static private boolean jj_3R_122() {
     if (jj_scan_token(79)) return true;
     if (jj_3R_82()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_99() {
-    if (jj_3R_22()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_181() {
-    if (jj_3R_187()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_188()) jj_scanpos = xsp;
     return false;
   }
 
@@ -4268,24 +4309,11 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_173() {
-    if (jj_3R_181()) return true;
+  static private boolean jj_3R_181() {
+    if (jj_3R_187()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_182()) jj_scanpos = xsp;
-    return false;
-  }
-
-  static private boolean jj_3R_83() {
-    if (jj_scan_token(78)) return true;
-    if (jj_3R_123()) return true;
-    if (jj_scan_token(61)) return true;
-    if (jj_3R_42()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_200() {
-    if (jj_3R_123()) return true;
+    if (jj_3R_188()) jj_scanpos = xsp;
     return false;
   }
 
@@ -4308,11 +4336,24 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_160() {
-    if (jj_3R_173()) return true;
+  static private boolean jj_3R_173() {
+    if (jj_3R_181()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_174()) jj_scanpos = xsp;
+    if (jj_3R_182()) jj_scanpos = xsp;
+    return false;
+  }
+
+  static private boolean jj_3R_83() {
+    if (jj_scan_token(78)) return true;
+    if (jj_3R_123()) return true;
+    if (jj_scan_token(61)) return true;
+    if (jj_3R_42()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_200() {
+    if (jj_3R_123()) return true;
     return false;
   }
 
@@ -4324,11 +4365,11 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_121() {
-    if (jj_3R_160()) return true;
+  static private boolean jj_3R_160() {
+    if (jj_3R_173()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_161()) jj_scanpos = xsp;
+    if (jj_3R_174()) jj_scanpos = xsp;
     return false;
   }
 
@@ -4361,11 +4402,11 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_82() {
-    if (jj_3R_121()) return true;
+  static private boolean jj_3R_121() {
+    if (jj_3R_160()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_122()) jj_scanpos = xsp;
+    if (jj_3R_161()) jj_scanpos = xsp;
     return false;
   }
 
@@ -4374,8 +4415,21 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
+  static private boolean jj_3R_82() {
+    if (jj_3R_121()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_122()) jj_scanpos = xsp;
+    return false;
+  }
+
   static private boolean jj_3R_113() {
     if (jj_3R_42()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_131() {
+    if (jj_3R_100()) return true;
     return false;
   }
 
@@ -4404,14 +4458,14 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_131() {
-    if (jj_3R_100()) return true;
-    return false;
-  }
-
   static private boolean jj_3_31() {
     if (jj_scan_token(ELSE)) return true;
     if (jj_3R_39()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_6() {
+    if (jj_3R_24()) return true;
     return false;
   }
 
@@ -4458,18 +4512,33 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3_6() {
-    if (jj_3R_24()) return true;
-    return false;
-  }
-
   static private boolean jj_3_35() {
     if (jj_3R_42()) return true;
     return false;
   }
 
+  static private boolean jj_3_3() {
+    if (jj_3R_21()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_53() {
+    if (jj_3R_24()) return true;
+    return false;
+  }
+
   static private boolean jj_3R_201() {
     if (jj_3R_123()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_23() {
+    Token xsp;
+    if (jj_3R_53()) return true;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_53()) { jj_scanpos = xsp; break; }
+    }
     return false;
   }
 
@@ -4485,32 +4554,12 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3_3() {
-    if (jj_3R_21()) return true;
-    return false;
-  }
-
   static private boolean jj_3R_89() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_130()) {
     jj_scanpos = xsp;
     if (jj_3_33()) return true;
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_53() {
-    if (jj_3R_24()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_23() {
-    Token xsp;
-    if (jj_3R_53()) return true;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_53()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
@@ -4527,6 +4576,15 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
       xsp = jj_scanpos;
       if (jj_3R_175()) { jj_scanpos = xsp; break; }
     }
+    return false;
+  }
+
+  static private boolean jj_3R_21() {
+    if (jj_3R_22()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_131()) jj_scanpos = xsp;
+    if (jj_scan_token(56)) return true;
     return false;
   }
 
@@ -4547,15 +4605,6 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
 
   static private boolean jj_3R_157() {
     if (jj_scan_token(CONTINUE)) return true;
-    if (jj_scan_token(56)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_21() {
-    if (jj_3R_22()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_131()) jj_scanpos = xsp;
     if (jj_scan_token(56)) return true;
     return false;
   }
@@ -4600,6 +4649,15 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
+  static private boolean jj_3R_24() {
+    if (jj_3R_22()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_54()) jj_scanpos = xsp;
+    if (jj_scan_token(56)) return true;
+    return false;
+  }
+
   static private boolean jj_3R_154() {
     if (jj_scan_token(DO)) return true;
     if (jj_3R_39()) return true;
@@ -4633,15 +4691,6 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_24() {
-    if (jj_3R_22()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_54()) jj_scanpos = xsp;
-    if (jj_scan_token(56)) return true;
-    return false;
-  }
-
   static private boolean jj_3R_152() {
     if (jj_scan_token(SWITCH)) return true;
     if (jj_scan_token(62)) return true;
@@ -4663,6 +4712,11 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
+  static private boolean jj_3_4() {
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
   static private boolean jj_3R_115() {
     Token xsp;
     xsp = jj_scanpos;
@@ -4670,11 +4724,6 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     jj_scanpos = xsp;
     if (jj_3R_152()) return true;
     }
-    return false;
-  }
-
-  static private boolean jj_3_4() {
-    if (jj_3R_22()) return true;
     return false;
   }
 
@@ -5402,13 +5451,6 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_120() {
-    if (jj_scan_token(62)) return true;
-    if (jj_3R_43()) return true;
-    if (jj_scan_token(63)) return true;
-    return false;
-  }
-
   static private boolean jj_3R_49() {
     Token xsp;
     xsp = jj_scanpos;
@@ -5423,14 +5465,15 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_59() {
-    if (jj_3R_36()) return true;
+  static private boolean jj_3R_120() {
+    if (jj_scan_token(62)) return true;
+    if (jj_3R_43()) return true;
+    if (jj_scan_token(63)) return true;
     return false;
   }
 
-  static private boolean jj_3R_129() {
-    if (jj_scan_token(101)) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
+  static private boolean jj_3R_59() {
+    if (jj_3R_36()) return true;
     return false;
   }
 
@@ -5439,18 +5482,6 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     xsp = jj_scanpos;
     if (jj_3R_59()) jj_scanpos = xsp;
     if (jj_3R_60()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_90() {
-    if (jj_scan_token(59)) return true;
-    if (jj_3R_89()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_128() {
-    if (jj_scan_token(100)) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
@@ -5470,11 +5501,29 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
+  static private boolean jj_3R_129() {
+    if (jj_scan_token(101)) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
   static private boolean jj_3R_61() {
     if (jj_scan_token(IDENTIFIER)) return true;
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_109()) jj_scanpos = xsp;
+    return false;
+  }
+
+  static private boolean jj_3R_90() {
+    if (jj_scan_token(59)) return true;
+    if (jj_3R_89()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_128() {
+    if (jj_scan_token(100)) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
@@ -5485,11 +5534,6 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     if (jj_scan_token(57)) return true;
     if (jj_3R_30()) return true;
     if (jj_scan_token(58)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_39() {
-    if (jj_3R_46()) return true;
     return false;
   }
 
@@ -5508,6 +5552,11 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
+  static private boolean jj_3_39() {
+    if (jj_3R_46()) return true;
+    return false;
+  }
+
   static private boolean jj_3R_104() {
     if (jj_3R_28()) return true;
     return false;
@@ -5521,11 +5570,6 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     jj_scanpos = xsp;
     if (jj_scan_token(53)) return true;
     }
-    return false;
-  }
-
-  static private boolean jj_3R_163() {
-    if (jj_3R_46()) return true;
     return false;
   }
 
@@ -5550,6 +5594,11 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
+  static private boolean jj_3R_163() {
+    if (jj_3R_46()) return true;
+    return false;
+  }
+
   static private boolean jj_3R_162() {
     Token xsp;
     xsp = jj_scanpos;
@@ -5562,6 +5611,16 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     if (jj_scan_token(19)) return true;
     }
     }
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_140() {
+    if (jj_3R_168()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_204()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
@@ -5604,36 +5663,9 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_140() {
-    if (jj_3R_168()) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_204()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_46() {
-    if (jj_3R_89()) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_90()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
   static private boolean jj_3R_138() {
     if (jj_scan_token(59)) return true;
     if (jj_3R_137()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_125() {
-    if (jj_scan_token(62)) return true;
-    if (jj_3R_123()) return true;
-    if (jj_scan_token(63)) return true;
     return false;
   }
 
@@ -5645,8 +5677,13 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_124() {
-    if (jj_3R_162()) return true;
+  static private boolean jj_3R_46() {
+    if (jj_3R_89()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_90()) { jj_scanpos = xsp; break; }
+    }
     return false;
   }
 
@@ -5668,8 +5705,27 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
+  static private boolean jj_3R_125() {
+    if (jj_scan_token(62)) return true;
+    if (jj_3R_123()) return true;
+    if (jj_scan_token(63)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_124() {
+    if (jj_3R_162()) return true;
+    return false;
+  }
+
   static private boolean jj_3_37() {
     if (jj_3R_40()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_27() {
+    if (jj_3R_28()) return true;
+    if (jj_3R_140()) return true;
+    if (jj_scan_token(56)) return true;
     return false;
   }
 
@@ -5686,10 +5742,11 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     return false;
   }
 
-  static private boolean jj_3R_27() {
-    if (jj_3R_28()) return true;
-    if (jj_3R_140()) return true;
-    if (jj_scan_token(56)) return true;
+  static private boolean jj_3R_137() {
+    if (jj_3R_29()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_167()) jj_scanpos = xsp;
     return false;
   }
 
@@ -5716,14 +5773,6 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     if (jj_scan_token(93)) return true;
     }
     if (jj_3R_202()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_137() {
-    if (jj_3R_29()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_167()) jj_scanpos = xsp;
     return false;
   }
 
@@ -5760,59 +5809,6 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants, CParserCon
     }
     }
     if (jj_3R_205()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_36() {
-    if (jj_scan_token(62)) return true;
-    if (jj_3R_43()) return true;
-    if (jj_scan_token(63)) return true;
-    if (jj_3R_44()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_81() {
-    if (jj_scan_token(SIZEOF)) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_119()) {
-    jj_scanpos = xsp;
-    if (jj_3R_120()) return true;
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_80() {
-    if (jj_3R_118()) return true;
-    if (jj_3R_44()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_79() {
-    if (jj_scan_token(97)) return true;
-    if (jj_3R_40()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_78() {
-    if (jj_scan_token(96)) return true;
-    if (jj_3R_40()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_203() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(90)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(91)) return true;
-    }
-    if (jj_3R_196()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_38() {
-    if (jj_3R_45()) return true;
     return false;
   }
 
