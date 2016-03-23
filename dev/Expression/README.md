@@ -2,9 +2,9 @@ Liste des Transformations a faire :
 
 Addition:
 
-A + B -> B + A OK
+A + B -> B + A 
 
-A + ( B + C ) -> ( A + B ) + C, ( A + C ) + B OK
+A + ( B + C ) -> ( A + B ) + C, ( A + C ) + B 
 
 Multiplication
 
