@@ -126,15 +126,15 @@ public class CParser/*@bgen(jjtree)*/implements CParserTreeConstants/*@egen*/{/*
 	        System.out.println("C Parser Version 0.1Alpha:  Java program parsed successfully.");
 	        parseTree.dump("");
 	        System.out.println("End");
-	        /*for(int index = 0; index < allFunctions.size(); index++){
+	        /* Print all functions' head */
+	        for(int index = 0; index < allFunctions.size(); index++){
 	          System.out.println("FUNCTION FOUND: " + allFunctions.get(index).getReturnedValue().getTypeDef() + " " +allFunctions.get(index).getName());
 	          if(allFunctions.get(index).getParams()!=null)
 	            for(int index2=0;index2 < allFunctions.get(index).getParams().size(); index2++){
 	              System.out.println("Param "+index2+": "+allFunctions.get(index).getParams().get(index2).getTypeDef()+ " " + allFunctions.get(index).getParams().get(index2).getName());
 	            }
-	        }*/
-	        System.out.println(allFunctions.get(0).getReturnedValue().getTypeDef() + " " +allFunctions.get(0).getName());
-	        //allFunctions.get(0).getContent().Fg();
+	        }
+	        
 	        tree = functionsToTree();
       	}catch(ParseException e){
         	System.out.println("C Parser Version 0.1Alpha:  Encountered errors during parse.");
@@ -1756,7 +1756,6 @@ PVirg CompoundStatement() : {/*@bgen(jjtree) CompoundStatement */
 	{
 
 
-
 		if(declarations!=null){
 			contents = declarations;
 			if(statements!=null){
@@ -1770,14 +1769,10 @@ PVirg CompoundStatement() : {/*@bgen(jjtree) CompoundStatement */
 			contents = statements;
 		}
 
+		return contents; //TODO 
+		/* On re\u00e7oit bien les declarations dans declarations. 
+		A tester dans le main la reception.*/
 
-			/* Print declaration recursively to check all things*/ 
-			System.out.println("Testing declarations: ");
-			System.out.println("Var1: "+((Variable)contents.Fg()).getName());
-			System.out.println("Var2: "+((Variable)((PVirg)contents.Fd()).Fg()).getName());
-		
-		
-		return contents;
 	}/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
