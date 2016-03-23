@@ -1,5 +1,6 @@
 package ssa;
 
+import structure.NodeA;
 import structure.PVirg;
 import structure.affectation.Affectation;
 import structure.operator.Plus;
@@ -69,14 +70,57 @@ public class Main {
 		//pv3.setFD(new Constante(new float[]{ 0f, 0f});
 		pv3.setFD(null);
 
+		System.out.println("Before:");
 
+		print(pvTop);
 
 
 		CmdFormatter cmdf = new CmdFormatter();
 
+
+		System.out.println("---------------------");
+		System.out.println("Optimisation ...");
+
+
 		cmdf.toSSA(pvTop);
 
-		System.out.println("pvTop: " + pvTop);
+		//System.out.println("pvTop: " + pvTop);
+
+
+
+
+		System.out.println("---------------------");
+		System.out.println("After:");
+		print(pvTop);
+
+
+	}
+
+	static void print(NodeA n){
+
+		if( n.Fg() instanceof NodeA){
+
+			print( (NodeA)( n.Fg() ) );
+
+		}
+		else{
+
+			System.out.println(n.Fg());
+		}
+
+
+		System.out.println( n );
+
+
+		if( n.Fd() instanceof NodeA){
+
+			print( (NodeA)( n.Fd() ) );
+
+		}
+		else{
+
+			System.out.println(n.Fd());
+		}
 
 	}
 

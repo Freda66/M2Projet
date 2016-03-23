@@ -39,7 +39,7 @@ public class CmdFormatter {
 		if(n != null){
 			s = n.getClass().toString();
 		}
-		System.out.println("in SSA, " + s + " '" + n + "'"  );
+		//System.out.println("in SSA, " + s + " '" + n + "'"  );
 
 		if( n instanceof Variable ){
 
@@ -76,7 +76,7 @@ public class CmdFormatter {
 				String newName = (fg).getName() + "___" + num	;
 				varnames.put( (fg).getName() , (fg) );
 
-				System.out.println("name changed from " + fg.getName() + " to " + newName);
+				//System.out.println("name changed from " + fg.getName() + " to " + newName);
 
 				(fg).setName(	newName );
 
@@ -96,7 +96,7 @@ public class CmdFormatter {
 				Variable newvar = varnames.get( fd.getName() );
 				//((Variable) n).setName(newname);
 
-				System.out.println("name changed from " + ((Variable)(((NodeA) n).Fd())).getName() + " to " + newvar.getName() );
+				//System.out.println("name changed from " + ((Variable)(((NodeA) n).Fd())).getName() + " to " + newvar.getName() );
 				((NodeA) n).setFD(newvar);
 
 			}
@@ -117,7 +117,7 @@ public class CmdFormatter {
 
 				Variable newvar = varnames.get( fg.getName() );
 				//((Variable) n).setName(newname);
-				System.out.println("name changed from " + ((Variable)(((NodeA) n).Fg())).getName() + " to " + newvar.getName() );
+				//System.out.println("name changed from " + ((Variable)(((NodeA) n).Fg())).getName() + " to " + newvar.getName() );
 				((NodeA) n).setFG(newvar);
 
 			}
@@ -135,7 +135,7 @@ public class CmdFormatter {
 				Variable newvar = varnames.get( fd.getName() );
 				//((Variable) n).setName(newname);
 
-				System.out.println("name changed from " + ((Variable)(((NodeA) n).Fd())).getName() + " to " + newvar.getName() );
+				//System.out.println("name changed from " + ((Variable)(((NodeA) n).Fd())).getName() + " to " + newvar.getName() );
 
 				((NodeA) n).setFD(newvar);
 
@@ -166,7 +166,7 @@ public class CmdFormatter {
 		if(n != null){
 			s = n.getClass().toString();
 		}
-		System.out.println("in transformExpressions, " + s + " '" + n + "'"  );
+		//System.out.println("in transformExpressions, " + s + " '" + n + "'"  );
 
 
 		if(n instanceof NodeA){
