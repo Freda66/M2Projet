@@ -1,4 +1,4 @@
-Liste des Transformations a faire :
+Liste des Transformations :
 
 Addition:
 
