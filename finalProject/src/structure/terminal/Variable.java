@@ -21,7 +21,7 @@ public class Variable extends Terminal{
 		super(range);
 		this.name = "Noname";
 	}
-	
+
 	@Override
 	public boolean equal(SimpleNodeA term){
 		boolean retour = super.equals(term);
