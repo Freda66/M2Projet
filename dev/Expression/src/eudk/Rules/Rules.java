@@ -8,6 +8,7 @@ import eudk.Rules.Addition.Associatif;
 import eudk.Rules.Addition.RAddition;
 import eudk.Rules.Division.*;
 import eudk.Rules.Multiplication.*;
+import eudk.Rules.Distribution.*;
 import structure.NodeA;
 import structure.NoeudDeCoupure;
 import structure.operator.*;
@@ -31,6 +32,10 @@ public class Rules {
 		//multiplication
 		Rules.add(new M1());
 		Rules.add(new M2());
+		
+		Rules.add(new Dist1());
+		Rules.add(new Dist2());
+		Rules.add(new Dist3());
 		
 	}
 	
