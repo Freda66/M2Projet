@@ -39,7 +39,7 @@
 	</ul>
 	<li>Transformations des expression</li>
 	<ul>
-		<li><a href="https://github.com/Freda66/M2Projet/tree/master/dev/Expression">Liste des transformations</a></li>
+		<li><a href="https://github.com/Freda66/M2Projet/tree/master/finalProject/doc/README.md">Liste des transformations</a></li>
 	</ul>
 	<li>Transformations des commandes</li>
 	<ul>
