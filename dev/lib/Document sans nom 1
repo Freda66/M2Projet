@@ -1,8 +1,0 @@
-import structure.NodeA;
-import structure.SimpleNodeA;
-
-public class Test extends SimpleNodeA {
-
-	
-
-}
